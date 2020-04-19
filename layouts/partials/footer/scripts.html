@@ -1,0 +1,75 @@
+{{ $main := resources.Get "js/main.js" }}
+{{ $jqeury := resources.Get "js/libs/jquery/3.4.1/jquery.js" }}
+{{ $faJS := resources.Get "js/libs/fa/fontawesome-all.js"}}
+
+{{ if .Params.mathjax }}
+    <script async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                displayMath: [['$$','$$'], ['\\[','\\]']],
+                processEscapes: true,
+                processEnvironments: true,
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+                TeX: { equationNumbers: { autoNumber: "AMS" },
+                    extensions: ["AMSmath.js", "AMSsymbols.js"] }
+            }
+        });
+        MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } }
+        });
+    </script>
+{{ end }}
+
+{{ if site.IsServer }}
+    {{ $defaultJS := slice $jqeury $faJS $main | resources.Concat "js/global.js" }}
+    {{ $globalJS := $defaultJS }}
+
+    <!-- Enable HTTP/2 Push -->
+    <link rel="preload" href="{{ $globalJS.RelPermalink }}?{{ now.Unix }}" as="script">
+    <script defer src="{{ $globalJS.RelPermalink }}?{{ now.Unix }}"></script>
+{{ else }}
+    {{ $defaultJS := slice $jqeury $faJS  $main | resources.Concat "js/global.js" }}
+    {{ $globalJS := $defaultJS | resources.Minify | resources.Fingerprint }}
+
+    <!-- Enable HTTP/2 Push -->
+    <link rel="preload" href="{{ $globalJS.RelPermalink }}" as="script" integrity="{{ $globalJS.Data.Integrity }}">
+    <script defer src="{{ $globalJS.RelPermalink }}" integrity="{{ $globalJS.Data.Integrity }}"></script>
+{{ end }}
+
+{{ $redirection := resources.Get "js/redirection.js" | minify | fingerprint}}
+<script integrity="{{ $redirection.Data.Integrity }}">{{ $redirection.Content | safeJS }}</script>
+
+{{ with site.Params.custom_js }}
+    {{ range site.Params.custom_js }}
+        {{ $asset := . }}
+        {{ $resource := resources.Get $asset }}
+            {{ if site.IsServer }}
+                <link rel="preload" href="{{ $resource.RelPermalink }}?{{ now.Unix }}" as="script">
+                <script src="{{ $resource.RelPermalink }}?{{ now.Unix }}"></script>
+            {{ else }}
+                {{ $js := $resource | minify | fingerprint }}
+                <link rel="preload" href="{{ $js.RelPermalink }}" as="script" integrity="{{ $js.Data.Integrity }}">
+                <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+            {{ end }}
+    {{ end }}
+{{ end }}
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+</script>

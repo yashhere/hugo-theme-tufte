@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang='{{ .Site.Language.Lang }}'>
+
+{{ partial "head/head" . }}
+
+<body lang="en">
+    <div class="border" id="home"></div>
+    <div class="wrapper">   <!--Used by responsive-nav-orig.js -->
+        {{ partial "header" . }}
+
+        {{ block "main" . }}{{ end }}
+
+        <footer>
+            {{ block "footer" . }}{{ end }}     <!-- defined in index.html -->
+{{/*            {{ partial "footer/feed" . }}*/}}
+        </footer>
+         <!-- Closing <div class="container"> -->
+    </div>
+
+    <footer> <!-- Footer outside the .container, not bound by max-width -->
+        {{ partial "footer" . }}
+    </footer>
+
+    {{- partial "footer/scripts" . -}}
+</body>
+</html>

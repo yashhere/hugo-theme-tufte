@@ -1,0 +1,8 @@
+{{ if .Site.Params.settings.showReadingTime }}
+    {{ if ( eq .Section "posts" ) }}
+        <span class='reading-time'>
+            {{- partial "svg/icons" "clock" -}}
+            {{ .ReadingTime }} minutes
+        </span>
+    {{ end }}
+{{ end }}

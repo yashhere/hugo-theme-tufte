@@ -1,0 +1,24 @@
+{{/* partial "debugprint.html" . */}}
+{{ $scratch_var := (printf "__first_%s_%s" .Kind .Type) }}
+{{ with site.Taxonomies }}
+    {{ $.Scratch.Set $scratch_var true }}
+    <div class="all-terms right no-text-decoration">
+        {{ range $taxo,$_ := . }}
+            {{/* partial "debugprint.html" (slice $taxo ($.Scratch.Get $scratch_var)) */}}
+            <!-- Fri May 11 17:16:09 EDT 2018 - kmodi
+                 Do not print "all series" on taxonomy and taxonomyTerm pages for now.
+            -->
+            {{ $allow_current_taxo__taxonomy     := (and (eq $.Page.Kind "taxonomy") (ne $taxo "series")) }}
+            <!-- Do not print "all tags" link on a "tags" taxonomyTerm page, and same for other taxos. -->
+            {{ $allow_current_taxo__taxonomyTerm := (and (eq $.Page.Kind "taxonomyTerm") (ne $.Page.Type $taxo) (ne $taxo "series")) }}
+            {{ if (or $allow_current_taxo__taxonomy $allow_current_taxo__taxonomyTerm) }}
+                {{ with site.GetPage (printf "/%s" $taxo) }}
+                    {{ $pipe_maybe := (cond ($.Scratch.Get $scratch_var) "" " | ") }}
+                    {{ printf `<span class="%s">%s<a href="%s">all <span class="term">%s</span></a></span>` $taxo $pipe_maybe .Permalink $taxo | safeHTML }}
+                    {{ $.Scratch.Set $scratch_var false }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+    </div>
+    <div class="clear-float"></div>
+{{ end }}

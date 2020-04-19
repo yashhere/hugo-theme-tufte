@@ -1,0 +1,23 @@
+<meta charset='utf-8'>
+
+<link href="https://gmpg.org/xfn/11" rel="profile">
+
+<!-- Enable responsiveness on mobile devices-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
+
+<!-- No referrer: https://webbkoll.dataskydd.net/en/ -->
+<meta name="referrer" content="no-referrer">
+
+{{ partial "head/opengraph.html" . }}
+
+{{ partial "head/opengraph/indieweb" . }}
+{{ partial "head/opengraph/twitter" . }}
+
+{{/*{{ partialCached "_shared/csp.html" . }}*/}}
+
+<!-- Hugo info -->
+<!-- https://stackoverflow.com/a/10534167/1219634 -->
+<!-- https://w3c.github.io/html/single-page.html#the-meta-element -->
+{{ printf `<meta name="hugo-build-date" content="%s"/>` hugo.BuildDate | safeHTML }}
+{{ printf `<meta name="hugo-commit-hash" content="%s"/>` hugo.CommitHash | safeHTML }}
+{{ hugo.Generator }}

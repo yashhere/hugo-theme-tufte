@@ -1,0 +1,6 @@
+{{ $content := .Content }}
+<!-- Headline hash -->
+{{ $content = $content | replaceRE "(<h[2-9] id=\"([^\"]+)\".+)(</h[2-9]+>)" `${1}&nbsp;<a class="headline-hash no-text-decoration" href="#${2}">#</a> ${3}` }}
+<!-- Replace "<p></div></p>" with "</div>" -->
+{{ $content = $content | replaceRE "<p>(</div>)</p>" "${1}" }}
+{{ $content | safeHTML }}

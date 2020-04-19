@@ -1,0 +1,44 @@
+*::-moz-selection {
+    background: rgba(255, 255, 0, 0.3);
+    color: #000;
+}
+
+*::selection {
+    background: rgba(255, 255, 0, 0.3);
+    color: #000;
+}
+
+a::-moz-selection {
+    background: rgba(255, 255, 0, 0.3);
+    color: #0645ad;
+}
+
+a::selection {
+    background: rgba(255, 255, 0, 0.3);
+    color: #0645ad;
+}
+
+/*MathJax*/
+code.has-jax {font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+}
+
+/* Progress bar */
+.books {
+    -webkit-font-smoothing: antialiased;
+}
+
+.books a {
+    text-decoration: none;
+    padding: 2px 7px;
+}
+
+.books .progress {
+    margin-top: -0.6em;
+}
+
+.books .passive {
+    color: #bbbdbd;
+}

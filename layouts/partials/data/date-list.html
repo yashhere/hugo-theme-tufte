@@ -1,0 +1,16 @@
+{{ $p := .page }}
+{{ $date_format_meta := "2006-01-02T15:04:05-0700" }}
+{{ if (not $p.Date.IsZero) }}
+    {{ $date_meta := dateFormat $date_format_meta $p.Date }}
+    {{ $date_display := dateFormat .fmt $p.Date }}
+    <div class="post-date">
+        <!-- If either the date or lastmod param is not set in the front-matter,
+             .Lastmod will be equal to .Date (at least as of Hugo 0.38). But if
+             the date param is set explicitly, and lastmod param is auto-updated
+             (ox-hugo), they will be unequal. In that case, add the "Updated on"
+             string.
+        -->
+        {{ printf `<time datetime="%s" class="dt-published">%s</time>` $date_meta $date_display | safeHTML }}
+        <!-- Don't show "Updated on" string if update happened on the same day. -->
+    </div>
+{{ end }}

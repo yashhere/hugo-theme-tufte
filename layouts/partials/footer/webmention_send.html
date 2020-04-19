@@ -1,0 +1,48 @@
+<!-- Send webmention -->
+<!-- https://github.com/dg01d/reproach/blob/master/layouts/partials/mention.html -->
+{{ $page := . }}
+{{ with site.Params.indieweb }}
+    {{ $domain := .domain }}
+    {{ with .webmention }}
+        <div class="send-mention">
+            <p>
+                If you have written a <a href="https://indieweb.org/responses">response</a>
+                to this, enter your response post's URL below.
+            </p>
+	    {{ printf `<form action="%s%s/webmention" method="post">` .endpoint .account | safeHTML }}
+	    {{ printf `<input name="source" placeholder="https://example.com/reply-to-%s/" type="url">` ($page.Title | urlize) | safeHTML }}
+	    {{ printf `<input name="target" value="%s" type="hidden">` ($page.Permalink | replaceRE "^http://localhost:[0-9]+/" $domain) | safeHTML }}
+	    <input value="Send Webmention" type="submit">
+	    {{ printf "</form>" | safeHTML }}
+        </div>
+
+        <!-- Comment using https://quill.p3k.io/ and https://commentpara.de/. -->
+        <div class="comment">
+            <div class="instructions left">
+                <p>
+                    Or, you can send a "comment" webmention (it's OK if
+                    you don't know what that means). <em>When asked about your
+                    website on an IndieAuth login screen, simply type
+                    <code>https://commentpara.de</code>.</em>
+                </p>
+                <small>
+                    <span class="small-caps">Markdown Support</span>&mdash;
+                    <span class="nobr"><code>**</code><b>bold</b><code>**</code></span>,
+                    <span class="nobr"><code>_</code><i>italics</i><code>_</code></span>,
+                    <span class="nobr"><code>~~</code><del>strikethrough</del><code>~~</code></span>,
+                    <span class="nobr"><code>[</code><i>descr</i><code>]</code><code>(</code><i>link</i><code>)</code></span>,
+                    <span class="nobr"><code>`</code><code>monospace</code><code>`</code></span>,
+                    <span class="nobr"><code>```</code><a href="https://gohugo.io/content-management/syntax-highlighting/#list-of-chroma-highlighting-languages"><strong><code>LANG</code></strong></a><code>\nline1\nline2\n</code><code>```</code></span> <em>(Yep, multi-line code blocks too, with syntax highlighting!)</em>,
+                    auto-hyperlinking.
+                </small>
+            </div>
+            <form method="get" action="https://quill.p3k.io/" target="_blank">
+                <input type="hidden" name="dontask" value="1" />
+                <input type="hidden" name="me" value="https://commentpara.de/" />
+                <input type="hidden" name="reply" value="{{ $page.Permalink }}" />
+                <input type="submit" value="Write a comment" />
+            </form>
+            <div class="clear-float"></div>
+        </div>
+    {{ end }}
+{{ end }}

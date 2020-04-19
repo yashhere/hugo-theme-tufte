@@ -1,0 +1,132 @@
+{{ define "main" }}
+    {{ $url := "/data/library.json" }}
+    {{ $data := getJSON $url }}
+
+    <h1 class="post-title p-name center">{{ .Title }}</h1>
+    {{if $data }}
+    <div class="library">
+        {{ if $data.currently_reading }}
+        {{ $books := $data.currently_reading }}
+            <div class="read-state currently_reading">
+                <p><strong>Currently Reading</strong></p>
+                <ol>
+                    {{ range $books }}
+                    {{ $book := . }}
+                    <li>
+                        <div itemprop="mainEntity" itemscope="" itemtype="http://schema.org/Book">
+                            <div itemprop="name">{{ $book.title }}</div>
+                            <div itemprop="author">{{ $book.author }}</div>
+                        </div>
+                    {{ end }}
+                </ol>
+            </div>
+        {{ end }}
+
+        {{ if $data.read }}
+        {{ $books := $data.read }}
+        <div class="read-state read">
+            <p><em><strong>Read</strong></em></p>
+            <ol>
+                {{ range $books }}
+                {{ $book := . }}
+                <li>
+                    <div itemprop="mainEntity" itemscope="" itemtype="http://schema.org/Book">
+                        <div itemprop="name"><a href="{{ $book.blog_link }}">{{ $book.title }}</a></div>
+                        <div itemprop="author">{{ $book.author }}</div>
+                        {{ if $book.date_read }}
+                            <div itemprop="dateCreated">{{ $book.date_read }}</div>
+                            <div><div itemprop="reviewRating" class="star" style="width:{{ mul $book.my_rating 16 }}px"></div></div>
+                        {{ end }}
+
+                    </div>
+                    {{ end }}
+            </ol>
+        </div>
+        {{ end }}
+
+        {{ if $data.queued }}
+        {{ $books := $data.queued }}
+        <div class="read-state queued">
+            <p><em><strong>Queued</strong></em></p>
+            <ol>
+                {{ range $books }}
+                {{ $book := . }}
+                <li>
+                    <div itemprop="mainEntity" itemscope="" itemtype="http://schema.org/Book">
+                        <div itemprop="name"><a href="/2020/03/19/my-year-of-rest-and-relaxation.html">{{ $book.title }}</a></div>
+                        <div itemprop="author">{{ $book.author }}</div>
+                        <div itemprop="dateCreated">{{ $book.date_read}}</div>
+                    </div>
+                    {{ end }}
+            </ol>
+        </div>
+        {{ end }}
+
+        {{ if $data.favorite }}
+        {{ $books := $data.favorite }}
+        <div class="read-state">
+            <p class="favorite"><strong>Favorites</strong></p>
+            <ol>
+                {{ range $books }}
+                {{ $book := . }}
+                <li>
+                    <div itemprop="mainEntity" itemscope="" itemtype="http://schema.org/Book">
+                        <div itemprop="name"><a href="/2020/03/19/my-year-of-rest-and-relaxation.html">{{ $book.title }}</a></div>
+                        <div itemprop="author">{{ $book.author }}</div>
+                        <div itemprop="dateCreated">{{ $book.date_read}}</div>
+                    </div>
+                    {{ end }}
+            </ol>
+        </div>
+        {{ end }}
+
+        {{ if $data.paused }}
+        {{ $books := $data.paused }}
+        <div class="read-state">
+            <p class="paused"><strong>Paused</strong></p>
+            <ol>
+                {{ range $books }}
+                {{ $book := . }}
+                <li>
+                    <div itemprop="mainEntity" itemscope="" itemtype="http://schema.org/Book">
+                        <div itemprop="name"><a href="/2020/03/19/my-year-of-rest-and-relaxation.html">{{ $book.title }}</a></div>
+                        <div itemprop="author">{{ $book.author }}</div>
+                        <div itemprop="dateCreated">{{ $book.date_read}}</div>
+                    </div>
+                    {{ end }}
+            </ol>
+        </div>
+        {{ end }}
+
+        {{ if $data.unread }}
+        {{ $books := $data.unread }}
+        <div class="read-state">
+            <p class="unread"><strong>Unread</strong></p>
+            <ol>
+                {{ range $books }}
+                {{ $book := . }}
+                <li>
+                    <div itemprop="mainEntity" itemscope="" itemtype="http://schema.org/Book">
+                        <div itemprop="name"><a href="/2020/03/19/my-year-of-rest-and-relaxation.html">{{ $book.title }}</a></div>
+                        <div itemprop="author">{{ $book.author }}</div>
+                        <div itemprop="dateCreated">{{ $book.date_read}}</div>
+                    </div>
+                    {{ end }}
+            </ol>
+        </div>
+        {{ end }}
+
+    </div>
+    {{ end }}
+{{ end }}
+
+
+{{ define "footer" }}
+
+    {{ partial "extras/jump" }}
+
+    <!-- Back to top -->
+    <div class="backtotop center no-text-decoration">
+        <a href="#">back to <span class="top">top</span></a>
+    </div>
+{{ end }}

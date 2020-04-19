@@ -1,0 +1,16 @@
+{{ $p := .page }}
+{{ $date_format_meta := "2006-01-02T15:04:05-0700" }}
+{{ if (not $p.Date.IsZero) }}
+    {{ $date_meta := dateFormat $date_format_meta $p.Date }}
+    {{ $date_display := dateFormat .fmt $p.Date }}
+
+    <div class="post-date">
+        {{- partial "svg/icons" "calendar" -}}
+        {{ printf `<time datetime="%s" class="dt-published">%s</time>` $date_meta $date_display | safeHTML }}
+        <!-- Don't show "Updated on" string if update happened on the same day. -->
+        {{ if (and (not $p.Lastmod.IsZero) (not (eq (dateFormat "2006-01-02" $p.Lastmod) (dateFormat "2006-01-02" $p.Date)))) }}
+            {{ $lastmod_display := dateFormat (.fmtupd | default .fmt) $p.Lastmod }}
+            <span class="dt-updated">(Updated on {{ $lastmod_display -}})</span>
+        {{ end }}
+    </div>
+{{ end }}

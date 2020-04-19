@@ -1,0 +1,202 @@
+<!-- https://github.com/aaronpk/webmention.io#api -->
+<!-- https://github.com/aaronpk/webmention.io#find-links-of-a-specific-type-to-a-specific-page -->
+{{ $page := . }}
+{{ with site.Params.indieweb }}
+    <!-- The webmentions would anyways never be received on localhost, so manually
+         concat the .domain and .RelPermalink instead of directly using the .Permalink -->
+    {{ $domain := .domain | strings.TrimRight "/" }}
+    {{ with .webmention }}
+        <h2 id="webmentions">Webmentions&nbsp;<a class="headline-hash no-text-decoration" href="#webmentions">#</a></h2>
+        {{ $.Scratch.Set "__wm_target_links" (slice (printf "target[]=%s%s" $domain $page.RelPermalink)) }}
+        <!-- https://github.com/aaronpk/webmention.io#find-links-to-multiple-pages
+             Check for Webmentions sent to aliases too. -->
+        {{ range $page.Params.aliases }}
+            <!-- Assume Hugo uglyURLs to be disabled.
+                 So put the trailing "/" after the alias if not already there. -->
+            {{ $alias := . | replaceRE "[^/]$" "${0}/" }}
+            {{ $.Scratch.Add "__wm_target_links" (printf "target[]=%s%s" $domain $alias) }}
+        {{ end }}
+        {{ $wm_targets := delimit ($.Scratch.Get "__wm_target_links") "&" }}
+        {{ $num_mentions_max := 200 }}
+        <!-- Example:
+             curl "https://webmention.io/api/mentions?target=<INSERT-URL-HERE>&per-page=200&page=0"
+             curl "https://webmention.io/api/mentions?target=https://scripter.co/golang-quirk-number-strings-starting-with-0-are-octals/&per-page=200&page=0"
+        -->
+        {{ $webmentions_rcv := getJSON (printf "%sapi/mentions?%s&per-page=%d&page=0" .endpoint $wm_targets $num_mentions_max) }}
+
+        {{ $.Scratch.Set "__like_cnt" 0 }}
+        {{ $.Scratch.Set "__repost_cnt" 0 }}
+
+        {{ with $webmentions_rcv.links }}
+            {{ range . }}
+                {{ $wm := . }}
+                {{/* partial "debugprint.html" $wm */}}
+                {{ $activity := (index $wm "activity") }}
+                {{ $activity_type := (index $activity "type") }}
+                {{ $data := (index $wm "data") }}
+                {{/* partial "debugprint.html" $data */}}
+                {{ $mention_url := (index $data "url") }}
+                {{ $mention_content := (index $data "content") }}
+                {{ with (index $data "published") }}
+                    {{ $.Scratch.Set "__published_date" ((time .).Local | dateFormat "Mon Jan 2, 2006") }}
+                {{ end }}
+                {{ with (index $wm "verified_date") }} <!-- Webmention received date -->
+                    {{ $.Scratch.Set "__verified_date" ((time .).Local | dateFormat "Mon Jan 2, 2006 15:04 MST") }}
+                {{ end }}
+                {{ $author_obj := (index $data "author") }}
+                {{ with $author_obj }}
+                    {{ $author_name := (index . "name") }}
+                    {{ $author_photo := (index . "photo") }}
+                    {{ $author_url := (index . "url") }}
+                    {{ if (eq $activity_type "reply") }}
+                        {{/* partial "debugprint.html" $data */}}
+                        <!-- data-proofer-ignore makes htmltest ignore all the links within this tag. -->
+                        <dl class="webmention comment" data-proofer-ignore>
+                            <dt>
+                                Comment by
+                                {{ if $author_url }}
+                                    <a href="{{ $author_url }}" class="no-text-decoration">{{ $author_name }}</a>
+                                {{ else }} <!-- Prevent empty href's if $author_url is "". -->
+                                    {{ $author_name }}
+                                {{ end }}
+                                {{ printf `<a href="%s" class="no-text-decoration">` $mention_url | safeHTML }}
+                                {{ with $.Scratch.Get "__verified_date" }}on {{ . }}{{ end }}
+                                {{ printf "</a>" | safeHTML }}
+                            </dt>
+                            <dd>
+                                <!-- Parse Markdown only in Webmentions originated from commentpara.de. -->
+                                {{ if (findRE "^https://commentpara\\.de" $mention_url) }}
+                                    <!--
+                                         An example $mention_content value:
+
+                                         "&gt; Can you please share your complete .ctags file?<br /><br />\nHello, there isn't really much to the `.ctags` file. Here is my actual `~/.ctags` minus dozens of `--exclude` lines which I cannot publicly share: http://ix.io/2aWa ."
+                                    -->
+
+                                    <!-- Replace the HTML line-breaks with \n, else the markdown code blocks won't work. -->
+                                    {{ $mention_content = $mention_content | replaceRE "<br />" "\n" }}
+
+                                    <!-- commentpara.de transmits the data encoded in HTML. So
+                                         the markdown blockquote markers ">" would get converted to "&gt;", so convert them back to ">".
+
+                                         Replace "&gt; " at the beginning of the string, or at the beginning of a line with a newline
+                                         followed by "> ". -->
+                                    {{ $mention_content = $mention_content | replaceRE "(^|\\n)&gt; " "\n> " }}
+
+                                    <!-- Replace " -&gt; " with " -> " and " &lt;- " with " <- " -->
+                                    {{ $mention_content = $mention_content | replaceRE " -&gt; " " -> " | replaceRE " &lt;- " " <- " }}
+
+                                    {{ $mention_content = $mention_content | markdownify }} <!-- Parse Markdown -->
+                                {{ end }}
+                                {{ $mention_content | safeHTML }}
+                            </dd>
+                        </dl>
+                    {{ else if (eq $activity_type "link") }}
+                        {{/* partial "debugprint.html" $wm */}}
+                        <!-- data-proofer-ignore makes htmltest ignore all the links within this tag. -->
+                        <dl class="webmention mention" data-proofer-ignore>
+                            <dt>
+                                Mentioned by
+                                {{ if $author_url }}
+                                    <a href="{{ $author_url }}" class="no-text-decoration">{{ $author_name }}</a>
+                                {{ else }} <!-- Prevent empty href's if $author_url is "". -->
+                                    {{ $author_name }}
+                                {{ end }}
+                                {{ printf `<a href="%s" class="no-text-decoration">` $mention_url | safeHTML }}
+                                {{ with $.Scratch.Get "__verified_date" }}on {{ . }}{{ end }}
+                                {{ printf "</a>" | safeHTML }}
+                            </dt>
+                            <dd>
+                                {{ $mention_title := (index $data "name") }}
+                                {{ with $mention_title }}
+                                    {{ printf `<strong><a href="%s">%s</a></strong>` $mention_url . | safeHTML }}<br />
+                                    {{ with $.Scratch.Get "__published_date" }}—Published on {{ . }}{{ end }}
+                                    <hr />
+                                {{ end }}
+                                <!-- Limit the mention content to 250 characters. -->
+                                {{ $mention_content | replaceRE "(<a[^>]+\\bhref=[^>]+)>" `${1}>` | safeHTML | truncate 250 }}
+                            </dd>
+                        </dl>
+                    {{ else if (eq $activity_type "like") }}
+                        {{ $.Scratch.Add "__like_cnt" 1 }}
+                    {{ else if (eq $activity_type "repost") }}
+                        {{ $.Scratch.Add "__repost_cnt" 1 }}
+                    {{ else }}
+                        {{ $activity }}
+                    {{ end }}
+                {{ else }}
+                    {{ with $mention_url }}
+                        <!-- data-proofer-ignore makes htmltest ignore all the links within this tag. -->
+                        <dl class="webmention mention" data-proofer-ignore>
+                            <dt>
+                                Mentioned at
+                            </dt>
+                            <dd>
+                                {{ printf `<a href="%s" class="no-text-decoration">%s</a>` . . | safeHTML }}
+                            </dd>
+                        </dl>
+                    {{ end }}
+                {{ end }}       <!-- ends "with $author_obj"-->
+            {{ end }} <!-- ends the range within "with $webmentions_rcv.links" -->
+        {{ end }}     <!-- ends "with $webmentions_rcv.links" -->
+
+        <!-- Show comments from Disqus-exported archive. -->
+{{/*        {{ partial "disqus-json.html" $page }}*/}}
+
+        <!-- Likes -->
+        <span class="like no-text-decoration">
+            {{ with $page.Params.syndication.twitter }}
+                <!--  data-proofer-ignore makes htmltest ignore this link. -->
+                {{ printf `<a title="Like using Twitter" href="https://twitter.com/intent/like?tweet_id=%d" data-proofer-ignore>` . | safeHTML }}
+            {{ end }}
+            <!-- Show the icon only if the associated count is non-zero or if syndication link is present. -->
+            {{ if (or (ge ($.Scratch.Get "__like_cnt") 1) ($page.Params.syndication.twitter)) }}
+                <span class="icon">
+                    {{ printf `<i class="%s fa-heart"></i>` ($.Param "fontawesome.style" | default "fal") | safeHTML }}
+                </span>
+            {{ end }}
+            {{ with $page.Params.syndication.twitter }}
+                {{ printf "</a>" | safeHTML }}
+            {{ end }}
+            <!-- No point showing a zero count -->
+            {{ if (ge ($.Scratch.Get "__like_cnt") 1) }}
+                <span class="count">
+                    &nbsp;{{ $.Scratch.Get "__like_cnt" }}
+                </span>
+            {{ end }}
+        </span>
+
+        <!-- Retweets/reposts -->
+        <span class="retweet no-text-decoration">
+            {{ with $page.Params.syndication.twitter }}
+                <!--  data-proofer-ignore makes htmltest ignore this link. -->
+                {{ printf `<a title="Retweet using Twitter" href="https://twitter.com/intent/retweet?tweet_id=%d" data-proofer-ignore>` . | safeHTML }}
+            {{ end }}
+            <!-- Show the icon only if the associated count is non-zero or if syndication link is present. -->
+            {{ if (or (ge ($.Scratch.Get "__repost_cnt") 1) ($page.Params.syndication.twitter)) }}
+                <span class="icon">
+                    {{ printf `<i class="%s fa-retweet"></i>` ($.Param "fontawesome.style" | default "fal") | safeHTML }}
+                </span>
+            {{ end }}
+            {{ with $page.Params.syndication.twitter }}
+                {{ printf "</a>" | safeHTML }}
+            {{ end }}
+            <!-- No point showing a zero count -->
+            {{ if (ge ($.Scratch.Get "__repost_cnt") 1) }}
+                <span class="count">
+                    &nbsp;{{ $.Scratch.Get "__repost_cnt" }}
+                </span>
+            {{ end }}
+        </span>
+
+        <!-- Reply-->
+        {{ with $page.Params.syndication.twitter }}
+            <span class="tweet no-text-decoration">
+                {{ printf `<a title="Reply using Twitter (but hey, I'd urge you to instead use that Comment button above ☺)" href="https://twitter.com/intent/tweet?in_reply_to=%d">` . | safeHTML }}
+                <span class="icon">
+                    {{ printf `<i class="%s fa-reply"></i>` ($.Param "fontawesome.style" | default "fal") | safeHTML }}
+                </span>
+                {{ printf "</a>" | safeHTML }}
+            </span>
+        {{ end }}
+    {{ end }}                   <!-- ends "with .webmention" -->
+{{ end }}                       <!-- ends "with site.Params.indieweb" -->

@@ -1,0 +1,69 @@
+{{ define "main" }}             <!-- List of all posts -->
+
+{{ partial "taxonomy/draft-tag" . }}
+
+{{/*{{ partialCached "taxonomy/all-terms" . }}*/}}
+
+{{ $has_some_content := (not (eq "" (.Content | replaceRE "[[:^alpha:]]" ""))) }}
+{{ if $has_some_content }}
+    <br /> <!-- This br needed so that the below taxo-buttons are center-aligned. -->
+    <article class="post h-entry {{ .Section }}">
+        <header>
+            <div class="center">{{ partial "taxonomy/taxo-buttons" . }}</div>
+            <h1 class="post-title p-name">{{ .Title }}</h1>
+
+            <!-- To complete the h-entry meta-data as per https://indiewebify.me/validate-h-entry/ -->
+            <data class="u-url" value="{{ .Permalink }}"></data>
+        </header>
+
+        <hr />
+        <div class="content">
+            {{ partial "entry/description" . }}
+
+            {{ partial "entry/meta/author" (dict "page" . "fmt" "u-author") }}
+
+            <div class="e-content">
+                {{ partial "extras/content-post-process" . }}
+            </div>
+        </div>
+        <hr />
+    </article>
+{{ end }}
+
+<!-- http://microformats.org/wiki/h-feed -->
+<section class="h-feed">
+    <header>
+        <!-- To complete the h-feed meta-data -->
+        <data class="u-url" value="{{ .Permalink }}"></data>
+        {{ partial "entry/meta/author" (dict "page" . "fmt" "u-author") }}
+
+        <!-- If the page is /tags/foo/, .Data.Plural = "tags", .Data.Term = "foo"
+             "%T" in the string retrieved from phrase map will be replaced with .Data.Term
+             "%N" in the string retrieved from phrase map will be replaced with .Name
+        -->
+        {{ $term := .Data.Term }}
+        {{ $term_count := (len .Pages) }}
+
+        {{ if $has_some_content }}
+            {{ $phrase := (index site.Data.taxonomy.phrases .Data.Plural) | replaceRE "%T" (printf "‘%s’" $term) | replaceRE "%N" "this" }}
+            <h2 class="p-name">{{ printf "Posts %s (%d)" $phrase $term_count }}</h2>
+        {{ else }}
+            <div class="center">{{ partial "taxonomy/taxo-buttons" . }}</div>
+            {{ $phrase := (index site.Data.taxonomy.phrases .Data.Plural) | replaceRE "%T" (printf "‘%s’" $term) | replaceRE "%N" (printf "‘%s’" .Name) }}
+            <h1 class="p-name">{{ printf "Posts %s (%d)" $phrase $term_count }}</h1>
+        {{ end }}
+    </header>
+
+    {{ range .Pages }}
+        <!-- If the current page's $term is "foo", it replaces «li class="__foo__"»
+             with «li class="active"».
+             The "__<taxo>__" are special classes added to the taxo buttons in the
+             taxo-buttons.html partial.
+        -->
+        {{ .Render "summary" | replaceRE (printf `(li class=")__%s__"` $term) `${1}active"` | safeHTML }}
+    {{ end }}
+
+    {{ partialCached "taxonomy/all-terms" . }}
+</section>
+
+{{ end }}

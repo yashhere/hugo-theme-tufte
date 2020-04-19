@@ -1,0 +1,19 @@
+{{ define "main" }}             <!-- List of all series -->
+
+<header>
+    <h1>List of {{ .Data.Plural }}</h1>
+</header>
+
+{{ $type := .Type }}
+<ul>
+    {{ range .Data.Terms.ByCount }}
+        {{ $count := .Count }}
+        {{ with site.GetPage (printf "/%s/%s" $type (.Name | urlize)) }} <!-- .Name in OrderedTaxonomyEntry object -->
+            <li>
+                <a href="{{ .Permalink }}">{{ .Name }}</a> ({{ $count }}) <!-- .Name in Page -->
+            </li>
+        {{ end }}
+    {{ end }}
+</ul>
+
+{{ end }}

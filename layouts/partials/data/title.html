@@ -1,0 +1,14 @@
+{{- $title := ( .Title ) -}}
+{{- $siteTitle := ( .Site.Title ) -}}
+{{- $sep := ( .Site.Params.seo.titleSeparator | default "•" ) -}}
+{{- $title404 := ( .Site.Params.info.title404 | default $title ) -}}
+
+{{ if eq .RelPermalink "/" }}
+    {{ $siteTitle }}
+{{- else if eq .Kind "404" -}}
+    {{ $title404 }} {{ $sep }} {{ $siteTitle }}
+{{- else if ( or .IsNode ( eq .Section "page" ) ) -}}
+    {{ $title }} {{ $sep }} {{ $siteTitle }}
+{{- else -}}
+    {{ $title }} {{ $sep }} {{ $siteTitle }}
+{{- end -}}

@@ -1,0 +1,64 @@
+<!-- https://npf.io/2014/08/making-it-a-series/ -->
+<!-- This must be called only in single type layouts. -->
+
+<!--
+     Site config needs to have "series" along with "tag" and "category" if you need
+     those too:
+
+     [Taxonomies]
+     category = "categories" # SINGULAR = "PLURAL"
+     tag = "tags"
+     series = "series"
+-->
+
+{{ $this_page_permalink := .Permalink }}
+{{ range .Params.series }}
+    {{ $series_name := . }}
+    {{ $series_name_urlized := (. | urlize) }}
+    {{ $series_page := (site.GetPage (printf "/series/%s" $series_name_urlized)) }}
+    {{ $series_page_empty_content := (eq "" ($series_page.Content | replaceRE "[[:^alpha:]]" "")) }}
+    <!--
+         site.Taxonomies.series then is a map with key = "urlized value
+         of the series name", and value = WeightedPages object. The
+         WeightedPages object holds a list of WeightedPage objects.
+    -->
+    {{ with site.Taxonomies.series }}
+        {{ $weighted_pages := index . $series_name_urlized }}
+        <!-- It does not make sense to show the "series block" if that series has just one post. -->
+        {{ if (or (ge $weighted_pages.Count 2) site.Data.series.todo) }}
+            <div class="series">
+                <p>
+                    <a href="#" id="series"></a>
+                    This is a post in the
+                    {{ if $series_page_empty_content }}
+                        “<b class="p-category">{{ $series_page.Title }}</b>”
+                    {{ else }}
+                        <!-- Link to the series landing page only if it has non-empty .Content. -->
+                        “<a href="{{ $series_page.Permalink }}"><b class="p-category">{{ $series_page.Title }}</b></a>”
+                    {{ end }}
+                    series.
+                </p>
+                <table>
+                    <!-- Calling .Pages function on the WeightedPages object will return all the nested pages. -->
+                    {{ range $weighted_pages.Pages }}
+                        {{ $date := (cond .Date.IsZero "" (.Date.Format "2006-01-02")) }}
+                        {{ if (eq $this_page_permalink .Permalink) }}
+                            <!-- Don't hyperlink the current-page series element. -->
+                            <tr class="active"><td class="date">{{ $date }}</td><td>{{ .Title }}</td></tr>
+                        {{ else }}
+                            <tr><td class="date">{{ $date }}</td><td><a href="{{ .Permalink }}">{{ .Title }}</a></td></tr>
+                        {{ end }}
+                    {{ end }}   <!-- ends range -->
+                    {{ with site.Data.series }}
+                        {{ with (index . $series_name) }}
+                            {{ range (index . "todo") }}
+                                <tr><td><span class="todo">TODO</span></td><td>{{ . }}</td></tr>
+                            {{ end }}
+                        {{ end }}
+                    {{ end }}
+                </table>
+            </div>
+            <br />
+        {{ end }}               <!-- ends if count -->
+    {{ end }}                   <!-- ends with site.Taxonomies.series -->
+{{ end }}                       <!-- ends with -->

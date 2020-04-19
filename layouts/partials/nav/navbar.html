@@ -1,0 +1,23 @@
+{{ $page_relpermalink := .RelPermalink }}
+{{/*<nav id="nav" class="nav-collapse opened" aria-hidden="false">*/}}
+{{/*    <ul class="navbar">*/}}
+{{/*        <li><a class="{{ if eq .Kind "home" }}active{{ end }}" href="/">Home</a></li>*/}}
+{{/*        {{ range site.Params.mainSections }}*/}}
+{{/*            {{ with site.GetPage (printf "/%s" .) }}*/}}
+{{/*                <li><a class="{{ if eq $page_relpermalink .RelPermalink }}active{{ end }}" href="{{ .Permalink }}">{{ .Name | title }}</a></li>*/}}
+{{/*            {{ end }}*/}}
+{{/*        {{ end }}*/}}
+{{/*    </ul>*/}}
+{{/*</nav>*/}}
+
+<nav class="topnav no-tufte-underline" id="myTopnav">
+        <a href="/" class="nav-logo sans no-tufte-underline" id="menu">
+            {{ site.Title }}<br><span class="tagline">{{ site.Params.tagline }}</span>
+        </a>
+    {{ range site.Params.mainSections }}
+        {{ with site.GetPage (printf "/%s" .) }}
+            <a href="{{ .Permalink }}" class="sans no-tufte-underline" id="menu">{{ .Name | title }}</a>
+        {{ end }}
+    {{ end }}
+    <b><a href="javascript:void(0);" class="icon no-tufte-underline" id="menu" onclick="myFunction()">&#9776;</a></b>
+</nav>

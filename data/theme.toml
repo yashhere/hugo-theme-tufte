@@ -1,0 +1,33 @@
+# Theme colors based on colors from Base16:
+# http://chriskempson.com/projects/base16/.
+[red]
+  default_color = "#ac4142"
+  light_color = "rgba(172, 65, 66, 0.2)" # Same as the --theme-color #ac4142, but in decimal, with 20% opacity
+
+[orange]
+  default_color = "#d28445"
+  light_color = "rgba(210, 84, 45, 0.2)"
+
+[yellow]
+  default_color = "#f4bf75"
+  light_color = "rgba(244, 191, 117, 0.2)"
+
+[green]
+  default_color = "#90a959"
+  light_color = "rgba(144, 169, 89, 0.2)"
+
+[cyan]
+  default_color = "#75b5aa"
+  light_color = "rgba(117, 181, 170, 0.2)"
+
+[blue]
+  default_color = "#6a9fb5"
+  light_color = "rgba(106, 159, 181, 0.2)"
+
+[magenta]
+  default_color = "#aa759f"
+  light_color = "rgba(170, 117, 159, 0.2)"
+
+[brown]
+  default_color = "#8f5536"
+  light_color = "rgba(143, 85, 54, 0.2)"

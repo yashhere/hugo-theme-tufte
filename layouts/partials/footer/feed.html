@@ -1,0 +1,11 @@
+<ul class="no-bullets feed right inline">
+    {{ range .AlternativeOutputFormats }}
+        {{ $name_upper := .Name | upper }}
+        {{ if (or (eq $name_upper "RSS") (eq $name_upper "ATOM")) }}
+            <li class="inline no-text-decoration">
+                {{ printf `<a href="%s">%s</a>` .Permalink $name_upper | safeHTML }}
+            </li>
+        {{ end }}
+    {{ end }}
+</ul>
+<div class="clear-float"></div>

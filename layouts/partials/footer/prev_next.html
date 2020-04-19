@@ -1,0 +1,12 @@
+<div class="prev-next-navigator clear-float">
+    {{ with .NextInSection }}
+        <span class="prev-post left no-text-decoration">
+            <a href="{{ .Permalink }}" class="nobr">« {{ .Title }}</a>
+        </span>
+    {{end}}
+    {{ with .PrevInSection }}
+        <span class="next-post right no-text-decoration">
+            <a href="{{ .Permalink }}" class="nobr">{{ .Title }} »</a>
+        </span>
+    {{end}}
+</div>

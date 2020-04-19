@@ -1,0 +1,29 @@
+<!-- https://indieauth.com/setup -->
+{{ printf `<!-- rel="me" links for IndieAuth -->` | safeHTML }}
+{{ $relme_exists := false }}
+{{ range site.Params.social -}}
+    {{- if .relme -}}
+        {{- printf `<link href="%s" rel="me">` .link | safeHTML -}}
+        {{ $relme_exists = true }}
+    {{- end -}}
+{{- end }}
+
+{{ if $relme_exists }}
+    <!-- https://www.amitgawande.com/indiewebify-hugo-website/ -->
+    <!--  data-proofer-ignore makes htmltest ignore this link. -->
+    <link rel="authorization_endpoint" href="https://indieauth.com/auth" data-proofer-ignore>
+    <!-- Token Endpoint: https://tokens.indieauth.com/ -->
+    <!-- Needed to log into services like https://monocle.p3k.io/ -->
+    <link rel="token_endpoint" href="https://tokens.indieauth.com/token">
+{{ end }}
+
+{{ with site.Params.indieweb }}
+    {{ $domain := .domain }}
+    {{ with .webmention }}
+        {{ printf `<link rel="pingback" href="%s%s/xmlrpc" />` .endpoint .account | safeHTML }}
+        {{ printf `<link rel="webmention" href="%s%s/webmention" />` .endpoint .account | safeHTML }}
+    {{ end }}
+    {{ with .micropub }}
+        {{ printf `<link rel="micropub" href="%s%s" />` $domain .url | safeHTML }}
+    {{ end }}
+{{ end }}

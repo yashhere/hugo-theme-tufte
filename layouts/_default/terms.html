@@ -1,0 +1,29 @@
+{{ define "main" }}             <!-- List of all tags/categories -->
+
+{{ $singular := .Data.Singular }}
+
+<header>
+    <h1>{{ .Data.Plural | title }} Collection</h1>
+</header>
+
+{{ $type := .Type }}
+<div class="taxo collection no-text-decoration">
+    <ul class="{{ printf "no-bullets %s" .Data.Plural }}">
+        {{ range .Data.Terms.ByCount }}
+            {{ $count := .Count }}
+            {{ $count_div_5 := (div .Count 5) }} <!-- intentionally getting truncated value -->
+            {{ $term := .Term }}
+            {{ with site.GetPage (printf "/%s/%s" $type $term) }}
+                <!-- Provision put in for up to 5*(19+1) = 100 posts for any tag/cateogry. -->
+                <li class="{{ printf "x%02d" (cond (gt $count_div_5 19) 19 $count_div_5) }}"
+                    title="{{ printf "%d post%s with %s ‘%s’" $count (cond (gt $count 1) "s" "") $singular $term }}">
+                    <a href="{{ .Permalink }}">{{ $term }}</a>
+                </li>
+            {{ end }}
+        {{ end }}
+    </ul>
+</div>
+
+{{ partial "taxonomy/all-terms" . }}
+
+{{ end }}

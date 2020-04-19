@@ -1,0 +1,84 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>
+            {{/*
+            If the page's .Title exists AND if it is not the same as the site's title,
+            set the title to
+
+            "Subsection title" on "My site title"
+
+            else, just
+
+            "My site title"
+            */}}
+            {{- with .Title -}}
+                {{- if (not (eq . site.Title)) }}
+                    {{ . }} on
+                {{ end }}
+            {{ end }}
+            {{ site.Title -}}
+        </title>
+        <link>{{ .Permalink }}</link>
+        <description>Recent content {{ with .Title }}{{ if (not (eq . site.Title)) }} in {{ . }}{{ end }}{{ end }}
+            on {{ site.Title }}</description>
+        {{ with site.LanguageCode }}<language>{{ . }}</language>{{ end }}
+        {{ with site.Copyright }}<copyright>{{ . }}</copyright>{{end}}
+        {{- with site.Author.name -}}
+            {{ if site.Author.email }}
+                <managingEditor>{{ printf "%s (%s)" site.Author.email . }}</managingEditor>
+                <webMaster>{{ printf "%s (%s)" site.Author.email . }}</webMaster>
+            {{- else -}}
+                <managingEditor>{{ . }}</managingEditor>
+                <webMaster>{{ . }}</webMaster>
+            {{- end -}}
+        {{- end -}}
+        <lastBuildDate>{{ now.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        {{- with .OutputFormats.Get "RSS" -}} <!-- Here, the Get is case-insensitive. -->
+            <atom:link href="{{ .Permalink }}" rel="self" type="{{ .MediaType.Type }}" />
+        {{- end -}}
+        {{ $feed_sections := site.Params.feedSections | default site.Params.mainSections }}
+        {{ $pages := (where .RegularPages "Type" "in" $feed_sections) }}
+        {{- if (eq .Kind "home") -}}
+            {{ $pages = (where site.RegularPages "Type" "in" $feed_sections) }}
+        {{- end -}}
+        {{ range first 15 $pages }}
+            {{ $page := . }}
+            <item>
+                <title>{{ .Title }}</title>
+                <link>{{ .Permalink }}</link>
+                {{ $description1 := .Description | default "" }}
+                {{ $description := (cond (eq "" $description1) "" (printf "<blockquote>%s</blockquote>" ($description1 | markdownify))) }}
+                <description>{{ printf "%s%s" $description .Content | html }}</description>
+                {{ with .Params.author -}}
+                    {{- range . -}} <!-- Assuming the author front-matter to be a list -->
+                        <author>{{ printf "%s@fakeEmailToMakeValidatorHappy.com (%s)" (. | replaceRE " " ".") . }}</author>
+                    {{- end -}}
+                {{- end }}
+                {{ with site.Taxonomies }}
+                    {{ range $taxo,$_ := . }} <!-- Defaults taxos: "tags", "categories" -->
+                        {{ with $page.Param $taxo }}
+                            {{ $taxo_list := . }} <!-- $taxo_list will be the tags/categories list -->
+                            {{ with site.GetPage (printf "/%s" $taxo) }}
+                                {{ $taxonomy_page := . }}
+                                {{ range $taxo_list }} <!-- Below, assuming pretty URLs -->
+                                    <category domain="{{ printf "%s%s" $taxonomy_page.Permalink (. | urlize) }}">{{ . }}</category>
+                                {{ end }}
+                            {{ end }}
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+                <guid>{{ .Permalink }}</guid>
+                {{ if (not .Date.IsZero) }}<pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>{{ end }}
+            </item>
+        {{ end }}
+    </channel>
+</rss>
+
+<!--
+     Local Variables:
+     mode: web
+     web-mode-minor-engine: hugo
+     End:
+-->

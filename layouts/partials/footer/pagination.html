@@ -1,0 +1,19 @@
+<div class="pagination no-text-decoration">
+    {{ if .Paginator.HasPrev }}
+        <a class="pagination-item newer" href="{{ .Paginator.Prev.URL }}">Future</a>
+    {{ else }}
+        <span class="pagination-item newer">Future</span>
+    {{ end }}
+    {{ if .Paginator.HasNext }}
+        <a class="pagination-item older" href="{{ .Paginator.Next.URL }}">Past</a>
+    {{ else }}
+        <span class="pagination-item older">Past</span>
+    {{ end }}
+</div>
+
+{{ if (eq 1 .Paginator.PageNumber) }}
+    {{ if not .Site.IsServer }}
+            <!-- Receive Webmentions -->
+        {{ partial "footer/webmention_rcv" . }}
+    {{ end }}
+{{ end }}

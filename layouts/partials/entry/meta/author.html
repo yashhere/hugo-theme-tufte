@@ -1,0 +1,25 @@
+{{ $author := (slice) }} <!-- Set the $author to be an empty slice by default -->
+{{ with site.Author.name }}
+    {{ $author = (slice .) }} <!-- Set the default to site author, if specified -->
+{{ end }}
+<!-- Override $author value with that present in page front-matter -->
+{{ with .page.Params.author }}
+    {{ $author_type := (printf "%T" .) }}
+    {{ $author_is_slice := (eq "[]string" $author_type) }}
+    {{ if $author_is_slice }}
+        {{ $author = . }}
+    {{ else }}
+        {{ $author = (slice .) }}
+    {{ end }}
+{{ end }}
+{{ range $author }}
+    {{ if (eq "u-author" $.fmt) }}
+        <!-- Link the u-author link inside h-entry with the u-url in the external h-card -->
+        <span class="hide">
+            &mdash; <a href="{{ site.BaseURL }}" class="u-author">{{ . }}</a>
+        </span>
+    {{ else if (eq "DC" $.fmt) }} <!-- Dublin Core metadata DC.Creator -->
+    <!-- http://www.dublincore.org/documents/2000/07/16/usageguide/simple-html/ -->
+    <meta name="DC.Creator" content="{{ . }}"/>
+    {{ end }}
+{{ end }}

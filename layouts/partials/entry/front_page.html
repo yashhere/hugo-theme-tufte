@@ -1,0 +1,14 @@
+<div class="posts h-feed">
+    <header>
+        <!-- To complete the h-feed meta-data -->
+        <data class="u-url" value="{{ .Permalink }}"></data>
+        {{ partial "entry/meta/author" (dict "page" . "fmt" "u-author") }}
+        <data class="p-name" value="{{ .Title }}"></data>
+    </header>
+    <!-- http://justindunham.net/blog-bells-and-whistles-in-hugo/ -->
+
+    {{ $pages := (where (where .Site.Pages "Type" "posts") "IsPage" true) }}
+    {{ range first 7 $pages }}
+        {{ .Render "summary"}}      <!-- Use layouts/_default/summary.html -->
+    {{ end }}
+</div>

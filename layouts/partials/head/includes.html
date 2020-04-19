@@ -1,0 +1,34 @@
+<link rel='icon' href='{{ ( or .Site.Params.assets.favicon "/appicons/favicon.ico" ) | relURL }}'>
+
+
+{{ with .Param "prefetch" }}
+    {{ range .fonts }}
+        {{ printf `<link rel="preload" href="%s" as="font" crossorigin>` . | safeHTML }}
+    {{ end }}
+{{ end }}
+
+{{ partialCached "css/theme_css" . }}
+{{ partialCached "css/custom_css" . }}
+
+<!-- Favicons -->
+<!-- Generated using https://realfavicongenerator.net/ -->
+{{ if (.Param "favicons") }}
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ (resources.Get "apple-touch-icon.png" | fingerprint).RelPermalink }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ (resources.Get "favicon-32x32.png" | fingerprint).RelPermalink }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ (resources.Get "favicon-16x16.png" | fingerprint).RelPermalink }}">
+    <link rel="manifest" href="{{ (resources.Get "manifest.json" | fingerprint).RelPermalink }}">
+    <link rel="mask-icon" href="{{ (resources.Get "safari-pinned-tab.svg" | fingerprint).RelPermalink }}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d" />
+    <meta name="theme-color" content="#ffffff" />
+{{ end }}
+
+<!-- RSS -->
+<!-- https://gohugo.io/templates/rss/#reference-your-rss-feed-in-head -->
+{{ range .AlternativeOutputFormats -}}
+    {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink (printf "%s for %s" (.Name | title) site.Title) | safeHTML }}
+{{ end -}}
+
+<!-- Author -->
+{{ partial "entry/meta/author" (dict "page" . "fmt" "DC") }}
+
+{{- partialCached "head/analytics" . -}}

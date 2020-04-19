@@ -1,0 +1,15 @@
+{{ with .Description }}
+    <div class="description p-summary">
+        {{ $desc_html := . | markdownify }}
+        {{ $has_p_tag := false }}
+        {{/* partial "debugprint.html" $desc_html */}}
+        {{ if (findRE "^<p>" $desc_html) }}
+            {{ $has_p_tag = true}}
+        {{ end }}
+        {{ if (not $has_p_tag) }}
+            <!-- Add the missing p tags. -->
+            {{ $desc_html = printf "<p>%s</p>" $desc_html }}
+        {{ end }}
+        {{ $desc_html | safeHTML }}
+    </div>
+{{ end }}

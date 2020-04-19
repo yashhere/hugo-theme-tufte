@@ -1,0 +1,23 @@
+<article class="summary h-entry {{ .Section }}">
+    <header>
+        <h2 class="post-title p-name no-text-decoration"><a class="u-url" href='{{ .Permalink }}'> {{ .Title }}</a> </h2>
+{{/*        {{ partial "taxonomy/taxo-buttons" . }}*/}}
+        {{ partial "data/date-maybe" (dict "page" . "fmt" (.Param "dateform")) }}
+    </header>
+
+    <div class="post p-summary" >
+        {{ partial "extras/summary_minus_toc" . }}
+    </div>
+
+    <!-- https://gohugo.io/content/summaries/ -->
+    <!-- Show the 'Read more' link only if the 'more' comment is used, or if the 'description' is set. -->
+    {{ if (or .Truncated .Description) }}
+        <div class="readmore no-text-decoration">
+            <a href='{{ .Permalink }}'
+               title="{{ printf "Read more about %s" .Title }}">
+                read <span class="more"> more</span>
+                <span class="screen-readers-only" >...</span>
+            </a>
+        </div>
+    {{ end }}
+</article>

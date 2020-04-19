@@ -1,0 +1,24 @@
+<ul class="social-links no-text-decoration">
+    {{ range .Param "social" }}
+        <li>
+            <a href="{{ .link }}" title="{{ .name }}">
+                <!-- Example value of Params.social with "svg" key in site config.toml:
+                     [[Params.social]]
+                     name = "Mastodon"
+                     link = "https://mastodon.technology/@kaushalmodi"
+                     svg = "mastodon"      # map key in site.Data.svg, other value: mastodon-alt
+                -->
+                {{ with .svg }}
+                    {{ with (index site.Data.svg . ) }}
+                        {{ . | safeHTML }}
+                    {{ end }}
+                {{ else }}
+                    {{ $family := .family | default "fab" }}
+                    {{ $size := .size | default "2x" }}
+                    {{ $icon := .icon | default (.name | lower) }}
+                    <i class="{{ $family }} fa-{{ $size }} fa-{{ $icon }}"></i>
+                {{ end }}
+            </a>
+        </li>
+    {{ end }}
+</ul>

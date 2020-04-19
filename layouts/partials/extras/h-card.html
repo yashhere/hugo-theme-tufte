@@ -1,0 +1,29 @@
+<!-- http://microformats.org/wiki/h-card -->
+<!-- Validator: https://waterpigs.co.uk/php-mf2/ -->
+<!-- https://indiewebify.me/validate-h-card/ -->
+<!-- h-entry validation: https://xray.p3k.io/ -->
+<!-- authorship testing: https://sturdy-backbone.glitch.me/ -->
+{{ with site.Author }}
+    <div class="h-card">
+        {{ with .photo }}
+            {{ $img := resources.Get .url }}
+            <img class="u-photo"
+                 {{- with site.Author.name }} alt="Photo of {{ . }}"{{ end }}
+                 src="{{ $img.RelPermalink }}"
+                 {{- with .width }} width="{{ . }}"{{ end -}}
+                 {{- with .height }} height="{{ . }}"{{ end -}}>
+        {{ end }}
+        <!-- Below u-url link must match with the u-author link in h-entry blocks to link this h-card with them. -->
+        <a class="p-name u-url" href="{{ site.BaseURL }}">{{ with .name }}{{ . }}{{ end }}</a>
+        {{ with .email }}
+            <p>
+                {{ printf `<a class="u-email" href="mailto:%s" rel="me">%s</a>` . . | safeHTML }}
+            </p>
+        {{ end }}
+        {{ with .bio }}
+            <p class="p-note">
+                {{ . | markdownify }}
+            </p>
+        {{ end }}
+    </div>
+{{ end }}

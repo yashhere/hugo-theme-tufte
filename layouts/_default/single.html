@@ -1,0 +1,95 @@
+{{ define "main" }}
+
+<!-- http://microformats.org/wiki/h-entry -->
+<!-- h-entry validation: https://xray.p3k.io/ -->
+<!-- authorship testing: https://sturdy-backbone.glitch.me/ -->
+
+{{ partial "taxonomy/draft-tag" . }}
+
+<article class="post h-entry {{ .Section }}">
+    <header>
+        <h1 class="post-title p-name">{{ .Title }}</h1>
+
+        <!-- To complete the h-entry meta-data as per https://indiewebify.me/validate-h-entry/ -->
+        <data class="u-url" value="{{ .Permalink }}"></data>
+
+        {{ partial "entry/meta/author" (dict "page" . "fmt" "u-author") }}
+        {{ partial "entry/footer" . }}
+
+    </header>
+
+    <div class="content">
+        {{ partial "entry/description" . }}
+
+        {{ partial "entry/series" . }}
+
+        <div class="e-content">
+            {{ partial "extras/content-post-process" . }}
+        </div>
+    </div>
+</article>
+
+{{ end }}
+
+{{ define "footer" }}
+
+<!-- Print versions at the end of the post, if specified. -->
+{{ with .Params.versions }}
+    {{ $.Scratch.Set "__versions_len" (len .) }}
+    {{ $.Scratch.Set "__versions_cnt" 0 }}
+    <hr />
+    <div>
+        <small>
+            {{ printf `<span class="small-caps">Versions used</span>:` | safeHTML }}
+            {{ range $k, $v := . }}
+                {{ printf "<code>%s</code> " $k | safeHTML }}
+                {{ if (eq "string" (printf "%T" $v)) }} <!-- Check if the value is a string -->
+                    {{ $v_is_hex := findRE "^[0-9a-f]{6,}$" ($v | lower) }}
+                    {{ if (and (eq "nim" ($k | lower)) $v_is_hex) }}
+                        {{ printf `<a href="https://github.com/nim-lang/Nim/commit/%s">%s</a>` $v $v | safeHTML -}}
+                    {{ else }}
+                        {{ printf "%s" $v | safeHTML -}} <!-- Don't print strings using "%#v" else they get double-quoted -->
+                    {{ end }}
+                {{- else -}}
+                    {{- printf "%#v" $v | safeHTML -}} <!-- Cannot print floats like 0.39 using "%s", so using "%#v" -->
+                {{- end -}}
+                {{- $.Scratch.Add "__versions_cnt" 1 -}}
+                {{- cond (eq ($.Scratch.Get "__versions_cnt") ($.Scratch.Get "__versions_len")) "" ", " }}
+            {{ end }}
+        </small>
+    </div>
+{{ end }}
+
+{{ partial "extras/jump" }}
+{{ if or (eq .Section "posts") (eq .Section "readings") (eq .Section "updates") }}
+    {{ if not .Params.notoc }} <!-- This ToC is rendered in the right sidebar only for wide screens .-->
+    {{ with .TableOfContents }}
+        <div class="hugotoc no-text-decoration">
+            {{ . }}
+            <a href="#" class="back-to-top">Back to top</a>
+        </div>
+    {{ end }}
+    {{ end }}
+{{ end }}
+
+<!-- Back to top -->
+<div class="backtotop center no-text-decoration">
+    <a href="#">back to <span class="top">top</span></a>
+</div>
+
+{{ if or (eq .Section "posts") (eq .Section "readings") (eq .Section "updates") }}
+    <!-- Prev/next post -->
+    {{ partial "footer/prev_next" . }}
+
+    <a id="bottom"></a>
+
+    {{ if not .Site.IsServer }}
+        <!-- Send/receive Webmentions -->
+        {{ partial "footer/webmention_send" . }}
+        {{ partial "footer/webmention_rcv" . }}
+    {{ end }}
+
+    <!-- Other Comments -->
+    {{ partial "entry/comments" . }}
+{{ end }}
+{{ end }}

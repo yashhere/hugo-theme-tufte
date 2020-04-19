@@ -1,0 +1,16 @@
+{{ $marginnoteDomIdSuffix := .Ordinal }}
+{{ $marginnoteIndex := add (div $marginnoteDomIdSuffix 2) 1 }}
+<label for="marginnote-{{.Page.File.UniqueID}}-{{ $marginnoteIndex }}" class="margin-toggle marginnote-symbol">⊕</label>
+<input type="checkbox" id="marginnote-{{.Page.File.UniqueID}}-{{ $marginnoteIndex }}" class="margin-toggle"/>
+<span class="marginnote">{{ .Inner }}</span>
+
+{{/*<figure>*/}}
+{{/*    <p class="caption">*/}}
+{{/*        {{ with .Get "caption" }}{{ . }}{{ end }}*/}}
+{{/*    </p>*/}}
+{{/*    <span class="marginnote">*/}}
+{{/*        {{ with .Get "link" }}<a href="{{ . }}">{{ end }}*/}}
+{{/*        <img src="{{ .Get "src" }}" {{ with .Get "alt"}}alt="{{ . }}"{{ end }}>*/}}
+{{/*        {{ if .Get "link" }}</a>{{ end }}*/}}
+{{/*    </span>*/}}
+{{/*</figure>*/}}

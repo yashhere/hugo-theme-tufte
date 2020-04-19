@@ -1,0 +1,4 @@
+[phrases]
+  categories = "categorized in %T"
+  tags = "tagged with %T"
+  series = "in %N series"

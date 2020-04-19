@@ -1,0 +1,2268 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: "et-book";
+    src: url("../fonts/et-book/et-book-roman-line-figures/et-book-roman-line-figures.eot");
+    src: url("../fonts/et-book/et-book-roman-line-figures/et-book-roman-line-figures.eot?#iefix") format("embedded-opentype"), url("../fonts/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff") format("woff"), url("../fonts/et-book/et-book-roman-line-figures/et-book-roman-line-figures.ttf") format("truetype"), url("../fonts/et-book/et-book-roman-line-figures/et-book-roman-line-figures.svg#etbookromanosf") format("svg");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "et-book";
+    src: url("../fonts/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.eot");
+    src: url("../fonts/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.eot?#iefix") format("embedded-opentype"), url("../fonts/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff") format("woff"), url("../fonts/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.ttf") format("truetype"), url("../fonts/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.svg#etbookromanosf") format("svg");
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "et-book";
+    src: url("../fonts/et-book/et-book-bold-line-figures/et-book-bold-line-figures.eot");
+    src: url("../fonts/et-book/et-book-bold-line-figures/et-book-bold-line-figures.eot?#iefix") format("embedded-opentype"), url("../fonts/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff") format("woff"), url("../fonts/et-book/et-book-bold-line-figures/et-book-bold-line-figures.ttf") format("truetype"), url("../fonts/et-book/et-book-bold-line-figures/et-book-bold-line-figures.svg#etbookromanosf") format("svg");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "et-book-roman-old-style";
+    src: url("../fonts/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.eot");
+    src: url("../fonts/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.eot?#iefix") format("embedded-opentype"), url("../fonts/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff") format("woff"), url("../fonts/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.ttf") format("truetype"), url("../fonts/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.svg#etbookromanosf") format("svg");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    /*--grey: #515151;*/
+    /*--grey-light: rgba(81, 81, 81, 0.5);*/
+    /*!* Same as the --grey color #515151, but in decimal, with 50% opacity *!*/
+    /*--grey-2: #313131;*/
+    /*--grey-bg: rgba(136, 136, 136, 0.3);*/
+    /*--title-heading-color: #212121;*/
+    /*--blinking-cursor-color: #212121;*/
+    /* Fonts */
+    --et-book: 'et-book';
+    /*--libre-baskerville: 'Interrobang', 'Libre Baskerville', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;*/
+    /*--andada: 'Interrobang', 'Andada', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;*/
+    /*--linux-biolinum: 'Interrobang', 'Linux Biolinum', Arial, Helvetica, sans-serif;*/
+    /*--source-sans-pro: 'Interrobang', 'Source Sans Pro', Arial, Helvetica, sans-serif;*/
+    /* --merriweather: 'Merriweather', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif; */
+    --body-font: var(--et-book);
+    /*--secondary-font: var(--linux-biolinum);*/
+    /*--tertiary-font: var(--source-sans-pro);*/
+    /*--mono: var(--iosevka);*/
+    /*--italic: var(--andada);*/
+    /*--symbola: 'Symbola';*/;
+}
+
+/*------------------
+ *  Main CSS
+*-------------------------*/
+
+/* Tufte-like CSS styles */
+
+html {
+    font-size: 15px;
+}
+
+body {
+    width: 87.5%;
+    padding-left: 6%;
+    font-family: var(--body-font),Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    background-color: #fffff8;
+    color: #111;
+    max-width: 1400px;
+    counter-reset: sidenote-counter;
+    font-size: 1.4rem;
+}
+
+h1 {
+    font-weight: 400;
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
+    font-size: 3.2rem;
+    line-height: 1;
+}
+
+h2 {
+    font-style: italic;
+    font-weight: 400;
+    margin-top: 2.1rem;
+    margin-bottom: 1.4rem;
+    font-size: 2.2rem;
+    line-height: 1;
+}
+
+h3 {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.7rem;
+    margin-top: 2rem;
+    margin-bottom: 1.4rem;
+    line-height: 1;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    width: 55%;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+p.subtitle {
+    font-style: italic;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    display: block;
+    line-height: 1;
+}
+
+.numeral {
+    font-family: et-book-roman-old-style;
+}
+
+.danger {
+    color: red;
+}
+
+article {
+    position: relative;
+    padding: 1rem 0rem;
+}
+
+section {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+p, ol, ul {
+    font-size: 1.4rem;
+    line-height: 2rem;
+}
+
+p {
+    margin-top: 1.4rem;
+    margin-bottom: 1.4rem;
+    padding-right: 0;
+    vertical-align: baseline;
+}
+
+/* Chapter Epigraphs */
+div.epigraph {
+    margin: 5em 0;
+}
+
+div.epigraph > blockquote {
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+div.epigraph>blockquote,
+div.epigraph>blockquote>p {
+    font-style: italic;
+}
+
+div.epigraph>blockquote>footer {
+    font-style: normal;
+}
+
+div.epigraph>blockquote>footer>cite {
+    font-style: italic;
+}
+/* end chapter epigraphs styles */
+
+blockquote {
+    font-size: 1.4rem;
+    font-style: italic;
+}
+
+blockquote p {
+    width: 50%;
+    margin-top: 1.4rem;
+    margin-right: 40px;
+}
+
+blockquote footer {
+    width: 50%;
+    font-size: 1.1rem;
+    text-align: right;
+}
+
+section > p,
+section > footer,
+section > table {
+    width: 55%;
+}
+
+/* 50 + 5 == 55, to be the same width as paragraph */
+section > ol,
+section > ul {
+    width: 50%;
+    -webkit-padding-start: 5%;
+}
+
+li:not(:first-child) {
+    margin-top: 0.25rem;
+}
+
+/* -------------------------------------- */
+
+
+/* Author Info CSS */
+
+
+/* -------------------------------------- */
+
+.author_blurb {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-decoration: none;
+    padding-top: 20px;
+}
+
+.photo {
+    width: 90px;
+}
+
+.author_info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px;
+    justify-content: center;
+}
+
+.social_links {
+    line-height: 2.5em;
+}
+
+.social_links a {
+    line-height: 2.5em;
+    padding-left: 8px;
+    text-decoration: none;
+    background: none !important;
+}
+
+.name {
+    font-family: "Merriweather", serif;
+    letter-spacing: 0.01rem;
+    font-size: 1.7rem;
+    padding-right: 15px;
+}
+
+.contact_info {
+    align-content: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.contact_info a {
+    background-repeat: no-repeat, no-repeat, no-repeat !important;
+    text-decoration: none !important;
+}
+
+.contact_info a:active {
+    outline: none;
+}
+
+.bio {
+    height: 100px;
+    padding-top: 0px;
+}
+
+.bio_text {
+    padding-top: 5px;
+    margin-top: auto;
+    font-size: 1.2rem;
+    line-height: 1.5em;
+    font-weight: 200;
+    color: #636363;
+    letter-spacing: 0;
+    text-indent: 0;
+}
+
+
+/* small screens */
+
+@media all and (max-width: 550px) {
+    .name {
+        padding-right: 5px;
+    }
+
+    .author_blurb {
+        flex-direction: column;
+    }
+
+    .author_photo {
+        padding-bottom: 12px;
+        align-self: center;
+    }
+
+    .author_blurb {
+        padding-top: 5px;
+    }
+
+    .author_info {
+        padding-left: 0px;
+    }
+}
+
+
+/* END Author Info CSS */
+
+#disqus_thread {
+    padding-top: 0px;
+}
+
+.main-header {
+    width: 100%;
+    height: 0;
+    padding-top: 33.33%;
+    position: relative;
+    z-index: -1;
+    margin: 0 auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 5px;
+}
+
+.brand {
+    margin-bottom: -10px;
+}
+
+.brand a {
+    background-repeat: no-repeat !important;
+}
+
+#blog_title {
+    line-height: 50px;
+    float: right;
+    padding-right: 5px;
+    right: 0;
+}
+
+#homepage {
+    width: 70%;
+    margin: 0 auto;
+    color: #111111;
+    font-size: 1.4rem;
+}
+
+#homepage a {
+    color: #a00000;
+}
+
+h1 {
+    font-weight: 400;
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
+    font-size: 3rem;
+    line-height: 1;
+}
+
+h1 a:visited {
+    color: inherit;
+}
+
+p {
+    font-size: 1.1em;
+    color: #111111;
+    text-rendering: geometricPrecision;
+}
+
+.thumbnail p {
+    width: 100%;
+}
+
+span.content-meta {
+    color: #64696e;
+    /* metadata  */
+    font-size: 1.3rem;
+}
+
+.content-title {
+    margin-bottom: 0.9rem;
+}
+
+p,
+nav,
+section,
+article,
+header,
+footer,
+.pure-g [class *="pure-u"] {
+    font-family: var(--body-font), serif;
+}
+
+ol,
+ul {
+    font-size: 1.4rem;
+    width: 61%;
+    -webkit-padding-start: 5%;
+    /*  -webkit-padding-end: 5%; */;
+}
+
+ul li p {
+    width: 100%;
+}
+
+ol li p {
+    width: 100%;
+}
+
+nav ul {
+    width: 100%;
+    -webkit-padding-start: 5%;
+    -webkit-padding-end: 5%;
+}
+
+li {
+    padding: 0.5rem 0;
+}
+
+figure {
+    width: 61%;
+}
+
+figureold {
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    max-width: 55%;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    margin: 0 0 3em 0;
+}
+
+figcaption {
+    float: right;
+    clear: right;
+    margin-right: -48%;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    vertical-align: baseline;
+    position: relative;
+    max-width: 40%;
+}
+
+figure.fullwidth figcaption {
+    margin-right: 24%;
+}
+
+figure.fullwidth p.caption {
+    float: right;
+    clear: right;
+    margin-top: 0;
+    margin-bottom: 1.96rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    vertical-align: baseline;
+    position: relative;
+    margin-right: 6.5%;
+    width: 32%;
+}
+
+
+/* links */
+
+a {
+    color: #a00000;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #a00000;
+    text-decoration: none;
+}
+
+p>a {
+    color: #a00000;
+    text-decoration: none;
+    background: -webkit-linear-gradient(#fffff8, #fffff8), -webkit-linear-gradient(#fffff8, #fffff8), -webkit-linear-gradient(#333, #333);
+    background: linear-gradient(#fffff8, #fffff8), linear-gradient(#fffff8, #fffff8), linear-gradient(#333, #333);
+    -webkit-background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+    -moz-background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+    background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+    background-repeat: no-repeat, no-repeat, repeat-x;
+    text-shadow: 0.03em 0 #fffff8, -0.03em 0 #fffff8, 0 0.03em #fffff8, 0 -0.03em #fffff8, 0.06em 0 #fffff8, -0.06em 0 #fffff8, 0.09em 0 #fffff8, -0.09em 0 #fffff8, 0.12em 0 #fffff8, -0.12em 0 #fffff8, 0.15em 0 #fffff8, -0.15em 0 #fffff8;
+    background-position: 0% 93%, 100% 93%, 0% 93%;
+}
+
+
+/* Links: replicate underline that clears descenders
+a:link, a:visited {
+color: inherit;
+}
+
+a:link {
+text-decoration: none;
+background: -webkit-linear-gradient(#fffff8, #fffff8), -webkit-linear-gradient(#fffff8, #fffff8), -webkit-linear-gradient(#333, #333);
+background: linear-gradient(#fffff8, #fffff8), linear-gradient(#fffff8, #fffff8), linear-gradient(#333, #333);
+-webkit-background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+-moz-background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+background-repeat: no-repeat, no-repeat, repeat-x;
+text-shadow: 0.03em 0 #fffff8, -0.03em 0 #fffff8, 0 0.03em #fffff8, 0 -0.03em #fffff8, 0.06em 0 #fffff8, -0.06em 0 #fffff8, 0.09em 0 #fffff8, -0.09em 0 #fffff8, 0.12em 0 #fffff8, -0.12em 0 #fffff8, 0.15em 0 #fffff8, -0.15em 0 #fffff8;
+background-position: 0% 93%, 100% 93%, 0% 93%;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+a:link { background-position-y: 87%, 87%, 87%; }
+}
+
+a:link::selection {
+text-shadow: 0.03em 0 #b4d5fe, -0.03em 0 #b4d5fe, 0 0.03em #b4d5fe, 0 -0.03em #b4d5fe, 0.06em 0 #b4d5fe, -0.06em 0 #b4d5fe, 0.09em 0 #b4d5fe, -0.09em 0 #b4d5fe, 0.12em 0 #b4d5fe, -0.12em 0 #b4d5fe, 0.15em 0 #b4d5fe, -0.15em 0 #b4d5fe;
+background: #b4d5fe;
+}
+
+a:link::-moz-selection {
+text-shadow: 0.03em 0 #b4d5fe, -0.03em 0 #b4d5fe, 0 0.03em #b4d5fe, 0 -0.03em #b4d5fe, 0.06em 0 #b4d5fe, -0.06em 0 #b4d5fe, 0.09em 0 #b4d5fe, -0.09em 0 #b4d5fe, 0.12em 0 #b4d5fe, -0.12em 0 #b4d5fe, 0.15em 0 #b4d5fe, -0.15em 0 #b4d5fe;
+background: #b4d5fe;
+}  */
+
+
+/* Sidenotes, margin notes, figures, captions */
+
+img {
+    max-width: 100%;
+}
+
+.sidenote,
+.marginnote,
+.footnoteRef,
+.caption,
+.figcaption {
+    float: right;
+    clear: right;
+    margin-right: -60%;
+    width: 50%;
+    margin-top: 0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    vertical-align: baseline;
+    position: relative;
+    margin-bottom: 1.96rem;
+}
+
+ol .sidenote,
+ol .marginnote,
+ol .footnoteRef,
+ol .caption,
+ol .figcaption {
+    float: right;
+    clear: right;
+    margin-right: -60%;
+    width: 50%;
+    margin-top: 0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    vertical-align: baseline;
+    position: relative;
+    margin-bottom: 1.96rem;
+}
+
+
+/* Additional stuff for sidenotes */
+
+.table-caption {
+    float: right;
+    clear: right;
+    margin-right: -60%;
+    width: 50%;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1.0rem;
+    line-height: 1.6;
+}
+
+.sidenote-number, .marginnote-symbol {
+    position: relative;
+    vertical-align: baseline;
+    font-size: 0.8rem;
+    top: -0.5rem;
+    /*left: 0.1rem;*/
+    color: #a00000;
+}
+
+label.sidenote-number, label.marginnote-symbol {
+    display: inline;
+}
+
+.sidenote-number:after {
+    /*content: counter(sidenote-counter);*/
+    font-size: 1rem;
+    top: -0.5rem;
+    left: 0.1rem;
+}
+
+.sidenote-number:after, .sidenote:before {
+    font-family: et-book-roman-old-style;
+    position: relative;
+    vertical-align: baseline;
+}
+
+p,
+div.table-wrapper-small,
+div.supertable-wrapper>p,
+div.booktabs-wrapper,
+div.figure {
+    width: 61%;
+    margin-top: 1.4rem;
+}
+
+div.fullwidth,
+table.fullwidth {
+    width: 100%;
+}
+
+div.table-wrapper {
+    overflow-x: scroll;
+    font-family: "Trebuchet MS", "Gill Sans", "Gill Sans MT", sans-serif;
+}
+
+div.girafe {
+    width: 61%;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.sans {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+    letter-spacing: .03em;
+}
+
+.copyright {
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: .0em;
+}
+
+footer {
+    font-size: 15px;
+    text-align: center;
+}
+
+code, pre > code {
+    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 1.0rem;
+    line-height: 1.42;
+    -webkit-text-size-adjust: 100%;
+    /* Prevent adjustments of font size after orientation changes in iOS. See https://github.com/edwardtufte/tufte-css/issues/81#issuecomment-261953409 */;
+}
+
+.sans > code {
+    font-size: 1.2rem;
+}
+
+h1 .code,
+h2 .code,
+h3 .code {
+    font-size: 0.80em;
+}
+
+.marginnote .code,
+.sidenote .code,
+.footnoteRef .code,
+.caption .code {
+    font-size: 1rem;
+}
+
+pre > code {
+    font-size: 0.9rem;
+    width: 52.5%;
+    margin-left: 2.5%;
+    overflow-x: auto;
+    display: block;
+}
+
+pre.fullwidth > code {
+    width: 90%;
+}
+
+.fullwidth {
+    max-width: 90%;
+    width: 90%;
+    clear: both;
+}
+
+span.newthought {
+    font-variant: small-caps;
+    font-size: 1.2em;
+}
+
+input.margin-toggle {
+    display: none;
+}
+
+label.sidenote-number {
+    display: inline;
+}
+
+label.marginnote-symbol {
+    display: inline;
+}
+
+label.margin-toggle:not(.sidenote-number):not(.marginnote-symbol) {
+    display: none;
+}
+
+@media screen and (max-width: 760px) {
+    p,
+    footer {
+        width: 90%;
+    }
+
+    pre > code {
+        width: 100%;
+        padding: 0;
+    }
+
+    ul {
+        width: 85%;
+    }
+
+    figure {
+        max-width: 90%;
+    }
+
+    figcaption,
+    figure.fullwidth figcaption {
+        margin-right: 0%;
+        max-width: none;
+    }
+
+    blockquote p,
+    blockquote footer {
+        width: 90%;
+    }
+
+    label {
+        cursor: pointer;
+    }
+
+    .table-caption {
+        display: block;
+        float: right;
+        clear: both;
+        width: 98%;
+        margin-bottom: 0.5rem;
+        margin-left: 1%;
+        margin-right: 1%;
+        vertical-align: baseline;
+        position: relative;
+    }
+
+    div.table-wrapper,
+    table,
+    table.booktabs {
+        width: 85%;
+    }
+
+    div.table-wrapper {
+        border-right: 1px solid #efefef;
+    }
+
+    label.margin-toggle {
+        display: inline;
+        color: #a00000;
+    }
+
+    .sidenote,
+    .marginnote {
+        display: none;
+    }
+
+    .margin-toggle:checked+.sidenote,
+    .margin-toggle:checked+.marginnote {
+        display: block;
+        float: left;
+        left: 1rem;
+        clear: both;
+        width: 95%;
+        margin: 1rem 2.5%;
+        vertical-align: baseline;
+        position: relative;
+    }
+
+    label {
+        cursor: pointer;
+    }
+}
+
+
+/* Large screens */
+
+@media all and (max-width: 1200px) {
+    #homepage {
+        width: 75%;
+    }
+}
+
+
+/* Medium-large screens */
+
+@media all and (max-width: 760px) {
+    #homepage {
+        width: 85%;
+    }
+}
+
+
+/* medium  screens */
+
+@media all and (max-width: 600px) {
+    #homepage {
+        width: 90%;
+    }
+}
+
+
+/* medium  screens */
+
+@media all and (max-width: 550px) {
+    #homepage {
+        width: 95%;
+    }
+
+    body {
+        width: 90% !important;
+        /*padding-left: 5% !important;*/;
+    }
+
+    figure {
+        width: 95% !important;
+    }
+}
+
+
+/* Medium screens */
+
+@media all and (max-width: 760px) {
+    pre {
+        width: 85%;
+    }
+
+    pre code {
+        width: 90% !important;
+        padding: 0 !important;
+    }
+
+    .marginnote {
+        display: block;
+        float: left;
+        left: 1rem;
+        clear: both;
+        width: 95%;
+        margin: 1rem 2.5%;
+        vertical-align: baseline;
+        position: relative;
+        font-style: italic;
+        border-top: 1px double;
+        border-bottom: 1px double;
+        margin-left: 0;
+        padding: 4px;
+    }
+
+    .caption {
+        display: block;
+        float: left;
+        left: 1rem;
+        clear: both;
+        width: 95%;
+        margin: 1rem 2.5%;
+        vertical-align: baseline;
+        position: relative;
+        font-style: italic;
+        border-top: 1px double;
+        border-bottom: 1px double;
+        margin-left: 0;
+        padding: 4px;
+    }
+
+    figure {
+        width: 95% !important;
+    }
+}
+
+table:before {
+    content: "";
+    width: 61%;
+    /* CE: 31/12-19   display: inline-block; */;
+}
+
+div.table {
+    width: 61%;
+}
+
+table,
+table.booktabs {
+    /* making booktabs style tables the unstyled default in case someone uses Markdown styling  */
+    border-spacing: 0px;
+    border-top: 2px solid #333;
+    border-bottom: 2px solid #333;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.booktabs th,
+th {
+    border-bottom: 1px solid #333;
+    padding: 0.65ex 0.5em 0.4ex 0.5em;
+    font-weight: normal;
+    text-align: center;
+}
+
+th,
+td {
+    font-size: 1.1rem;
+    line-height: 1.71428571;
+    padding-right: 0.5em;
+}
+
+.booktabs th.cmid,
+th {
+    border-bottom: 1px solid #3f3f3f;
+}
+
+.booktabs th.nocmid {
+    border-bottom: none;
+}
+
+.booktabs tbody tr:first-child td,
+tr:first-child td {
+    padding-top: 0.65ex;
+}
+
+/*add space between thead row and tbody*/
+.booktabs td, td {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    text-align: left;
+}
+
+.booktabs caption,
+caption {
+    font-size: 90%;
+    text-align: left;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1ex;
+    caption-side: top;
+}
+
+.booktabs tbody tr td.l {
+    text-align: left !important;
+}
+
+.booktabs tbody tr td.c {
+    text-align: center !important;
+}
+
+.booktabs tbody tr td.r {
+    text-align: right !important;
+}
+
+.table-caption {
+    float: right;
+    clear: right;
+    margin-right: -60%;
+    width: 50%;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1.0rem;
+    line-height: 1.96;
+}
+
+
+/* -------------------------------------- */
+/* NAV                                    */
+/* -------------------------------------- */
+
+.nav-links {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 1.2rem;
+    color: #a00000;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+.nav-links li {
+    display: inline-block;
+    margin: 0 25px 0 25px;
+}
+
+.nav-links li:first-child {
+    margin-left: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #a00000;
+    letter-spacing: 0.15em;
+}
+
+.nav-links a:hover {
+}
+
+nav-links a.active:before {
+    content: "\0003c\000a0";
+}
+/*escaped unicode for the carats and then a space on active menu links*/
+nav-links a.active:after {
+    content: "\000a0\0003e";
+}
+
+/*********************
+ *
+ *
+ *
+ *********************/
+
+ul.social-links {
+    list-style: none;
+    text-align: center;
+    margin: 0 auto;
+}
+
+ul.social-links li {
+    display: inline;
+    padding: 0.5rem 0.25rem;
+}
+
+
+/*
+
+ Remove the silly URLs when printing.
+
+*/
+
+@media print {
+    a:after {
+        content: '';
+    }
+
+    a[href]:after {
+        content: none !important;
+    }
+}
+
+@page {
+    margin-top: 2cm;
+    margin-bottom: 2cm;
+    margin-left: 2cm;
+    margin-right: 2cm;
+}
+
+/* * microformats2 h-card */
+.hide,
+.h-card {
+    display: none;
+}
+
+/* hr */
+hr {
+    border: 0;
+    height: 1px;
+    margin-top: 1.4rem;
+    margin-bottom: 1.4rem;
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+hr.slender {
+    width: 100%;
+}
+
+
+/* Taxonomy buttons */
+ul.no-bullets {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+/* Post titles in li.html */
+.li .taxo {
+    margin-top: 0;
+    margin-bottom: 1.5em;
+}
+
+.li .post-title {
+    display: inline;
+}
+
+.clear-float {
+    clear: both;
+}
+
+/* * Display Inline */
+/*.inline {*/
+/*    display: inline;*/
+/*}*/
+
+/* ** Tags/categories buttons */
+.taxo {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+/* Taxo buttons in summaries in header tag */
+header .taxo {
+    margin-top: -0.5em;
+}
+
+.taxo li {
+    font-size: .8em;
+    border: none;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-bottom: 1px;
+    padding: 1px 5px;
+    text-align: center;
+    display: inline-block;
+}
+
+.taxo ul > * {
+    margin-top: -5%;
+}
+/* Show only tags and categories in summaries, not series. */
+.taxo .series {
+    display: none;
+}
+
+/* *** Buttons on terms pages / Tag Cloud */
+.taxo.collection {
+    margin-top: 2em;
+    text-align: center;
+}
+
+.taxo.collection li {
+    margin: 5px;
+}
+
+/* Font size increments of 0.10rem */
+.taxo.collection li.x00 {
+    font-size: 1.00em;
+    padding: 1.0px 05px;
+}
+
+.taxo.collection li.x01 {
+    font-size: 1.10em;
+    padding: 1.2px 06px;
+}
+
+.taxo.collection li.x02 {
+    font-size: 1.20em;
+    padding: 1.4px 07px;
+}
+
+/* Font size increments of 0.15em */
+.taxo.collection li.x03 {
+    font-size: 1.35em;
+    padding: 1.6px 08px;
+}
+
+.taxo.collection li.x04 {
+    font-size: 1.50em;
+    padding: 1.8px 09px;
+}
+
+.taxo.collection li.x05 {
+    font-size: 1.65em;
+    padding: 2.0px 10px;
+}
+
+/* Font size increments of 0.20em */
+.taxo.collection li.x06 {
+    font-size: 1.85em;
+    padding: 2.2px 11px;
+}
+
+.taxo.collection li.x07 {
+    font-size: 2.05em;
+    padding: 2.4px 12px;
+}
+
+.taxo.collection li.x08 {
+    font-size: 2.25em;
+    padding: 2.6px 13px;
+}
+
+/* Font size increments of 0.25em */
+.taxo.collection li.x09 {
+    font-size: 2.50em;
+    padding: 2.8px 14px;
+}
+
+.taxo.collection li.x10 {
+    font-size: 2.75em;
+    padding: 3.0px 15px;
+}
+
+.taxo.collection li.x11 {
+    font-size: 3.00em;
+    padding: 3.2px 16px;
+}
+
+/* Font size increments of 0.30em */
+.taxo.collection li.x12 {
+    font-size: 3.30em;
+    padding: 3.4px 17px;
+}
+
+.taxo.collection li.x13 {
+    font-size: 3.60em;
+    padding: 3.6px 18px;
+}
+
+.taxo.collection li.x14 {
+    font-size: 3.90em;
+    padding: 3.8px 19px;
+}
+
+/* Font size increments of 0.35em */
+.taxo.collection li.x15 {
+    font-size: 4.25em;
+    padding: 4.0px 20px;
+}
+
+.taxo.collection li.x16 {
+    font-size: 4.60em;
+    padding: 4.2px 21px;
+}
+
+.taxo.collection li.x17 {
+    font-size: 4.95em;
+    padding: 4.4px 22px;
+}
+
+/* Font size increments of 0.40em */
+.taxo.collection li.x18 {
+    font-size: 5.35em;
+    padding: 4.6px 23px;
+}
+
+.taxo.collection li.x19 {
+    font-size: 5.75em;
+    padding: 4.8px 24px;
+}
+
+/* Jump */
+.jump {
+    font-size: 2rem;
+    position: fixed;
+    right: 0.3rem;
+    z-index: 999;
+}
+
+.jump.top {
+    top: 7rem;
+}
+
+.jump.bottom {
+    bottom: 0;
+}
+
+/* Back to top */
+.backtotop {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.sidenote .back-to-top {
+    /* Back to top link */
+    font-size: 0.8em;
+    padding-left: 1rem;
+}
+
+/* Pagination */
+.pagination {
+    font-size: 1.2em;
+    text-align: center;
+    margin-left: -1rem;
+    /* Don't show margins on small screens */
+    /*margin-right: -1rem;*/
+
+    overflow: hidden;
+}
+
+/* Pagination items can be `span`s or `a`s */
+.pagination-item {
+    display: block;
+    width: 50%;
+    padding: 0.5rem;
+    border: 1px solid #eee;
+}
+
+.pagination-item:first-child {
+    margin-bottom: -1px;
+}
+
+/* Only provide a hover state for linked pagination items */
+a.pagination-item:hover {
+    background-color: #f5f5f5;
+}
+
+@media (min-width: 480px) {
+    .pagination {
+        width: 100%;
+        margin: 5rem auto;
+    }
+
+    .pagination-item {
+        float: left;
+        width: 30%;
+    }
+
+    .pagination-item:first-child {
+        margin-bottom: 0;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+    }
+
+    .pagination-item:last-child {
+        margin-left: -1px;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+    }
+}
+
+/* Post titles in li.html */
+.li .taxo {
+    margin-top: 0;
+    margin-bottom: 1.5em;
+}
+
+.li .post-title {
+    display: inline;
+}
+
+/* Library */
+.library a {
+    border-bottom: none;
+}
+
+.library ol>li::before {
+    content: none;
+}
+
+.library ol {
+    list-style-type: decimal;
+}
+
+.library{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.library .read-state {
+    width: 100%;
+    margin-bottom: 4%;
+    padding: 1%;
+}
+
+.read-state p {
+    padding: 0 2%;
+}
+
+.read-state li>div {
+    max-width: 100%;
+    font-size: 0.9em;
+    display: grid;
+    grid-column-gap: 20px;
+    padding-top: 5px;
+    grid-template-columns: 0.75fr 0.40fr 0.40fr 0.25fr;
+}
+
+.currently_reading li>div {
+    max-width: 100%;
+    font-size: 0.9em;
+    display: grid;
+    grid-column-gap: 20px;
+    padding-top: 5px;
+    grid-template-columns: 0.75fr 0.40fr;
+}
+
+.read-state li>div div {
+    /*border: 1px solid red;*/
+    white-space: nowrap;
+    overflow: hidden;
+    /*text-overflow: fade;*/
+    white-space: initial;
+}
+
+.star {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjAiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNTAgNTAiIGZpbGw9IiM3ZjhjOGQiID4gICAgPHBhdGggZD0iTSAyNSAyLjI3MzQzNzUgTCAxOC42MDkzNzUgMTguNDgwNDY5IEwgMC44MTA1NDY4OCAxOS40MTc5NjkgTCAxNC42NDg0MzggMzAuNDEyMTA5IEwgMTAuMDcwMzEyIDQ3LjIyMjY1NiBMIDI1IDM3Ljc3MTQ4NCBMIDM5LjkyOTY4OCA0Ny4yMjI2NTYgTCAzNS4zNTE1NjIgMzAuNDEyMTA5IEwgNDkuMTg5NDUzIDE5LjQxNzk2OSBMIDMxLjM5MDYyNSAxOC40ODA0NjkgTCAyNSAyLjI3MzQzNzUgeiI+PC9wYXRoPjwvc3ZnPg==");
+    background-repeat: repeat-x;
+    filter: sepia() saturate(10000%) hue-rotate(30deg);
+}
+
+.read-state li>div div:nth-child(3) {
+    padding-right: .25em;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.012em;
+}
+
+@media screen and (max-width: 640px) {
+    .read-state li>div div:nth-child(3) {
+        display: none;
+    }
+
+    .read-state li>div {
+        grid-template-columns: 100px 100px 90px;
+    }
+
+    .currently_reading li>div {
+        grid-template-columns: 160px 160px;
+    }
+}
+
+/* Updates Page style */
+.updates {
+    width: 100%;
+    /*border: 1px solid red;*/
+}
+
+.updates header {
+    text-align: left;
+
+}
+.updates hr {
+    margin-top: 3em;
+    margin-bottom: 3em;
+    border: none;
+    height: 1px;
+    background-color: #C8CACA;
+}
+
+.updates h4::before {
+    content: none;
+}
+
+.updates h4 {
+    font-size: 1.15em;
+    margin-top: 2.3em;
+    color: #4B4B4B;
+    text-transform: uppercase;
+}
+
+
+/* Posts page style */
+.hugotoc {
+    font-family: var(--secondary-font);
+    display: none;
+    position: fixed;
+    right: 4%;
+    top: 110px;
+    width: 300px;
+    overflow-y: auto;
+    max-height: 85%;
+    padding: 0;
+}
+
+.hugotoc li {
+    list-style: none;
+}
+
+.hugotoc ul>li {
+    margin-bottom: 0.4rem;
+}
+
+.hugotoc ul>li>ul>li {
+    font-size: 0.9em;
+    margin-bottom: 0.4rem;
+}
+
+.hugotoc ul>li>ul>li>ul>li {
+    font-size: 0.9em;
+    margin-bottom: 0.3rem;
+}
+
+.hugotoc ul {
+    /* Add left padding for headings in TOC */
+    padding-left: 1rem;
+}
+
+.hugotoc nav>ul {
+    /* The highest level heading in a blog post is level-2 */
+    padding-left: 0;
+    /* The level-1 heading is reserved for the blog title. */
+    /* So do not add any padding for level-1 heading, as that will never show*/
+    /* up in the TOC. */
+}
+
+
+.hugotoc a.current {
+    font-weight: bold;
+}
+
+/* Override the bullets customization done above, just for list items*/
+/* in .hugotoc class */
+.hugotoc ul:not(.navbar):not(.no-bullets) li::before {
+    content: '';
+}
+
+.hugotoc .back-to-top {
+    /* Back to top link */
+    font-size: 0.8em;
+    padding-left: 1rem;
+}
+
+ul.no-bullets {
+    padding-left: 0;
+    list-style-type: none;
+    margin-bottom: -2%;
+}
+
+ul.no-bullets li::before {
+    content: '';
+}
+
+/* li.html style */
+/* Post titles in li.html */
+.li .taxo {
+    margin-top: 0;
+    margin-bottom: 1.5em;
+}
+
+.li .post-title {
+    display: inline;
+}
+
+.li .post-date {
+    display: inline;
+    margin-right: 3em;
+}
+
+/* ** Tags/categories buttons */
+.taxo {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.taxo li {
+    font-size: .8em;
+    border: none;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-bottom: 1px;
+    padding: 1px 5px;
+    text-align: center;
+    display: inline-block;
+}
+
+.taxo .categories li {
+    background: var(--grey);
+    color: white;
+}
+
+.taxo .tags li {
+    background: var(--grey-light);
+}
+
+/* Special case to handle the taxo buttons specific to a taxo term page.
+   For example, below ..li.active rules will apply only to the buttons for
+   "emacs" category only on the /categories/emacs/ page.
+*/
+.taxo li.active {
+    color: white;
+}
+
+/* * Floats */
+/* Applies to the date stamp in the list of all posts, and 'Prev' post links */
+.left {
+    float: left;
+    margin-right: 1rem;
+}
+
+/* Applies to the categories listed in the list of all posts, and 'Next' post links */
+.right {
+    float: right;
+    margin-left: 1rem;
+}
+
+
+/* Category, tags icons*/
+.icon {
+    margin-right: .375em;
+}
+
+.icon, img.emoji {
+    height: 1em;
+    width: 1em;
+}
+
+.icon {
+    display: inline-block;
+    stroke: currentColor;
+    fill: none;
+    position: relative;
+    top: 2px;
+}
+
+/* Post page grid design */
+.li {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.li > * {
+    display: grid;
+    /*grid-column-gap: 20px;*/
+    /*padding-top: 5px;*/
+    grid-template-columns: 150px 1fr;
+    white-space: initial;
+}
+
+.li:last-child {
+    grid-column-gap: 20px;
+    padding-top: 5px;
+}
+
+@media screen and (max-width: 640px) {
+    .read-state li>div div:nth-child(3) {
+        display: none;
+    }
+
+    .read-state li>div {
+        grid-template-columns: 100px 100px 90px;
+    }
+
+    .currently_reading li>div {
+        grid-template-columns: 160px 160px;
+    }
+}
+
+/* * Footer */
+footer .social,
+.generated,
+.badges, .copyright p {
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+}
+
+/* * Comments -- Isso */
+.comments {
+    margin: 2em 0 0.4em -0.02em;
+}
+
+/* * No Wrap */
+.nobr {
+    margin-top: 4%;
+    margin-bottom: 4%;
+    white-space: nowrap;
+}
+
+/* * Prev/Next post links */
+.prev-next-navigator {
+    /* https://stackoverflow.com/a/2073135/1219634 */
+    /* Use overflow:auto; for div blocks containing only floats. */
+    overflow: auto;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    /*border-top: 1px solid #e6e6e6;*/
+    /* border-bottom: 1px solid #e6e6e6; */
+    width: 100%;
+    font-size: 1.3em;
+}
+
+@media screen and (max-width: 480px) {
+    .prev-next-navigator span {
+        padding: 10% 0;
+    }
+}
+.prev-next-navigator a {
+    white-space: initial;
+}
+
+/* Search */
+.search h1 {
+    margin-bottom: 1em;
+}
+
+.search h1,
+.search form,
+.search .no-results {
+    text-align: left;
+}
+
+.search_summary .res_table{
+    margin-left: 0;
+}
+
+.search input[id=search-query] {
+    width: 60%;
+    border: 1px solid inherit;
+    padding: 8px 10px;
+    font-size: 2em;
+    margin-bottom: 1em;
+    border-radius: 3px;
+}
+
+/* Draft */
+.draft {
+    color: white;
+    background-color: red;
+    font-family: var(--secondary-font);
+    font-weight: bold;
+    font-size: 2em;
+    padding: 0 0.5em;
+    margin-bottom: 0.5em;
+}
+
+/* Code */
+.chroma {
+    padding: 4px;
+    margin: 1.3em 0 1.3em 0;
+    background-color: transparent !important;
+}
+
+pre::-webkit-scrollbar {
+    -webkit-appearance: none;
+    background-color: transparent;
+    width: 8px;
+    height: 8px
+}
+
+pre::-webkit-scrollbar-thumb {
+    border-radius: 0;
+}
+
+/* ** Show code block language on top-right/Language Overlay */
+/* Thanks to Regis Philibert on the tip for how to make the lang identifier */
+/* stay stuck (and not scroll) on top-right. */
+/* https://regisphilibert.com/blog/2018/01/hugo-page-resources-and-how-to-use-them/#comment-3711468901 */
+div.highlight {
+    position: relative;
+}
+
+.highlight {
+    margin: 2.3em 0 0 0;
+}
+
+[data-lang]::before {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+    position: absolute;
+    font-size: 1.2em;
+    display: block;
+    bottom: calc(100% - 1px) !important;
+    left: 0;
+    padding: .2em .5em;
+    border-top: 1px double;
+    border-bottom: 1px double;
+    margin: 15px 0 5px 0;
+
+}
+
+pre code.language-C::before {
+    content: 'C';
+}
+
+pre code.language-D::before {
+    content: 'D';
+}
+
+pre code.language-J::before {
+    content: 'J';
+}
+
+pre code.language-R::before {
+    content: 'R';
+}
+
+pre code.language-abc::before {
+    content: 'ABC';
+}
+
+pre code.language-ada::before {
+    content: 'Ada';
+}
+
+pre code.language-ash::before {
+    content: 'ash';
+}
+
+pre code.language-asm::before {
+    content: 'Assembler';
+}
+
+pre code.language-asymptote::before {
+    content: 'Asymptote';
+}
+
+pre code.language-awk::before {
+    content: 'Awk';
+}
+
+pre code.language-bash::before {
+    content: 'bash';
+}
+
+pre code.language-calc::before {
+    content: 'Emacs Calc';
+}
+
+pre code.language-caml::before {
+    content: 'Caml';
+}
+
+pre code.language-clojure::before {
+    content: 'Clojure';
+}
+
+pre code.language-conf::before {
+    content: 'Conf';
+}
+
+pre code.language-coq::before {
+    content: 'Coq';
+}
+
+pre code.language-cpp::before {
+    content: 'C++';
+}
+
+pre code.language-csh::before {
+    content: 'csh';
+}
+
+pre code.language-css::before {
+    content: 'CSS';
+}
+
+pre code.language-dash::before {
+    content: 'dash';
+}
+
+pre code.language-delphi::before {
+    content: 'Delphi';
+}
+
+pre code.language-ditaa::before {
+    content: 'ditaa';
+}
+
+pre code.language-dot::before {
+    content: 'Graphviz';
+}
+
+pre code.language-ebnf2ps::before {
+    content: 'ebfn2ps';
+}
+
+pre code.language-emacs-lisp::before {
+    content: 'Emacs Lisp';
+}
+
+pre code.language-forth::before {
+    content: 'Forth';
+}
+
+pre code.language-fortran::before {
+    content: 'Fortran';
+}
+
+pre code.language-gnuplot::before {
+    content: 'gnuplot';
+}
+
+pre code.language-go::before {
+    content: 'Go';
+}
+
+pre code.language-go-html-template::before {
+    content: 'Go Template';
+}
+
+pre code.language-go-text-template::before {
+    content: 'Go Template';
+}
+
+pre code.language-groovy::before {
+    content: 'Groovy';
+}
+
+pre code.language-haskell::before {
+    content: 'Haskell';
+}
+
+pre code.language-hledger::before {
+    content: 'hledger';
+}
+
+pre code.language-html::before {
+    content: 'HTML';
+}
+
+pre code.language-idl::before {
+    content: 'IDL';
+}
+
+pre code.language-io::before {
+    content: 'IO';
+}
+
+pre code.language-java::before {
+    content: 'Java';
+}
+
+pre code.language-js::before {
+    content: 'Javascript';
+}
+
+pre code.language-json::before {
+    content: 'JSON';
+}
+
+pre code.language-ksh::before {
+    content: 'ksh';
+}
+
+pre code.language-latex::before {
+    content: 'LaTeX';
+}
+
+pre code.language-ledger::before {
+    content: 'Ledger';
+}
+
+pre code.language-lilypond::before {
+    content: 'Lilypond';
+}
+
+pre code.language-lisp::before {
+    content: 'Lisp';
+}
+
+pre code.language-lua::before {
+    content: 'Lua';
+}
+
+pre code.language-makefile::before {
+    content: 'Makefile';
+}
+
+pre code.language-matlab::before {
+    content: 'MATLAB';
+}
+
+pre code.language-maxima::before {
+    content: 'Maxima';
+}
+
+pre code.language-mercury::before {
+    content: 'Mercury';
+}
+
+pre code.language-metapost::before {
+    content: 'MetaPost';
+}
+
+pre code.language-mksh::before {
+    content: 'mksh';
+}
+
+pre code.language-modula-2::before {
+    content: 'Modula-2';
+}
+
+pre code.language-mscgen::before {
+    content: 'Mscgen';
+}
+
+pre code.language-nxml::before {
+    content: 'XML';
+}
+
+pre code.language-nim::before {
+    content: 'Nim';
+}
+
+pre code.language-ocaml::before {
+    content: 'Objective Caml';
+}
+
+pre code.language-octave::before {
+    content: 'Octave';
+}
+
+pre code.language-org::before {
+    content: 'Org';
+}
+
+pre code.language-oz::before {
+    content: 'OZ';
+}
+
+pre code.language-pascal::before {
+    content: 'Pascal';
+}
+
+pre code.language-perl::before {
+    content: 'Perl';
+}
+
+pre code.language-picolisp::before {
+    content: 'Pico Lisp';
+}
+
+pre code.language-plain-tex::before {
+    content: 'Plain TeX';
+}
+
+pre code.language-plantuml::before {
+    content: 'PlantUML';
+}
+
+pre code.language-posh::before {
+    content: 'posh';
+}
+
+pre code.language-processing::before {
+    content: 'Processing.js';
+}
+
+pre code.language-prolog::before {
+    content: 'Prolog';
+}
+
+pre code.language-ps::before {
+    content: 'PostScript';
+}
+
+pre code.language-python::before {
+    content: 'Python';
+}
+
+pre code.language-ruby::before {
+    content: 'Ruby';
+}
+
+pre code.language-sass::before {
+    content: 'Sass';
+}
+
+pre code.language-scala::before {
+    content: 'Scala';
+}
+
+pre code.language-scheme::before {
+    content: 'Scheme';
+}
+
+pre code.language-screen::before {
+    content: 'Gnu Screen';
+}
+
+pre code.language-sed::before {
+    content: 'Sed';
+}
+
+pre code.language-sh::before {
+    content: 'bash';
+}
+
+pre code.language-shell::before {
+    content: 'Shell';
+}
+
+pre code.language-simula::before {
+    content: 'Simula';
+}
+
+pre code.language-sql::before {
+    content: 'SQL';
+}
+
+pre code.language-sqlite::before {
+    content: 'SQLite';
+}
+
+pre code.language-systemverilog::before {
+    content: 'SystemVerilog';
+}
+
+pre code.language-tcl::before {
+    content: 'tcl';
+}
+
+pre code.language-tcsh::before {
+    content: 'tcsh';
+}
+
+pre code.language-tex::before {
+    content: 'TeX';
+}
+
+pre code.language-toml::before {
+    content: 'TOML';
+}
+
+pre code.language-verilog::before {
+    content: 'Verilog';
+}
+
+pre code.language-vhdl::before {
+    content: 'VHDL';
+}
+
+pre code.language-xml::before {
+    content: 'XML';
+}
+
+pre code.language-yaml::before {
+    content: 'YAML';
+}
+
+/* fixes issues with hugo-css-gallery */
+.box {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.gallery {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+/* hack to put images in center without adding html to markup
+Center -    ![your_img](/img/your_img.png#center)
+left   -    ![your_img](/img/your_img.png#floatleft)
+right  -    ![your_img](/img/your_img.png#floatright)
+*/
+img[src$='#center'] {
+    display: block;
+    margin: 0.7rem auto;
+    /* you can replace the vertical '0.7rem' by
+                            whatever floats your boat, but keep the
+                            horizontal 'auto' for this to work */
+    /* whatever else styles you fancy here */
+}
+
+img[src$='#floatleft'] {
+    float: left;
+    margin: 0.7rem;
+    /* this margin is totally up to you */
+    /* whatever else styles you fancy here */
+}
+
+img[src$='#floatright'] {
+    float: right;
+    margin: 0.7rem;
+    /* this margin is totally up to you */
+    /* whatever else styles you fancy here */
+}
+
+/* IFraome */
+.iframe-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 25px;
+    height: 0;
+}
+
+.iframe-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* * Series */
+div.series {
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 6px;
+    /*font-size: 0.8em;*/
+}
+
+.series .active {
+    border: 1px solid #e5e5e5;
+    color: inherit;
+    font-weight: bolder;
+    /*background-color: #e5e5e5;*/
+}
+
+.series tbody tr td {
+    background: inherit;
+}
+
+.series table,
+.series td {
+    margin-left: 0;
+}
+
+/* Don't wrap dates in series tables */
+.series .date {
+    white-space: nowrap;
+}
+
+/* Rating System */
+.rating-center {
+    margin-bottom: 3%;
+}
+
+.Stars {
+    --star-size: 30px;
+    --percent: calc(var(--rating) / 5 * 100%);
+
+    margin-left: auto;
+    margin-right: auto;
+
+    display: inline-block;
+    font-size: var(--star-size);
+    font-family: Times;
+    line-height: 1;
+}
+
+.Stars::before {
+    --star-color: #000;
+    --star-background: #fc0;
+
+    content: "★★★★★";
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
