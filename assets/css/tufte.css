@@ -206,7 +206,7 @@ section > table {
 section > ol,
 section > ul {
     width: 50%;
-    -webkit-padding-start: 5%;
+    /*-webkit-padding-start: 5%;*/
 }
 
 li:not(:first-child) {
@@ -222,9 +222,18 @@ li:not(:first-child) {
 /* -------------------------------------- */
 
 .author_blurb {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
     flex-direction: row;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
     justify-content: flex-start;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: flex-start;
     text-decoration: none;
     padding-top: 20px;
@@ -236,9 +245,16 @@ li:not(:first-child) {
 
 .author_info {
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
     padding-left: 15px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
 }
 
@@ -261,9 +277,16 @@ li:not(:first-child) {
 }
 
 .contact_info {
+    -ms-flex-line-pack: center;
     align-content: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
     flex-direction: row;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
 
@@ -301,11 +324,16 @@ li:not(:first-child) {
     }
 
     .author_blurb {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
         flex-direction: column;
     }
 
     .author_photo {
         padding-bottom: 12px;
+        -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
         align-self: center;
     }
 
@@ -495,8 +523,6 @@ p>a {
     text-decoration: none;
     background: -webkit-linear-gradient(#fffff8, #fffff8), -webkit-linear-gradient(#fffff8, #fffff8), -webkit-linear-gradient(#333, #333);
     background: linear-gradient(#fffff8, #fffff8), linear-gradient(#fffff8, #fffff8), linear-gradient(#333, #333);
-    -webkit-background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
-    -moz-background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
     background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
     background-repeat: no-repeat, no-repeat, repeat-x;
     text-shadow: 0.03em 0 #fffff8, -0.03em 0 #fffff8, 0 0.03em #fffff8, 0 -0.03em #fffff8, 0.06em 0 #fffff8, -0.06em 0 #fffff8, 0.09em 0 #fffff8, -0.09em 0 #fffff8, 0.12em 0 #fffff8, -0.12em 0 #fffff8, 0.15em 0 #fffff8, -0.15em 0 #fffff8;
@@ -1084,8 +1110,6 @@ hr {
     margin-top: 1.4rem;
     margin-bottom: 1.4rem;
     background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-    background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-    background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
     background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 
@@ -1370,8 +1394,14 @@ a.pagination-item:hover {
 }
 
 .library{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
     flex-direction: row;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
 
@@ -1388,26 +1418,27 @@ a.pagination-item:hover {
 .read-state li>div {
     max-width: 100%;
     font-size: 0.9em;
+    display: -ms-grid;
     display: grid;
     grid-column-gap: 20px;
     padding-top: 5px;
+    -ms-grid-columns: 0.75fr 0.40fr 0.40fr 0.25fr;
     grid-template-columns: 0.75fr 0.40fr 0.40fr 0.25fr;
 }
 
 .currently_reading li>div {
     max-width: 100%;
     font-size: 0.9em;
+    display: -ms-grid;
     display: grid;
     grid-column-gap: 20px;
     padding-top: 5px;
+    -ms-grid-columns: 0.75fr 0.40fr;
     grid-template-columns: 0.75fr 0.40fr;
 }
 
 .read-state li>div div {
-    /*border: 1px solid red;*/
     white-space: nowrap;
-    overflow: hidden;
-    /*text-overflow: fade;*/
     white-space: initial;
 }
 
@@ -1417,6 +1448,7 @@ a.pagination-item:hover {
     display: inline-block;
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjAiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNTAgNTAiIGZpbGw9IiM3ZjhjOGQiID4gICAgPHBhdGggZD0iTSAyNSAyLjI3MzQzNzUgTCAxOC42MDkzNzUgMTguNDgwNDY5IEwgMC44MTA1NDY4OCAxOS40MTc5NjkgTCAxNC42NDg0MzggMzAuNDEyMTA5IEwgMTAuMDcwMzEyIDQ3LjIyMjY1NiBMIDI1IDM3Ljc3MTQ4NCBMIDM5LjkyOTY4OCA0Ny4yMjI2NTYgTCAzNS4zNTE1NjIgMzAuNDEyMTA5IEwgNDkuMTg5NDUzIDE5LjQxNzk2OSBMIDMxLjM5MDYyNSAxOC40ODA0NjkgTCAyNSAyLjI3MzQzNzUgeiI+PC9wYXRoPjwvc3ZnPg==");
     background-repeat: repeat-x;
+    -webkit-filter: sepia() saturate(10000%) hue-rotate(30deg);
     filter: sepia() saturate(10000%) hue-rotate(30deg);
 }
 
@@ -1432,10 +1464,12 @@ a.pagination-item:hover {
     }
 
     .read-state li>div {
+        -ms-grid-columns: 100px 100px 90px;
         grid-template-columns: 100px 100px 90px;
     }
 
     .currently_reading li>div {
+        -ms-grid-columns: 160px 160px;
         grid-template-columns: 160px 160px;
     }
 }
@@ -1625,21 +1659,28 @@ ul.no-bullets li::before {
 
 /* Post page grid design */
 .li {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
     flex-direction: row;
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
 }
 
 .li > * {
+    display: -ms-grid;
     display: grid;
     /*grid-column-gap: 20px;*/
     /*padding-top: 5px;*/
+    -ms-grid-columns: 150px 1fr;
     grid-template-columns: 150px 1fr;
     white-space: initial;
 }
 
 .li:last-child {
-    grid-column-gap: 20px;
     padding-top: 5px;
 }
 
@@ -1649,10 +1690,12 @@ ul.no-bullets li::before {
     }
 
     .read-state li>div {
+        -ms-grid-columns: 100px 100px 90px;
         grid-template-columns: 100px 100px 90px;
     }
 
     .currently_reading li>div {
+        -ms-grid-columns: 160px 160px;
         grid-template-columns: 160px 160px;
     }
 }
@@ -2140,57 +2183,33 @@ pre code.language-yaml::before {
     content: 'YAML';
 }
 
-/* fixes issues with hugo-css-gallery */
-.box {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-}
-
-.gallery {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-
-    -webkit-justify-content: center;
-    -moz-justify-content: center;
-    justify-content: center;
-    -webkit-align-items: center;
-    -moz-align-items: center;
-    align-items: center;
-    -webkit-flex-wrap: wrap;
-    -moz-flex-wrap: wrap;
-    flex-wrap: wrap;
-}
-
 /* hack to put images in center without adding html to markup
 Center -    ![your_img](/img/your_img.png#center)
 left   -    ![your_img](/img/your_img.png#floatleft)
 right  -    ![your_img](/img/your_img.png#floatright)
 */
-img[src$='#center'] {
-    display: block;
-    margin: 0.7rem auto;
-    /* you can replace the vertical '0.7rem' by
-                            whatever floats your boat, but keep the
-                            horizontal 'auto' for this to work */
-    /* whatever else styles you fancy here */
-}
+/*img[src$='#center'] {*/
+/*    display: block;*/
+/*    margin: 0.7rem auto;*/
+/*    !* you can replace the vertical '0.7rem' by*/
+/*                            whatever floats your boat, but keep the*/
+/*                            horizontal 'auto' for this to work *!*/
+/*    !* whatever else styles you fancy here *!*/
+/*}*/
 
-img[src$='#floatleft'] {
-    float: left;
-    margin: 0.7rem;
-    /* this margin is totally up to you */
-    /* whatever else styles you fancy here */
-}
+/*img[src$='#floatleft'] {*/
+/*    float: left;*/
+/*    margin: 0.7rem;*/
+/*    !* this margin is totally up to you *!*/
+/*    !* whatever else styles you fancy here *!*/
+/*}*/
 
-img[src$='#floatright'] {
-    float: right;
-    margin: 0.7rem;
-    /* this margin is totally up to you */
-    /* whatever else styles you fancy here */
-}
+/*img[src$='#floatright'] {*/
+/*    float: right;*/
+/*    margin: 0.7rem;*/
+/*    !* this margin is totally up to you *!*/
+/*    !* whatever else styles you fancy here *!*/
+/*}*/
 
 /* IFraome */
 .iframe-wrapper {
@@ -2262,6 +2281,7 @@ div.series {
 
     content: "★★★★★";
     letter-spacing: 3px;
+    background: -webkit-linear-gradient(left, var(--star-background) var(--percent), var(--star-color) var(--percent));
     background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
