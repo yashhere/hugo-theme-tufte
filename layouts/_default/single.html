@@ -60,7 +60,7 @@
     </div>
 {{ end }}
 
-{{ partial "extras/jump" }}
+{{/*{{ partial "extras/jump" }}*/}}
 {{ if or (eq .Section "posts") (eq .Section "readings") (eq .Section "updates") }}
     {{ if not .Params.notoc }} <!-- This ToC is rendered in the right sidebar only for wide screens .-->
     {{ with .TableOfContents }}
