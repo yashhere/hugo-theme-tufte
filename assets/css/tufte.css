@@ -1426,7 +1426,7 @@ a.pagination-item:hover {
     grid-template-columns: 0.75fr 0.40fr 0.40fr 0.25fr;
 }
 
-.currently_reading li>div, .queued li>div, .unread li>div {
+.two_cols li>div {
     max-width: 100%;
     font-size: 0.9em;
     display: -ms-grid;
@@ -1468,7 +1468,7 @@ a.pagination-item:hover {
         grid-template-columns: 100px 100px 90px;
     }
 
-    .currently_reading li>div {
+    .two_cols li>div {
         -ms-grid-columns: 160px 160px;
         grid-template-columns: 160px 160px;
     }
@@ -1694,7 +1694,7 @@ ul.no-bullets li::before {
         grid-template-columns: 100px 100px 90px;
     }
 
-    .currently_reading li>div {
+    .two_cols li>div {
         -ms-grid-columns: 160px 160px;
         grid-template-columns: 160px 160px;
     }

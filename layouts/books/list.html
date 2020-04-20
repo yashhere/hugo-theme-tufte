@@ -7,7 +7,7 @@
     <div class="library">
         {{ if $data.currently_reading }}
         {{ $books := $data.currently_reading }}
-            <div class="read-state currently_reading">
+            <div class="read-state two_cols">
                 <p>Currently Reading</p>
                 <ol>
                     {{ range $books }}
@@ -24,9 +24,9 @@
         {{ end }}
 
         {{ if $data.queued }}
-            {{ $books := $data.queued }}
-            <div class="read-state queued">
-                <p>On The Radar</p>
+        {{ $books := $data.queued }}
+            <div class="read-state two_cols">
+                <p>Queued</p>
                 <ol>
                     {{ range $books }}
                         {{ $book := . }}
@@ -63,7 +63,6 @@
             </div>
         {{ end }}
 
-
         {{ if $data.read }}
         {{ $books := $data.read }}
         <div class="read-state read">
@@ -73,22 +72,28 @@
                 {{ $book := . }}
                 <li>
                     <div itemprop="mainEntity" itemscope="" itemtype="http://schema.org/Book">
-                            <div itemprop="name">{{ if $book.blog_link }}<a href="{{ $book.blog_link }}">{{ end }}{{ $book.title }}{{ if $book.blog_link }}</a>{{ end }}</div>
-                            <div itemprop="author">{{ $book.author }}</div>
-                            {{ if $book.date_read }}
-                            <div itemprop="dateCreated">{{ $book.date_read }}</div>
-                            <div><div itemprop="reviewRating" class="star" style="width:{{ mul $book.my_rating 16 }}px"></div></div>
-                            {{ end }}
-
+                        <div itemprop="name">{{ if $book.blog_link }}<a href="{{ $book.blog_link }}">{{ end }}{{ $book.title }}{{ if $book.blog_link }}</a>{{ end }}</div>
+                        <div itemprop="author">{{ $book.author }}</div>
+                        {{ if $book.date_read }}
+                        <div itemprop="dateCreated">{{ $book.date_read }}</div>
+                        {{ else }}
+                            <div itemprop="dateCreated">-</div>
+                        {{ end }}
+                        {{ if $book.my_rating }}
+                            <div>
+                                <div itemprop="reviewRating" class="star" style="width:{{ mul $book.my_rating 16 }}px"></div>
+                            </div>
+                        {{ end }}
                     </div>
-                    {{ end }}
+                </li>
+                {{ end }}
             </ol>
         </div>
         {{ end }}
 
         {{ if $data.unread }}
         {{ $books := $data.unread }}
-        <div class="read-state unread">
+        <div class="read-state two_cols">
             <p>Unread</p>
             <ol>
                 {{ range $books }}
@@ -99,14 +104,14 @@
                         <div itemprop="author">{{ $book.author }}</div>
                         <div itemprop="dateCreated">{{ $book.date_read}}</div>
                     </div>
-                    {{ end }}
+                </li>
+                {{ end }}
             </ol>
         </div>
         {{ end }}
     </div>
     {{ end }}
 {{ end }}
-
 
 {{ define "footer" }}
 
