@@ -1426,7 +1426,7 @@ a.pagination-item:hover {
     grid-template-columns: 0.75fr 0.40fr 0.40fr 0.25fr;
 }
 
-.currently_reading li>div {
+.currently_reading li>div, .queued li>div, .unread li>div {
     max-width: 100%;
     font-size: 0.9em;
     display: -ms-grid;
