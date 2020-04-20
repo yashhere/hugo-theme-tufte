@@ -31,7 +31,7 @@
                 {{ $book := . }}
                 <li>
                     <div itemprop="mainEntity" itemscope="" itemtype="http://schema.org/Book">
-                        <div itemprop="name"><a href="{{ $book.blog_link }}">{{ $book.title }}</a></div>
+                            <div itemprop="name">{{ if $book.blog_link }}<a href="{{ $book.blog_link }}">{{ end }}{{ $book.title }}{{ if $book.blog_link }}</a>{{ end }}</div>
                         <div itemprop="author">{{ $book.author }}</div>
                         {{ if $book.date_read }}
                             <div itemprop="dateCreated">{{ $book.date_read }}</div>
