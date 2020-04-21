@@ -1332,7 +1332,6 @@ header .taxo {
 /* Pagination items can be `span`s or `a`s */
 .pagination-item {
     display: block;
-    width: 50%;
     padding: 0.5rem;
     border: 1px solid #eee;
 }
