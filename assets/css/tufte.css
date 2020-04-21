@@ -688,6 +688,7 @@ code, pre > code {
     font-size: 1.0rem;
     line-height: 1.42;
     -webkit-text-size-adjust: 100%;
+    overflow-wrap: break-word;
     /* Prevent adjustments of font size after orientation changes in iOS. See https://github.com/edwardtufte/tufte-css/issues/81#issuecomment-261953409 */;
 }
 
@@ -763,7 +764,7 @@ label.margin-toggle:not(.sidenote-number):not(.marginnote-symbol) {
     }
 
     figure {
-        max-width: 90%;
+        max-width: 85%;
     }
 
     figcaption,
@@ -830,41 +831,9 @@ label.margin-toggle:not(.sidenote-number):not(.marginnote-symbol) {
     }
 }
 
-
-/* Large screens */
-
-@media all and (max-width: 1200px) {
-    #homepage {
-        width: 75%;
-    }
-}
-
-
-/* Medium-large screens */
-
-@media all and (max-width: 760px) {
-    #homepage {
-        width: 85%;
-    }
-}
-
-
-/* medium  screens */
-
-@media all and (max-width: 600px) {
-    #homepage {
-        width: 90%;
-    }
-}
-
-
 /* medium  screens */
 
 @media all and (max-width: 550px) {
-    #homepage {
-        width: 95%;
-    }
-
     body {
         width: 90% !important;
         /*padding-left: 5% !important;*/;
@@ -921,7 +890,7 @@ label.margin-toggle:not(.sidenote-number):not(.marginnote-symbol) {
     }
 
     figure {
-        width: 95% !important;
+        width: 85% !important;
     }
 }
 
