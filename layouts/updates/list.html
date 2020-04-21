@@ -32,11 +32,12 @@
                 {{ $date_meta := dateFormat $date_format_meta .Date }}
                 {{ $date_display := dateFormat (.Param "dateform") .Date }}
                 <div class="post-date">
+
                     {{ if (and (not .Lastmod.IsZero) (not (eq (dateFormat "2006-01-02" .Lastmod) (dateFormat "2006-01-02" .Date)))) }}
                         {{ $lastmod_display := dateFormat (.Param "dateform") .Lastmod }}
-                        <span class="dt-updated">Last edit: {{ $lastmod_display -}}</span>
+                        {{- partial "svg/icons" "calendar" -}}<span class="dt-updated">Last edit: {{ $lastmod_display -}}</span>
                     {{ else }}
-                        {{ printf `<time datetime="%s" class="dt-published">%s</time>` $date_meta $date_display | safeHTML }}
+                        {{- partial "svg/icons" "calendar" -}}{{ printf `<time datetime="%s" class="dt-published">%s</time>` $date_meta $date_display | safeHTML }}
                     {{ end }}
                 </div>
             </div>
