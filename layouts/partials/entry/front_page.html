@@ -5,10 +5,10 @@
         {{ partial "entry/meta/author" (dict "page" . "fmt" "u-author") }}
         <data class="p-name" value="{{ .Title }}"></data>
     </header>
-    <!-- http://justindunham.net/blog-bells-and-whistles-in-hugo/ -->
 
-    {{ $pages := (where (where .Site.Pages "Type" "posts") "IsPage" true) }}
-    {{ range first 7 $pages }}
-        {{ .Render "summary"}}      <!-- Use layouts/_default/summary.html -->
+    {{ $typesToShow := slice "posts" }}
+    {{ $paginator := .Paginate (where site.RegularPages "Section" "in" $typesToShow)}}
+    {{ range $paginator.Pages }}
+        {{ .Render "summary"}}
     {{ end }}
 </div>
