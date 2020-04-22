@@ -1,4 +1,4 @@
-{{ define "main" }}             <!-- List of all series -->
+{{ define "main" }}
 
 <header>
     <h1>List of {{ .Data.Plural }}</h1>
@@ -8,9 +8,9 @@
 <ul>
     {{ range .Data.Terms.ByCount }}
         {{ $count := .Count }}
-        {{ with site.GetPage (printf "/%s/%s" $type (.Name | urlize)) }} <!-- .Name in OrderedTaxonomyEntry object -->
+        {{ with site.GetPage (printf "/%s/%s" $type (.Name | urlize)) }}
             <li>
-                <a href="{{ .Permalink }}">{{ .Name }}</a> ({{ $count }}) <!-- .Name in Page -->
+                <a href="{{ .Permalink }}">{{ .Name }}</a> ({{ $count }})
             </li>
         {{ end }}
     {{ end }}

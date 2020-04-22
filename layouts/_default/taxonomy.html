@@ -1,12 +1,9 @@
 {{ define "main" }}             <!-- List of all posts -->
 
-{{ partial "taxonomy/draft-tag" . }}
-
-{{/*{{ partialCached "taxonomy/all-terms" . }}*/}}
+{{ partial "extras/draft" . }}
 
 {{ $has_some_content := (not (eq "" (.Content | replaceRE "[[:^alpha:]]" ""))) }}
 {{ if $has_some_content }}
-    <br /> <!-- This br needed so that the below taxo-buttons are center-aligned. -->
     <article class="post h-entry {{ .Section }}">
         <header>
             <div class="center">{{ partial "taxonomy/taxo-buttons" . }}</div>
@@ -18,12 +15,17 @@
 
         <hr />
         <div class="content">
-            {{ partial "entry/description" . }}
+            {{ partial "header/description" . }}
 
-            {{ partial "entry/meta/author" (dict "page" . "fmt" "u-author") }}
+            {{ partial "header/author" (dict "page" . "fmt" "u-author") }}
 
             <div class="e-content">
-                {{ partial "extras/content-post-process" . }}
+                {{ $content := .Content }}
+                <!-- Headline hash -->
+                {{ $content = $content | replaceRE "(<h[2-9] id=\"([^\"]+)\".+)(</h[2-9]+>)" `${1}&nbsp;<a class="headline-hash no-text-decoration" href="#${2}">#</a> ${3}` }}
+                <!-- Replace "<p></div></p>" with "</div>" -->
+                {{ $content = $content | replaceRE "<p>(</div>)</p>" "${1}" }}
+                {{ $content | safeHTML }}
             </div>
         </div>
         <hr />
@@ -35,12 +37,7 @@
     <header>
         <!-- To complete the h-feed meta-data -->
         <data class="u-url" value="{{ .Permalink }}"></data>
-        {{ partial "entry/meta/author" (dict "page" . "fmt" "u-author") }}
-
-        <!-- If the page is /tags/foo/, .Data.Plural = "tags", .Data.Term = "foo"
-             "%T" in the string retrieved from phrase map will be replaced with .Data.Term
-             "%N" in the string retrieved from phrase map will be replaced with .Name
-        -->
+        {{ partial "header/author" (dict "page" . "fmt" "u-author") }}
         {{ $term := .Data.Term }}
         {{ $term_count := (len .Pages) }}
 
@@ -55,11 +52,6 @@
     </header>
 
     {{ range .Pages }}
-        <!-- If the current page's $term is "foo", it replaces «li class="__foo__"»
-             with «li class="active"».
-             The "__<taxo>__" are special classes added to the taxo buttons in the
-             taxo-buttons.html partial.
-        -->
         {{ .Render "summary" | replaceRE (printf `(li class=")__%s__"` $term) `${1}active"` | safeHTML }}
     {{ end }}
 

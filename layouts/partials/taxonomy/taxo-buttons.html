@@ -7,20 +7,6 @@
                         {{ $term := . }}
                         {{ $term_urlized := (. | urlize) }}
                         {{ with site.GetPage (printf "/%s/%s" $taxo $term_urlized) }}
-                            <!-- Each "taxonomy" Kind page has .Data.FOO element.
-                                 That FOO is the singular form of the taxo,
-                                 like "tag" or "category".
-
-                                 The .Data.FOO element is a slice of type hugolib.WeightedPages.
-                                 It's basically a list of all pages that have the FOO taxo set
-                                 to the same term as the current "taxonomy" Kind page's .Data.Term,
-                                 i.e. the $term_urlized value above.
-
-                                 The size/length of that slice can then be used to find out the
-                                 total number of pages with the FOO taxo set to that .Data.Term.
-                            -->
-{{/*                             partial "debugprint.html" .Data*/}}
-{{/*                             partial "debugprint.html" (index .Data .Data.Singular)*/}}
                             {{ $term_count := (len (index .Data .Data.Singular)) }}
                             <!-- The "__<taxo>__" are special classes used to search/replace in taxonomy.html. -->
                             <li class="{{ printf "__%s__" $term_urlized }}"
@@ -40,4 +26,3 @@
         {{ end }}
     </div>
 {{ end }}
-{{/**/}}

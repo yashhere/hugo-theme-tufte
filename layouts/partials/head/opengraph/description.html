@@ -1,0 +1,8 @@
+{{ $out := "" }}
+{{- with .Description -}}
+    {{- $out = . | markdownify | printf "<p>%s</p>" | safeHTML -}}
+{{- else -}}
+    {{- $out = .Summary | printf "<p>%s</p>" | safeHTML -}}
+{{- end -}}
+
+{{ $out }}

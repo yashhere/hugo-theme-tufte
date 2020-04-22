@@ -1,12 +1,25 @@
 <!-- https://indieauth.com/setup -->
 {{ printf `<!-- rel="me" links for IndieAuth -->` | safeHTML }}
+
+{{- $social := .Site.Params.social -}}
 {{ $relme_exists := false }}
-{{ range site.Params.social -}}
-    {{- if .relme -}}
-        {{- printf `<link href="%s" rel="me">` .link | safeHTML -}}
-        {{ $relme_exists = true }}
+
+{{- if $social -}}
+    {{- $configData := .Site.Data.theme.social_menu -}}
+    {{- $lang := .Site.Language.Lang -}}
+    {{- $config := ( ( index $configData $lang ) | default $configData ) -}}
+
+    {{- range $platform := $config.platforms -}}
+        {{- with $username := ( index $social $platform ) -}}
+            {{ range $username}}
+                {{ if .relme }}
+                    <link href='{{ print ( index $.Site.Data.theme.social.base $platform ) .address }}' rel="me"></link>
+                    {{ $relme_exists = true }}
+                {{ end }}
+            {{ end }}
+        {{- end -}}
     {{- end -}}
-{{- end }}
+{{- end -}}
 
 {{ if $relme_exists }}
     <!-- https://www.amitgawande.com/indiewebify-hugo-website/ -->

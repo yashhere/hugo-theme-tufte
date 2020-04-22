@@ -2,35 +2,20 @@
 <hr class="slender" />
 {{ partialCached "footer/social" . }}
 
-{{ $ox_hugo_string := "" }}
 {{ $source_string := "" }}
 {{ $file_info := .File }}
+
 {{ with site.Params.source }}
     {{ $source := . }}
-    {{ $branch := $source.branch | default "source" }}
+    {{ $branch := $source.branch | default "master" }}
     {{ with (or $source.org_dir $source.md_dir) }}
         {{ $source_string = "<br />" }}
-    {{ end }}
-    {{ with $source.ox_hugo }}
-        {{ with $page_params.creator }}
-            {{ $ox_hugo_string = . | replaceRE "ox-hugo" (printf `<a href="%s"><code>ox-hugo</code></a>` site.Params.urls.ox_hugo) }}
-        {{ else }}
-            {{ $ox_hugo_string = printf `the <a href="%s"><code class="nobr">ox-hugo</code></a> package for Emacs/Org-mode` site.Params.urls.ox_hugo }}
-        {{ end }}
-        {{ $ox_hugo_string = printf "%s +" $ox_hugo_string }}
     {{ end }}
     {{ with $file_info }}
         {{ if (and $source.url $source.md_dir .Path) }}
             {{ $md_source_string := printf `Markdown <a href="%s/raw/%s/%s/%s">source</a> of this page` $source.url $branch $source.md_dir .Path }}
-            {{ with $source.ox_hugo }}
-                {{ $source_string = printf `%s<span class="nobr">&mdash; <code>ox-hugo</code>-generated</span> %s` $source_string $md_source_string }}
-            {{ else }}
-                {{ $source_string = printf `%s<span class="nobr">&mdash; %s</span>` $source_string $md_source_string }}
-            {{ end }}
+            {{ $source_string = printf `%s<span class="nobr">&mdash; %s</span>` $source_string $md_source_string }}
         {{ end }}
-    {{ end }}
-    {{ with (and $source.url $source.org_dir) }}
-        {{ $source_string = printf `%s <span class="nobr">[<a href="%s/tree/%s/%s">Org mode source</a>]</span>` $source_string $source.url $branch $source.org_dir }}
     {{ end }}
     {{ with $file_info }}
         {{ if (and $source.url $source.md_dir .Path) }}
@@ -39,7 +24,7 @@
     {{ end }}
 {{ end }}
 
-{{ $refined_theme_string := printf `<a href="%s"><code class="nobr">tufte-css</code></a>` site.Params.urls.refined }}
+{{ $theme_string := printf `<a href="%s"><code class="nobr">tufte-css</code></a>` site.Params.urls.theme }}
 
 {{ $hugo_version_string_1 := hugo.Version }}
 {{ with hugo.CommitHash }} <!-- Example value: "975bb629:chroma-d5ca12b" -->
@@ -49,17 +34,9 @@
 {{ $hugo_version_string := printf `<span class="nobr">Hugo %s</span>` $hugo_version_string_1 }}
 
 <p class="generated no-text-decoration">
-    {{ printf "Generated using %s + %s%s" $refined_theme_string $hugo_version_string $source_string | safeHTML }}
+    {{ printf "Generated using %s + %s%s" $theme_string $hugo_version_string $source_string | safeHTML }}
 </p>
-
-<p>
-    {{ with site.Params.footer }}
-        {{ . | safeHTML }}
-    {{ end }}
-</p>
-
-{{ partial "footer/badges" . }}
 
 {{ partial "footer/copyright" . }}
-
-{{ partialCached "extras/h-card.html" . }}
+{{ partial "footer/indieweb/badges" . }}
+{{ partialCached "footer/indieweb/h-card" . }}

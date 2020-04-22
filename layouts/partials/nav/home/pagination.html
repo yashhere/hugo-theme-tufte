@@ -14,6 +14,6 @@
 {{ if (eq 1 .Paginator.PageNumber) }}
     {{ if not .Site.IsServer }}
             <!-- Receive Webmentions -->
-        {{ partial "footer/webmention_rcv" . }}
+        {{ partial "footer/indieweb/webmention_rcv" . }}
     {{ end }}
 {{ end }}

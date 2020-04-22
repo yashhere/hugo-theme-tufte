@@ -1,4 +1,3 @@
-{{/* partial "debugprint.html" . */}}
 {{ $scratch_var := (printf "__first_%s_%s" .Kind .Type) }}
 {{ with site.Taxonomies }}
     {{ $.Scratch.Set $scratch_var true }}

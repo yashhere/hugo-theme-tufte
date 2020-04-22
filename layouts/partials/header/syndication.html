@@ -1,0 +1,47 @@
+<!-- Twitter syndication example:
+     1. Requirement in site config
+     [[Params.social]]
+     address = yash__here
+
+     2. Requirement in page front-matter
+     [syndication]
+     twitter = 975860854573936640
+-->
+
+{{ $syndication_class := "" }}
+{{ $syndication_link := "" }}
+{{ with .Params.syndication }}
+    {{ range $platform, $val := . }}
+        {{ $val_is_string := (eq "string" (printf "%T" $val)) }}
+
+        {{- $social := site.Params.social -}}
+        {{- with $username := ( index $social $platform ) -}}
+            {{ range $username }}
+                {{ if (eq $platform "twitter") }}
+                    {{ if (and $val_is_string (not (eq $val "")) (not (eq $val "0"))) }}
+                        {{ $syndication_link = (printf "%s/status/%s" .address $val) }}
+                        {{ $syndication_class = ($platform | lower) }}
+                    {{ else if (gt $val 0) }}
+                        {{ $syndication_link = (printf "%s/status/%d" .address $val) }}
+                        {{ $syndication_class = ($platform | lower) }}
+                    {{ end }}
+{{/*                {{ else if (eq $platform "instagram") }}*/}}
+{{/*                    {{ if (and $val_is_string (not (eq $val "")) (not (eq $val "0"))) }}*/}}
+{{/*                        {{ $syndication_link = (printf "%s/status/%s" .address $val) }}*/}}
+{{/*                        {{ $syndication_class = ($platform | lower) }}*/}}
+{{/*                    {{ else if (gt $val 0) }}*/}}
+{{/*                        {{ $syndication_link = (printf "%s/status/%d" .address $val) }}*/}}
+{{/*                        {{ $syndication_class = ($platform | lower) }}*/}}
+{{/*                    {{ end }}*/}}
+                {{ end }}
+                {{ if (not (eq "" $syndication_class)) }}
+                    <div class="syndication">
+                        {{- partial "svg/icons" $platform -}}
+                        <span><a rel="syndication" class="u-syndication no-text-decoration" href="{{ print ( index $.Site.Data.theme.social.base $platform ) $syndication_link }}" title="This post was syndicated to {{ $platform }}">Syndicated to {{ $platform }}</a>&nbsp;
+                        </span>
+                    </div>
+                {{ end }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}

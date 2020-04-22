@@ -3,7 +3,7 @@
 
 {{if $data  }}
     <div class="books">
-        <h4>Books</h4>
+        <h3>Books</h3>
             {{ range getJSON $url }}
                 {{ $book := . }}
                 {{ $factor := int "5" }}
@@ -15,7 +15,7 @@
                     <div class="progress">
                     <span style="font-family:Arial;">
                         {{ range seq $range1 }}░{{ end }}{{ range seq $range2 }}▓{{ end }}{{ range seq $range3 }}░{{ end }}
-                    </span> &nbsp; {{ if gt (sub $book.percent_current $book.percent_start) 0 }} Progress: {{ $book.percent_start }}-{{ $book.percent_current }}% {{ else }} Progress: 0% {{ end }} <span class="passive">(last read: {{ $book.updated_at }})</span>
+                    </span> &nbsp; {{ if gt (sub $book.percent_current $book.percent_start) 0 }} Progress: {{ $book.percent_start }}-{{ $book.percent_current }}% {{ else }} Progress: 0% {{ end }}
                 </div>
                 </p>
             {{ end }}

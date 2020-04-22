@@ -151,7 +151,7 @@
             <!-- Show the icon only if the associated count is non-zero or if syndication link is present. -->
             {{ if (or (ge ($.Scratch.Get "__like_cnt") 1) ($page.Params.syndication.twitter)) }}
                 <span class="icon">
-                    {{ printf `<i class="%s fa-heart"></i>` ($.Param "fontawesome.style" | default "fal") | safeHTML }}
+                    {{- partial "svg/icons" "heart" -}}
                 </span>
             {{ end }}
             {{ with $page.Params.syndication.twitter }}
@@ -174,7 +174,7 @@
             <!-- Show the icon only if the associated count is non-zero or if syndication link is present. -->
             {{ if (or (ge ($.Scratch.Get "__repost_cnt") 1) ($page.Params.syndication.twitter)) }}
                 <span class="icon">
-                    {{ printf `<i class="%s fa-retweet"></i>` ($.Param "fontawesome.style" | default "fal") | safeHTML }}
+                    {{- partial "svg/icons" "twitter" -}}
                 </span>
             {{ end }}
             {{ with $page.Params.syndication.twitter }}
@@ -193,7 +193,7 @@
             <span class="tweet no-text-decoration">
                 {{ printf `<a title="Reply using Twitter (but hey, I'd urge you to instead use that Comment button above ☺)" href="https://twitter.com/intent/tweet?in_reply_to=%d">` . | safeHTML }}
                 <span class="icon">
-                    {{ printf `<i class="%s fa-reply"></i>` ($.Param "fontawesome.style" | default "fal") | safeHTML }}
+                    {{- partial "svg/icons" "reply" -}}
                 </span>
                 {{ printf "</a>" | safeHTML }}
             </span>

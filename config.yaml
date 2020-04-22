@@ -11,8 +11,6 @@ Params:
   # Go date formats: https://golang.org/pkg/time/#pkg-constants
   dateform: "Mon Jan 2, 2006"
 
-  themecolorbase: blue # Valid values: "red", "orange", "yellow", "green", "cyan", "blue", "magenta", "brown"
-
   # Set favicons to true only if the following files are present in the project assets/ dir:
   # - safari-pinned-tab.svg
   # - manifest.json
@@ -21,18 +19,8 @@ Params:
   # - apple-touch-icon.png
   favicons: false
 
-  # These inline CSS files have to live in layouts/partials/.
-  # custom_inline_css:
-  #   - css/github_chroma.css
-  #   - css/improvements.css
-
-  css_lazy_load: false
-
-  fontawesome:
-    style: fal # Valid values: "fas" (Solid), "far" (Regular), "fal" (Light), "fab" (Brands)
-
   urls:
-    refined: "https://edwardtufte.github.io/tufte-css/"
+    theme: "https://edwardtufte.github.io/tufte-css/"
     hugo: "https://github.com/gohugoio/hugo"
   prefetch:
     fonts:

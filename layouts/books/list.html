@@ -4,9 +4,7 @@
         {{ $url := "/data/library.json" }}
         {{ $data = getJSON $url }}
     {{ end }}
-{{/*    {{ range .Pages }}*/}}
-{{/*        {{ .Render "li" }}*/}}
-{{/*    {{ end }}*/}}
+        
     <h1 class="post-title p-name center">{{ .Title }}</h1>
     {{if $data }}
         {{ $unread := slice }}

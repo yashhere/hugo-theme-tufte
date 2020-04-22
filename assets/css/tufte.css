@@ -206,7 +206,6 @@ section > table {
 section > ol,
 section > ul {
     width: 50%;
-    /*-webkit-padding-start: 5%;*/
 }
 
 li:not(:first-child) {
@@ -437,7 +436,6 @@ ol,
 ul {
     font-size: 1.4rem;
     width: 61%;
-    -webkit-padding-start: 5%;
     /*  -webkit-padding-end: 5%; */;
 }
 
@@ -451,8 +449,6 @@ ol li p {
 
 nav ul {
     width: 100%;
-    -webkit-padding-start: 5%;
-    -webkit-padding-end: 5%;
 }
 
 li {
@@ -681,6 +677,7 @@ div.girafe {
 footer {
     font-size: 15px;
     text-align: center;
+    margin-top: 3em;
 }
 
 code, pre > code {

@@ -1,7 +1,7 @@
-name: Refined-modified
+name: tufte
 license: MIT
 licenselink: "https://github.com/yashhere/hugo-theme-tufte/blob/master/LICENSE"
-description: "A Hugo theme made solely for https://yashagarwal.in"
+description: "A Hugo theme made using tufte-css for https://yashagarwal.in"
 homepage: "https://yashagarwal.in"
 tags:
   - tufte
@@ -9,7 +9,7 @@ features:
   - Atom Feed
   - JF2 Feed
   - Fuse.js Search
-min_version: "0.58"
+min_version: "0.68"
 author:
   name: Yash Agarwal
   homepage: "https://yashagarwal.in"

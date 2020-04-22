@@ -1,6 +1,5 @@
 <link rel='icon' href='{{ ( or .Site.Params.assets.favicon "/appicons/favicon.ico" ) | relURL }}'>
 
-
 {{ with .Param "prefetch" }}
     {{ range .fonts }}
         {{ printf `<link rel="preload" href="%s" as="font" crossorigin>` . | safeHTML }}
@@ -29,6 +28,4 @@
 {{ end -}}
 
 <!-- Author -->
-{{ partial "entry/meta/author" (dict "page" . "fmt" "DC") }}
-
-{{- partialCached "head/analytics" . -}}
+{{ partial "header/author" (dict "page" . "fmt" "DC") }}

@@ -1,0 +1,18 @@
+{{ if not ( eq .Section "page" ) }}
+    <div class="date-syndication">
+        {{ partial "header/date" (dict "page" . "fmt" (.Param "dateform")) }}
+    </div>
+
+    {{ partial "header/reading-time" . }}
+
+    <div class='container sep-before'>
+        {{ range $taxonomy, $pages := .Site.Taxonomies }}
+            {{- if ( index $.Params $taxonomy ) -}}
+                {{- $.Scratch.Set "taxonomy" $taxonomy -}}
+                {{- partial "header/taxonomy-list" $ -}}
+            {{- end -}}
+        {{ end }}
+    </div>
+
+    {{ partial "header/syndication" . }}
+{{ end }}
