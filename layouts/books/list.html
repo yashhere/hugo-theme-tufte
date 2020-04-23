@@ -74,7 +74,7 @@
                                 <div itemprop="author">{{ $book.author }}</div>
                                 {{ if $book.date_read }}
                                     <div itemprop="dateCreated">{{ $book.date_read}}</div>
-                                    <div><div itemprop="reviewRating" class="star" style="width:{{ mul $book.my_rating 16 }}px"></div></div>
+                                    <div itemprop="reviewRating" class="star" style="width:{{ mul $book.my_rating 16 }}px"></div>
                                 {{ end }}
                             </div>
                         </li>
@@ -99,9 +99,7 @@
                                     <div itemprop="dateCreated">-</div>
                                 {{ end }}
                                 {{ if $book.my_rating }}
-                                    <div>
                                         <div itemprop="reviewRating" class="star" style="width:{{ mul $book.my_rating 16 }}px"></div>
-                                    </div>
                                 {{ end }}
                             </div>
                         </li>
