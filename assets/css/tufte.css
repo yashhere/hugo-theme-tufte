@@ -836,6 +836,10 @@ label.margin-toggle:not(.sidenote-number):not(.marginnote-symbol) {
         /*padding-left: 5% !important;*/;
     }
 
+    footer {
+        width: 93%;
+    }
+
     figure {
         width: 95% !important;
     }
@@ -1288,7 +1292,7 @@ header .taxo {
 .pagination {
     font-size: 1.2em;
     text-align: center;
-    margin-left: -1rem;
+    /*margin-left: -1rem;*/
     /* Don't show margins on small screens */
     /*margin-right: -1rem;*/
 
@@ -1463,8 +1467,8 @@ a.pagination-item:hover {
     }
 
     .read-state li>div {
-        -ms-grid-columns: 100px 100px;
-        grid-template-columns: 130px 130px;
+        -ms-grid-columns: 150px 150px;
+        grid-template-columns: 150px 150px;
     }
 
     .two_cols li>div {
