@@ -2273,3 +2273,10 @@ div.series {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+
+/* Special classes */
+.passive {
+    font-weight: normal;
+    color: #aeb1b1;
+}

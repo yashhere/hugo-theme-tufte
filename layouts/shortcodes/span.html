@@ -1,0 +1,14 @@
+{{/*https://github.com/shawnohare/hugo-tufte*/}}
+
+{{/*{{< div class="my-class" >}}*/}}
+{{/*{{<div "begin" >}}*/}}
+{{/*{{<div "end" >}}*/}}
+
+{{ $loc := .Get 0  }}
+{{ if .IsNamedParams }}
+    <span {{with .Get "class"}} class="{{.}}"{{end}}{{with .Get "id"}} id="{{.}}"{{end}}>
+{{ else if or (eq $loc "") (eq $loc "begin") }}
+  <span>
+{{ else if eq $loc "end" }}
+  </span>
+{{ end }}

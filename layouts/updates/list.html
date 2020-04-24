@@ -5,25 +5,13 @@
     <header>
         <!-- To complete the h-feed meta-data -->
         <data class="u-url" value="{{ .Permalink }}"></data>
-
-        {{ $title := .Title }}
-        {{ $section := .Section }}
-        {{ with .File }}
-            {{ if (eq .Path "") }} <!-- Regular section -->
-            <h1 class="p-name">Posts in ‘{{ .Dir | default $section }}’</h1>
-            {{ else }}                  <!-- Branch bundle based section -->
-            <h1 class="p-name">{{ $title }}</h1>
-            <h2>Posts in ‘{{ .Dir | default $section }}’</h2>
-            {{ end }}
-        {{ end }}
-
     </header>
-
+</div>
 
 {{ range .Pages }}
     <article class="post h-entry updates">
         <header>
-            <h1 class="post-title p-name no-text-decoration"><a class="u-url" href='{{ .Permalink }}'>{{ .Title }}</a></h1>
+            <h2 class="post-title p-name no-text-decoration"><a class="u-url" href='{{ .Permalink }}'>{{ .Title }}</a></h2>
 
             <data class="u-url" value="{{ .Permalink }}"></data>
 
