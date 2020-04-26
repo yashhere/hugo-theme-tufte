@@ -45,6 +45,27 @@
                 </div>
             {{ end }}
 
+            {{ if ge ($recently_finished | len) 0 }}
+                <div class="read-state">
+                    <p><strong>Recently Finished</strong></p>
+                    <ol>
+                        {{ range $recently_finished }}
+                            {{ $book := . }}
+                            <li>
+                                <div itemprop="mainEntity" itemscope="" itemtype="http://schema.org/Book">
+                                    <div itemprop="name">{{ if $book.blog_link }}<a href="{{ $book.blog_link }}">{{ end }}{{ $book.title }}{{ if $book.blog_link }}</a>{{ end }}</div>
+                                    <div itemprop="author">{{ $book.author }}</div>
+                                    {{ if $book.date_read }}
+                                        <div itemprop="dateCreated">{{ dateFormat "02/01/2006" $book.date_read }}</div>
+                                        <div itemprop="reviewRating" class="star" style="width:{{ mul $book.my_rating 16 }}px"></div>
+                                    {{ end }}
+                                </div>
+                            </li>
+                        {{ end }}
+                    </ol>
+                </div>
+            {{ end }}
+
             {{ if ge ($queued | len) 0 }}
                 <div class="read-state two_cols">
                     <p><strong>Queued</strong></p>
@@ -62,27 +83,6 @@
                 </div>
             {{ end }}
 
-            {{ if ge ($recently_finished | len) 0 }}
-                <div class="read-state">
-                    <p><strong>Recently Finished</strong></p>
-                    <ol>
-                        {{ range $recently_finished }}
-                        {{ $book := . }}
-                        <li>
-                            <div itemprop="mainEntity" itemscope="" itemtype="http://schema.org/Book">
-                                <div itemprop="name">{{ if $book.blog_link }}<a href="{{ $book.blog_link }}">{{ end }}{{ $book.title }}{{ if $book.blog_link }}</a>{{ end }}</div>
-                                <div itemprop="author">{{ $book.author }}</div>
-                                {{ if $book.date_read }}
-                                    <div itemprop="dateCreated">{{ $book.date_read}}</div>
-                                    <div itemprop="reviewRating" class="star" style="width:{{ mul $book.my_rating 16 }}px"></div>
-                                {{ end }}
-                            </div>
-                        </li>
-                        {{ end }}
-                    </ol>
-                </div>
-            {{ end }}
-
             {{ if ge ($read | len) 0 }}
                 <div class="read-state">
                     <p><strong>Read</strong></p>
@@ -94,7 +94,7 @@
                                 <div itemprop="name">{{ if $book.blog_link }}<a href="{{ $book.blog_link }}">{{ end }}{{ $book.title }}{{ if $book.blog_link }}</a>{{ end }}</div>
                                 <div itemprop="author">{{ $book.author }}</div>
                                 {{ if $book.date_read }}
-                                <div itemprop="dateCreated">{{ $book.date_read }}</div>
+                                <div itemprop="dateCreated">{{ dateFormat "02/01/2006" $book.date_read }}</div>
                                 {{ else }}
                                     <div itemprop="dateCreated">-</div>
                                 {{ end }}
@@ -118,7 +118,6 @@
                             <div itemprop="mainEntity" itemscope="" itemtype="http://schema.org/Book">
                                 <div itemprop="name">{{ $book.title }}</div>
                                 <div itemprop="author">{{ $book.author }}</div>
-                                <div itemprop="dateCreated">{{ $book.date_read}}</div>
                             </div>
                         </li>
                         {{ end }}
