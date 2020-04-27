@@ -2,7 +2,8 @@
 {{ $highlight_css := resources.Get "css/github_croma.css" | resources.ExecuteAsTemplate "css/github_croma.css" . }}
 {{ $improvements_css := resources.Get "css/improvements.css" | resources.ExecuteAsTemplate "css/improvements.css" . }}
 {{ $navbar_css := resources.Get "css/navbar.css" | resources.ExecuteAsTemplate "css/navbar.css" . }}
+{{ $links_css := resources.Get "css/links.css" | resources.ExecuteAsTemplate "css/links.css" . }}
 {{ $latex_css := resources.Get "css/latex.css" | resources.ExecuteAsTemplate "css/latex.css" . }}
 
-{{ $styles := slice $tufte_css $latex_css $navbar_css $highlight_css $improvements_css | resources.Concat "styles.css" | minify | fingerprint }}
+{{ $styles := slice $tufte_css $latex_css $navbar_css $highlight_css $links_css $improvements_css | resources.Concat "styles.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $styles.RelPermalink }}" {{ printf "integrity=%q" $styles.Data.Integrity | safeHTMLAttr }}>
