@@ -4,8 +4,9 @@
 {{ partial "head/head" . }}
 
 <body lang="en">
+    {{ partial "nav/navbar" . }}
     <div class="wrapper">
-        {{ partial "nav/navbar" . }}
+
 
         {{ block "main" . }}{{ end }}
         <footer>
