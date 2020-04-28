@@ -1,13 +1,13 @@
 {{ $page_relpermalink := .RelPermalink }}
 
-<nav class="topnav no-tufte-underline" id="myTopnav">
+<nav class="topnav no-tufte-underline" id="navbar">
     <a href="/" class="nav-logo sans no-tufte-underline" id="menu">
         {{ site.Title }}<br><span class="tagline">{{ site.Params.tagline }}</span>
     </a>
     {{ range site.Params.mainSections }}
         {{ with site.GetPage (printf "/%s" .) }}
-            <a href="{{ .Permalink }}" class="sans no-tufte-underline" id="menu">{{ .Name | title }}</a>
+            <a href="{{ .Permalink }}" class="topnav sans no-tufte-underline" id="menu">{{ .Name | title }}</a>
         {{ end }}
     {{ end }}
-    <b><a href="javascript:void(0);" class="icon no-tufte-underline" id="menu" onclick="myFunction()">&#9776;</a></b>
+    <b><a href="javascript:void(0);" class="icon no-tufte-underline" id="menu" onclick="toggleNavBar()">&#9776;</a></b>
 </nav>

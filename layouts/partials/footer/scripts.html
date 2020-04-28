@@ -38,12 +38,12 @@
 {{ end }}
 
 <script>
-    function myFunction() {
-        var x = document.getElementById("myTopnav");
-        if (x.className === "topnav") {
-            x.className += " responsive";
+    function toggleNavBar() {
+        var nav = document.getElementById("navbar");
+        if (!nav.classList.contains("responsive")) {
+            nav.classList.add("responsive");
         } else {
-            x.className = "topnav";
+            nav.classList.remove("responsive")
         }
     }
 </script>
