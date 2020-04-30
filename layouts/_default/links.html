@@ -1,8 +1,8 @@
 {{ define "main" }}
     {{ $data := "" }}
     {{ $url := "" }}
-    {{ if fileExists "/static/data/bookmarks.json" }}
-        {{ $url = "/static/data/bookmarks.json" }}
+    {{ if fileExists "/data/bookmarks.json" }}
+        {{ $url = "/data/bookmarks.json" }}
         {{ $data = getJSON $url }}
     {{ end }}
 
@@ -35,14 +35,14 @@
                     <ul>
                 {{ end }}
             {{ end }}
-            <li class="h-entry p-name post-title">{{ $book.title }} - <a class="u-url sans" href='{{ $book.url }}'> {{ $book.domain }}</a></li>
+            <li class="h-entry p-name post-title">{{ $book.title }} - <a class="u-url sans" target="_blank" href='{{ $book.url }}'> {{ $book.domain }}</a></li>
         {{ end }}
                     </ul>
         </div>
     </div>
     {{ end }}
 
-    <p>Download all bookmarks:- <a class="sans" href={{ (path.Join "/data" (path.Base $url)) | absURL }}>{{ path.Base $url }}</a></p>
+    <p>Download all bookmarks:- <a class="sans" target="_blank" href={{ $url | absURL }}>{{ path.Base $url }}</a></p>
 {{ end }}
 
 {{ define "footer" }}
