@@ -1,0 +1,53 @@
+{{ define "main" }}
+    {{ $data := "" }}
+    {{ $url := "" }}
+    {{ if fileExists "/static/data/bookmarks.json" }}
+        {{ $url = "/static/data/bookmarks.json" }}
+        {{ $data = getJSON $url }}
+    {{ end }}
+
+    {{if $data }}
+    <div class="h-feed">
+        <header>
+            <data class="u-url" value="{{ .Permalink }}"></data>
+            {{ partial "header/author" (dict "page" . "fmt" "u-author") }}
+
+            <h1 class="p-name">{{ .Title }}</h1>
+        </header>
+
+        {{ $.Scratch.Set "lastDate" (.Date.Format "01/02") }}
+        <div class="links">
+        {{ $archive := false }}
+        {{ range $data }}
+            {{ $book := . }}
+            {{ $date := (dateFormat "02/01" $book.date_added) }}
+            {{ $diff := (now.Sub ($book.date_added | time)) }}
+            {{ if eq $archive false }}
+                {{ if ge $diff.Hours 96 }}
+                    </ul>
+                    <h2 id="archive">Archive</h2>
+                    {{ $archive = true }}
+                    <ul>
+                {{ else if ne ($.Scratch.Get "lastDate") $date }}
+                    </ul>
+                    <h2 id="{{ $date }}">{{ $date }}</h2>
+                    {{ $.Scratch.Set "lastDate" $date }}
+                    <ul>
+                {{ end }}
+            {{ end }}
+            <li class="h-entry p-name post-title">{{ $book.title }} - <a class="u-url sans" href='{{ $book.url }}'> {{ $book.domain }}</a></li>
+        {{ end }}
+                    </ul>
+        </div>
+    </div>
+    {{ end }}
+
+    <p>Download all bookmarks:- <a class="sans" href={{ (path.Join "/data" (path.Base $url)) | absURL }}>{{ path.Base $url }}</a></p>
+{{ end }}
+
+{{ define "footer" }}
+    <!-- Back to top -->
+    <div class="backtotop center no-text-decoration">
+        <a href="#">back to <span class="top">top</span></a>
+    </div>
+{{ end }}

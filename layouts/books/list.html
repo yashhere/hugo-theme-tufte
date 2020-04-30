@@ -1,7 +1,7 @@
 {{ define "main" }}
     {{ $data := "" }}
-    {{ if fileExists "/data/library.json" }}
-        {{ $url := "/data/library.json" }}
+    {{ if fileExists "/static/data/library.json" }}
+        {{ $url := "/static/data/library.json" }}
         {{ $data = getJSON $url }}
     {{ end }}
         
