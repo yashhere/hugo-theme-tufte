@@ -2486,7 +2486,7 @@ div.series {
 
 .resp-sharing-button__link {
     text-decoration: none;
-    /*margin-right: 1em;*/
+    margin-right: 10px;
     display: inline-block;
 }
 
