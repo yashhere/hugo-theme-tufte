@@ -61,6 +61,9 @@
     </div>
 {{ end }}
 
+    {{ if or (eq .Section "posts") (eq .Section "books") }}
+        {{ partial "footer/sharing-buttons" . }}
+    {{ end }}
 {{ end }}
 
 {{ define "footer" }}
@@ -69,7 +72,8 @@
         <a href="#">back to <span class="top">top</span></a>
     </div>
 
-    {{ if or (eq .Section "posts") (eq .Section "readings") (eq .Section "updates") }}
+
+    {{ if or (eq .Section "posts") (eq .Section "books") (eq .Section "updates") }}
         <!-- Prev/next post -->
         {{ partial "nav/single/pagination" . }}
 
@@ -80,6 +84,7 @@
         {{ end }}
 
         <!-- Other Comments -->
-        {{ partial "footer/comments/disqus" . }}
+
 {{ end }}
+    {{ partial "footer/comments/disqus" . }}
 {{ end }}

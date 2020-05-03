@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 @font-face {
     font-family: "et-book";
     src: url("../fonts/et-book/et-book-roman-line-figures/et-book-roman-line-figures.eot");
@@ -56,7 +57,7 @@
     /*--mono: var(--iosevka);*/
     /*--italic: var(--andada);*/
     /*--symbola: 'Symbola';*/
-;
+    ;
 }
 
 
@@ -80,6 +81,7 @@ body {
     max-width: 1400px;
     counter-reset: sidenote-counter;
     font-size: 1.4rem;
+    /*text-align: justify;*/
 }
 
 h1 {
@@ -157,6 +159,7 @@ p {
     margin-bottom: 1.4rem;
     padding-right: 0;
     vertical-align: baseline;
+    text-align: justify;
 }
 
 
@@ -190,16 +193,22 @@ div.epigraph>blockquote>footer>cite {
 blockquote {
     font-size: 1.4rem;
     font-style: italic;
+    border-left: 5px solid #808080;
 }
 
 blockquote p {
-    width: 50%;
+    width: 59%;
     margin-top: 1.4rem;
     margin-right: 40px;
+    padding-left: 2%;
 }
 
 blockquote footer {
-    width: 50%;
+    margin-right: 40px;
+    font-size: 1.1rem;
+    width: 59%;
+    padding-left: 2%;
+    margin-right: 40px;
     font-size: 1.1rem;
     text-align: right;
 }
@@ -332,21 +341,25 @@ li:not(:first-child) {
     .name {
         padding-right: 5px;
     }
+
     .author_blurb {
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
         flex-direction: column;
     }
+
     .author_photo {
         padding-bottom: 12px;
         -ms-flex-item-align: center;
         -ms-grid-row-align: center;
         align-self: center;
     }
+
     .author_blurb {
         padding-top: 5px;
     }
+
     .author_info {
         padding-left: 0px;
     }
@@ -442,9 +455,9 @@ footer,
 ol,
 ul {
     font-size: 1.4rem;
-    width: 61%;
+    width: 55%;
     /*  -webkit-padding-end: 5%; */
-;
+    ;
 }
 
 ul li p {
@@ -699,7 +712,7 @@ pre>code {
     -webkit-text-size-adjust: 100%;
     overflow-wrap: break-word;
     /* Prevent adjustments of font size after orientation changes in iOS. See https://github.com/edwardtufte/tufte-css/issues/81#issuecomment-261953409 */
-;
+    ;
 }
 
 .sans>code {
@@ -759,32 +772,46 @@ label.margin-toggle:not(.sidenote-number):not(.marginnote-symbol) {
 }
 
 @media screen and (max-width: 760px) {
+    /*body {*/
+    /*    text-align: left;*/
+    /*}*/
     p,
     footer {
         width: 90%;
     }
+
     pre>code {
         width: 100%;
         padding: 0;
     }
-    ul {
-        width: 85%;
+
+    ul, ol {
+        width: 80%;
     }
+
     figure {
         max-width: 85%;
     }
+
     figcaption,
     figure.fullwidth figcaption {
         margin-right: 0%;
         max-width: none;
     }
+
+    blockquote {
+        padding-left: 2%;
+        margin-left: 0;
+    }
     blockquote p,
     blockquote footer {
         width: 90%;
     }
+
     label {
         cursor: pointer;
     }
+
     .table-caption {
         display: block;
         float: right;
@@ -796,22 +823,27 @@ label.margin-toggle:not(.sidenote-number):not(.marginnote-symbol) {
         vertical-align: baseline;
         position: relative;
     }
+
     div.table-wrapper,
     table,
     table.booktabs {
         width: 85%;
     }
+
     div.table-wrapper {
         border-right: 1px solid #efefef;
     }
+
     label.margin-toggle {
         display: inline;
         color: #a00000;
     }
+
     .sidenote,
     .marginnote {
         display: none;
     }
+
     .margin-toggle:checked+.sidenote,
     .margin-toggle:checked+.marginnote {
         display: block;
@@ -823,6 +855,7 @@ label.margin-toggle:not(.sidenote-number):not(.marginnote-symbol) {
         vertical-align: baseline;
         position: relative;
     }
+
     label {
         cursor: pointer;
     }
@@ -832,6 +865,7 @@ label.margin-toggle:not(.sidenote-number):not(.marginnote-symbol) {
 /* medium  screens */
 
 @media all and (max-width: 550px) {
+
     /*body {*/
     /*    width: 90% !important;*/
     /*    !*padding-left: 5% !important;*!*/
@@ -840,6 +874,7 @@ label.margin-toggle:not(.sidenote-number):not(.marginnote-symbol) {
     footer {
         width: 93%;
     }
+
     figure {
         width: 95% !important;
     }
@@ -852,10 +887,12 @@ label.margin-toggle:not(.sidenote-number):not(.marginnote-symbol) {
     pre {
         width: 85%;
     }
+
     pre code {
         width: 90% !important;
         padding: 0 !important;
     }
+
     .marginnote {
         display: block;
         float: left;
@@ -871,6 +908,7 @@ label.margin-toggle:not(.sidenote-number):not(.marginnote-symbol) {
         margin-left: 0;
         padding: 4px;
     }
+
     .caption {
         display: block;
         float: left;
@@ -886,6 +924,7 @@ label.margin-toggle:not(.sidenote-number):not(.marginnote-symbol) {
         margin-left: 0;
         padding: 4px;
     }
+
     figure {
         width: 85% !important;
     }
@@ -895,7 +934,7 @@ table:before {
     content: "";
     width: 61%;
     /* CE: 31/12-19   display: inline-block; */
-;
+    ;
 }
 
 div.table {
@@ -1061,6 +1100,7 @@ ul.social-links li {
     a:after {
         content: '';
     }
+
     a[href]:after {
         content: none !important;
     }
@@ -1372,15 +1412,18 @@ a.pagination-item:hover {
         width: 100%;
         margin: 5rem auto;
     }
+
     .pagination-item {
         float: left;
         width: 30%;
     }
+
     .pagination-item:first-child {
         margin-bottom: 0;
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px;
     }
+
     .pagination-item:last-child {
         margin-left: -1px;
         border-top-right-radius: 4px;
@@ -1484,18 +1527,22 @@ a.pagination-item:hover {
     .read-state ol {
         width: 70%;
     }
+
     .library .read-state {
         width: 100%;
         margin-bottom: 4%;
         padding: 1%;
     }
+
     .read-state li>div div:nth-child(3) {
         display: none;
     }
+
     .read-state li>div {
         -ms-grid-columns: 100px 100px 90px;
         grid-template-columns: 1fr 0.7fr 100px;
     }
+
     .two_cols li>div {
         -ms-grid-columns: 130px 130px;
         grid-template-columns: 1fr 1fr;
@@ -1506,16 +1553,20 @@ a.pagination-item:hover {
     .read-state ol {
         width: 85%;
     }
+
     .read-state li>div div:nth-child(2) {
         display: none;
     }
+
     .two_cols li>div div:nth-child(2) {
         display: block;
     }
+
     .read-state li>div {
         -ms-grid-columns: 150px 150px;
         grid-template-columns: 150px 150px;
     }
+
     .two_cols li>div {
         -ms-grid-columns: 130px 130px;
         grid-template-columns: 130px 130px;
@@ -2427,3 +2478,65 @@ div.series {
     color: #aeb1b1;
 }
 
+/* Sharing on social media buttons */
+.sharing-wrapper {
+    display: block;
+    padding-top: 5px;
+}
+
+.resp-sharing-button__link {
+    text-decoration: none;
+    /*margin-right: 1em;*/
+    display: inline-block;
+}
+
+.resp-sharing-button__icon, .resp-sharing-button__link {
+    display: inline-block;
+    padding: 0;
+}
+
+.resp-sharing-button .icon {
+    margin-right: 0;
+}
+
+
+.resp-sharing-button {
+    border: 1pt solid #111;
+    background-color: transparent;
+    border-radius: 5px;
+    transition: 25ms ease-out;
+    padding: .25em .5em;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.resp-sharing-button:hover {
+    color: white;
+}
+
+.resp-sharing-button.twitter:hover {
+    fill: #fffff8;
+    background-color: #55acee;
+    border-color: #55acee
+}
+
+.resp-sharing-button.facebook:hover {
+    background-color: #3b5998;
+    border: 1pt solid #111
+}
+
+.resp-sharing-button.email:hover {
+    background-color: #777;
+    border-color: #777
+}
+
+.resp-sharing-button.reddit:hover {
+    background-color: #FF4301;
+    border-color: #FF4301;
+}
+
+.resp-sharing-button.linkedin:hover {
+    background-color: #0e76a8;
+    border-color: #0e76a8;
+}
