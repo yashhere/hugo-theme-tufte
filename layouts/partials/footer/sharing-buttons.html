@@ -1,6 +1,6 @@
 <div class="sharing-wrapper">
     <h4>Share on - </h4>
-    <a class="resp-sharing-button__link" href="//twitter.com/share?url={{ .Permalink }}&amp;text={{ .Title }}&amp;via={{ .Site.Social.twitter }}" target="_blank" aria-label="">
+    <a class="resp-sharing-button__link" href="//twitter.com/share?url={{ .Permalink }}&amp;text={{ .Title }}&amp;via={{ (index (.Site.Params.social.twitter) 0).address }}" target="_blank" aria-label="">
         <div class="resp-sharing-button twitter resp-sharing-button__icon">
             <div aria-hidden="true">
                 {{- partial "svg/icons" "twitter" -}}
