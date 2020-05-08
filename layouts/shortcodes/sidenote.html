@@ -1,5 +1,4 @@
-{{ $sidenoteDomIdSuffix := .Ordinal }}{{ $sidenoteIndex := add (div $sidenoteDomIdSuffix 2) 1 }}<label for="sidenote-{{.Page.File.UniqueID}}-{{ $sidenoteIndex }}" class="margin-toggle sidenote-number">{{ $sidenoteIndex }}</label>
-</strong>
+{{ $sidenoteIndex := add .Ordinal 1 }}<label for="sidenote-{{.Page.File.UniqueID}}-{{ $sidenoteIndex }}" class="margin-toggle sidenote-number">{{ $sidenoteIndex }}</label>
 <input type="checkbox" id="sidenote-{{.Page.File.UniqueID}}-{{ $sidenoteIndex }}" class="margin-toggle"/>
 
 {{ if .Get "src" }}
