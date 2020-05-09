@@ -2540,3 +2540,12 @@ div.series {
     background-color: #0e76a8;
     border-color: #0e76a8;
 }
+
+
+/* Hide disqus container */
+.disqus-placeholder {
+    font-size: 1.3em;
+}
+.disqus-placeholder.is-hidden {
+    display: none;
+}

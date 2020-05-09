@@ -1,8 +1,43 @@
+{{/*{{- if not ( eq .Params.comments false ) -}}*/}}
+{{/*{{ if .Site.DisqusShortname }}*/}}
+{{/*    <div class="disqus comments clear-float">*/}}
+{{/*        */}}
+{{/*        {{ template "_internal/disqus.html" . }}*/}}
+{{/*    </div>*/}}
+{{/*{{ end }}*/}}
+{{/*{{- end -}}*/}}
+
 {{- if not ( eq .Params.comments false ) -}}
-{{ if .Site.DisqusShortname }}
-    <div class="comments clear-float">
-        <h2>Comments</h2>
-        {{ template "_internal/disqus.html" . }}
-    </div>
+    {{ if .Site.DisqusShortname }}
+        {{ $loader := resources.Get "js/disqusloader.js" | minify | fingerprint}}
+        <div class="comments clear-float">
+            <div class="disqus-placeholder">Loading comments...</div>
+            <div class="disqus">
+        </div>
+        {{ if site.IsServer }}
+            <script src="{{ $loader.RelPermalink }}?{{ now.Unix }}"></script>
+        {{else}}
+            <script integrity="{{ $loader.Data.Integrity }}">{{ $loader.Content | safeJS }}</script>
+        {{end}}
+
+        <script>
+            disqusLoader('.disqus',
+                {
+                    scriptUrl: 'https://{{ .Site.DisqusShortname }}.disqus.com/embed.js',
+                    disqusConfig: function () {
+                        this.page.title = {{ .Title | safeJS | string }}
+                        this.page.url = {{.RelPermalink | absURL | safeJS | string }};
+                        this.page.identifier = {{ .RelPermalink | absURL | safeJS | string }};
+                        this.callbacks.onReady = [function()
+                        {
+                            var el = document.querySelector( '.disqus-placeholder' );
+                            if( el.classList )
+                                el.classList.add( 'is-hidden' ); // IE 10+
+                            else
+                                el.className += ' ' + 'is-hidden'; // IE 8-9
+                        }];
+                    }
+                });
+        </script>
+    {{ end }}
 {{ end }}
-{{- end -}}
