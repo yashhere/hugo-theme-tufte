@@ -1,6 +1,6 @@
 <div class="sharing-wrapper">
     <h4>Share on - </h4>
-    <a class="resp-sharing-button__link" href="//twitter.com/share?url={{ .Permalink }}&amp;text={{ .Title }}&amp;via={{ (index (.Site.Params.social.twitter) 0).address }}" target="_blank" aria-label="">
+    <a class="resp-sharing-button__link" href="//twitter.com/share?url={{ .Permalink }}&amp;text={{ .Title }}&amp;via={{ (index (.Site.Params.social.twitter) 0).address }}" target="_blank" rel="noopener" aria-label="">
         <div class="resp-sharing-button twitter resp-sharing-button__icon">
             <div aria-hidden="true">
                 {{- partial "svg/icons" "twitter" -}}
@@ -8,7 +8,7 @@
         </div>
     </a>
 
-    <a class="resp-sharing-button__link" href="//www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" aria-label="">
+    <a class="resp-sharing-button__link" href="//www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" rel="noopener" aria-label="">
         <div class="resp-sharing-button facebook resp-sharing-button__icon">
             <div aria-hidden="true">
                 {{- partial "svg/icons" "facebook" -}}
@@ -16,7 +16,7 @@
         </div>
     </a>
 
-    <a class="resp-sharing-button__link" href="mailto:?subject=Check out this post by {{ .Params.author }}&amp;body={{ .Permalink }}" target="_blank" aria-label="">
+    <a class="resp-sharing-button__link" href="mailto:?subject=Check out this post by {{ .Params.author }}&amp;body={{ .Permalink }}" target="_blank" rel="noopener" aria-label="">
         <div class="resp-sharing-button email resp-sharing-button__icon">
             <div aria-hidden="true">
                 {{- partial "svg/icons" "email" -}}
@@ -24,7 +24,7 @@
         </div>
     </a>
 
-    <a class="resp-sharing-button__link" href="//reddit.com/submit?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" aria-label="">
+    <a class="resp-sharing-button__link" href="//reddit.com/submit?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" rel="noopener" aria-label="">
         <div class="resp-sharing-button reddit resp-sharing-button__icon">
             <div aria-hidden="true">
                 {{- partial "svg/icons" "reddit" -}}
@@ -32,7 +32,7 @@
         </div>
     </a>
 
-    <a class="resp-sharing-button__link" href="//www.linkedin.com/shareArticle?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" aria-label="">
+    <a class="resp-sharing-button__link" href="//www.linkedin.com/shareArticle?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" rel="noopener" aria-label="">
         <div class="resp-sharing-button linkedin resp-sharing-button__icon">
             <div aria-hidden="true">
                 {{- partial "svg/icons" "linkedin" -}}
