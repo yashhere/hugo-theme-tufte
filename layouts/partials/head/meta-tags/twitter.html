@@ -30,9 +30,26 @@
         {{- end -}}
     {{- end -}}
 {{- end }}
+
 <meta name="twitter:title" content="{{ .Title }}"/>
-<meta name="twitter:description" content="{{ with .Description }}{{ . | markdownify | plainify }}{{ else }}{{ if .IsPage }}{{ partial "head/opengraph/description" . }}{{ else }}{{ with site.Params.description }}{{ . | markdownify | plainify }}{{ end }}{{ end }}{{ end -}}"/>
-{{ with site.Social.twitter -}}
-    <meta name="twitter:site" content="@{{ . }}"/>
-    <meta name="twitter:creator" content="@{{ . }}"/>
+<meta name="twitter:url" content="{{ .Permalink }}" />
+<meta name="twitter:domain" value="{{ .Site.BaseURL }}" />
+
+{{ $description_content := "" }}
+{{ with .Description }}
+    {{ $description_content = . | markdownify | plainify }}
+{{ else }}
+    {{ if .IsPage }}
+        {{ $description_content = (partial "head/meta-tags/description" .) }}
+    {{ else }}
+        {{ with site.Params.description }}
+            {{ $description_content = . | markdownify | plainify }}
+        {{ end }}
+    {{ end }}
+{{ end -}}
+<meta name="twitter:description" content="{{ $description_content }}"/>
+
+{{ with (index (.Site.Params.social.twitter) 0) -}}
+    <meta name="twitter:site" content="@{{ .address }}"/>
+    <meta name="twitter:creator" content="@{{ .address }}"/>
 {{ end -}}

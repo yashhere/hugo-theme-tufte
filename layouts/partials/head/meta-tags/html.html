@@ -1,0 +1,41 @@
+{{ $permalink := .Permalink }}
+{{ $permalink_pretty := .Permalink | replaceRE "\\.html$" "/" }}
+
+{{ $description_content := "" }}
+{{ with .Description }}
+    {{ $description_content = . | markdownify | plainify }}
+{{ else }}
+    {{ if .IsPage }}
+        {{ $description_content = (partial "head/meta-tags/description" .) }}
+    {{ else }}
+        {{ with site.Params.description }}
+            {{ $description_content = . | markdownify | plainify }}
+        {{ end }}
+    {{ end }}
+{{ end -}}
+
+<meta name="description" content="{{ $description_content }}"/>
+<meta name="language" content="{{ .Site.LanguageCode }}">
+<meta name="robots" content="index,follow" />
+<meta name="googlebot" content="index,follow" />
+<meta name="coverage" content="Worldwide" />
+<meta name="distribution" content="Global" />
+<meta name="HandheldFriendly" content="True" />
+
+{{ with .Site.Author}}
+    <meta name="author" content="{{ printf "%s, %s" .name }}" />
+{{ end }}
+
+<meta name="copyright" content="© {{ .Site.Params.copyright.startyear }}-{{ now.Year }} /dev/yash/notes">
+
+<meta name="owner" content="{{ .Site.Author.name }}">
+
+<meta name="url" content="{{ .Permalink }}" />
+
+{{ if .IsPage }}
+    <meta property="article:section" content="{{ .Section }}" />
+
+    {{ with .Params.tags }}
+        <meta name="keywords" content="{{ delimit . ", " }}" />
+    {{ end }}
+{{ end }}

@@ -8,11 +8,12 @@
 <!-- No referrer: https://webbkoll.dataskydd.net/en/ -->
 <meta name="referrer" content="no-referrer">
 
-{{ partial "head/opengraph/opengraph" . }}
-{{ partial "head/opengraph/twitter" . }}
+{{ partial "head/meta-tags/html" . }}
+{{ partial "head/meta-tags/opengraph" . }}
+{{ partial "head/meta-tags/twitter" . }}
 
 {{ if site.Params.indieweb }}
-    {{ partial "head/opengraph/indieweb" . }}
+    {{ partial "head/meta-tags/indieweb" . }}
 {{ end }}
 
 <!-- Hugo info -->
