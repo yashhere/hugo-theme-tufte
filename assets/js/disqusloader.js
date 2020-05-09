@@ -86,8 +86,14 @@
             }
         };
 
-    window.addEventListener( 'scroll', throttle( throttleTO, init ));
-    window.addEventListener( 'resize', throttle( throttleTO, init ));
+    window.addEventListener( 'scroll', throttle( throttleTO, init ), {
+        capture: true,
+        passive: true
+    });
+    window.addEventListener( 'resize', throttle( throttleTO, init ), {
+        capture: true,
+        passive: true
+    });
 
     window.disqusLoader = function( element, options )
     {

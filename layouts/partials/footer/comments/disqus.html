@@ -11,7 +11,7 @@
     {{ if .Site.DisqusShortname }}
         {{ $loader := resources.Get "js/disqusloader.js" | minify | fingerprint}}
         <div class="comments clear-float">
-            <div class="disqus-placeholder">Loading comments...</div>
+            <div class="disqus-loading">Loading comments...</div>
             <div class="disqus">
         </div>
         {{ if site.IsServer }}
@@ -26,11 +26,11 @@
                     scriptUrl: 'https://{{ .Site.DisqusShortname }}.disqus.com/embed.js',
                     disqusConfig: function () {
                         this.page.title = {{ .Title | safeJS | string }}
-                        this.page.url = {{.RelPermalink | absURL | safeJS | string }};
-                        this.page.identifier = {{ .RelPermalink | absURL | safeJS | string }};
+                        this.page.url = {{ .Permalink }};
+                        this.page.identifier = {{ .Permalink }};
                         this.callbacks.onReady = [function()
                         {
-                            var el = document.querySelector( '.disqus-placeholder' );
+                            var el = document.querySelector( '.disqus-loading' );
                             if( el.classList )
                                 el.classList.add( 'is-hidden' ); // IE 10+
                             else

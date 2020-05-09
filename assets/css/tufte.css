@@ -2543,9 +2543,10 @@ div.series {
 
 
 /* Hide disqus container */
-.disqus-placeholder {
+.disqus-loading {
     font-size: 1.3em;
 }
-.disqus-placeholder.is-hidden {
+
+.disqus-loading.is-hidden {
     display: none;
 }
