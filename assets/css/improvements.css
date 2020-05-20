@@ -5,3 +5,226 @@ code.has-jax {
     background: inherit;
     border: inherit;
 }
+
+#callout {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    max-width: 61%;
+    padding: 1.2em 0em 1.2em 0.6em;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    line-height:1.5em;
+    background: hsla(67, 95%, 95%, 1);
+    border:solid 5px 	hsl(0, 100%, 31%);
+}
+
+.callout-emoji {
+    width: 50px;
+    float: left;
+
+}
+
+.callout-emoji p {
+    font-size: 50px;
+}
+
+#callout-inner {
+    float: right;
+    margin-left: 1em;
+}
+
+@media (max-width: 760px) {
+    #callout {
+        max-width: 80%;
+        padding: 1.5em 0.75em 1.5em 0.6em;
+    }
+    #callout-inner {
+        margin-left: 0.5em;
+    }
+}
+
+
+
+/* TOC */
+.toc {
+    max-width: 35%;
+    border: 1px solid #ccc;
+    background-color: #fcfee6;
+    margin: 1.5rem 2rem 1.5rem 0;
+    line-height: 1.25;
+    padding: 10px 10px 2px 10px;
+    z-index: 1;
+    text-align: left;
+    font-size: 1.1rem;
+    vertical-align: baseline;
+    position: relative;
+    float: left;
+}
+
+@media (max-width: 900px) {
+    .toc {
+        float: none;
+        max-width: 58%;
+        /*width: 100%;*/
+        margin: 1.5rem 0;
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 760px) {
+    .toc {
+        max-width: 100%;
+    }
+}
+
+.toc li {
+    list-style: none;
+    padding: 0;
+}
+
+.toc ul>li {
+    margin-bottom: 0.4rem;
+}
+
+.toc ul>li>ul>li {
+    font-size: 0.9em;
+    margin-bottom: 0.4rem;
+}
+
+.toc ul>li>ul>li>ul>li {
+    font-size: 0.9em;
+    margin-bottom: 0.3rem;
+}
+
+.toc nav>ul {
+    /* The highest level heading in a blog post is level-2 */
+    padding-left: 0;
+    /* The level-1 heading is reserved for the blog title. */
+    /* So do not add any padding for level-1 heading, as that will never show*/
+    /* up in the TOC. */
+}
+
+#TableOfContents>ul {
+    counter-reset: htoc_1;
+}
+
+#TableOfContents ul {
+    list-style-type: none;
+    margin-bottom: 0;
+    margin-top: 4px;
+    text-indent: 0;
+    padding: 0;
+}
+
+#TableOfContents li {
+    font-weight: bold;
+    margin: 5px 0 10px 0;
+    padding-left: 1.125em;
+    position: relative;
+    overflow-wrap: break-word;
+}
+
+#TableOfContents li li {
+    margin-bottom: 0;
+    font-weight: normal;
+    font-size: 0.9em;
+}
+
+#TableOfContents ul li::before {
+    position: absolute;
+    right: calc(100% - 1em);
+    width: 12ch;
+    text-align: right;
+    font-weight: normal;
+    pointer-events: none;
+}
+
+#TableOfContents>ul>li::before {
+    counter-increment: htoc_1;
+    content: counter(htoc_1) "\2006 ";
+}
+
+#TableOfContents>ul ul {
+    counter-reset: htoc_2;
+}
+#TableOfContents ul ul {
+    list-style-type: none;
+    padding-left: 0.7em;
+    margin-top: 2px;
+}
+#TableOfContents ul {
+    list-style-type: none;
+    margin-bottom: 0;
+    margin-top: 4px;
+    text-indent: 0;
+    padding: 0;
+}
+
+#TableOfContents>ul ul li::before {
+    counter-increment: htoc_2;
+    content: counter(htoc_1) "." counter(htoc_2) "\2006 ";
+}
+#TableOfContents ul li::before {
+    position: absolute;
+    right: calc(100% - 1em);
+    width: 12ch;
+    text-align: right;
+    font-weight: normal;
+    pointer-events: none;
+}
+
+#TableOfContents>ul ul ul {
+    counter-reset: htoc_3;
+}
+
+#TableOfContents>ul ul ul li::before {
+    counter-increment: htoc_3;
+    content: counter(htoc_1) "." counter(htoc_2) "." counter(htoc_3) "\2006 ";
+}
+
+/* By The Way Box */
+.btw {
+    border: 1px solid #ccc;
+    display: block;
+    /*padding: 10px 10px 10px 10px;*/
+    width: 61%;
+}
+
+@media (max-width: 760px) {
+    .btw {
+        width: 100%;
+    }
+}
+
+.btw-title {
+    display: block;
+    font-size: 1em;
+    font-variant: small-caps;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 1em;
+    border-bottom: 4px double #ccc;
+    padding: 15px;
+}
+
+.btw li::before {
+    content: "→";
+    float: left;
+    margin-left: -2.5rem;
+    margin-top: 0.1rem;
+}
+
+.btw ul {
+    width: 95%;
+    padding-left: 10px;
+}
+
+.btw li {
+    list-style: none;
+    margin-left: 1.35rem;
+    padding-left: 1.15rem;
+    margin-bottom: 0.7em;
+    font-size: 95%;
+}

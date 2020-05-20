@@ -23,11 +23,19 @@
 
         {{ partial "header/series" . }}
 
+
         <div class="e-content">
+            {{ if .Params.toc }}
+                {{ with .TableOfContents }}
+                <div class="toc">
+                    <h2>On this Page</h2>
+                    {{ . }}
+                </div>
+                {{ end }}
+            {{ end }}
+
             {{ $content := .Content }}
-            <!-- Headline hash -->
             {{ $content = $content | replaceRE "(<h[2-9] id=\"([^\"]+)\".+)(</h[2-9]+>)" `${1}&nbsp;<a class="headline-hash no-text-decoration" href="#${2}">#</a> ${3}` }}
-            <!-- Replace "<p></div></p>" with "</div>" -->
             {{ $content = $content | replaceRE "<p>(</div>)</p>" "${1}" }}
             {{ $content | safeHTML }}
         </div>
@@ -68,6 +76,7 @@
 
 {{ define "footer" }}
     <!-- Back to top -->
+
     <div class="backtotop center no-text-decoration">
         <a href="#">back to <span class="top">top</span></a>
     </div>

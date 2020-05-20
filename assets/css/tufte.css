@@ -73,8 +73,9 @@ html {
 }
 
 body {
-    width: 87.5%;
+    /*width: 87.5%;*/
     padding-left: 6%;
+    padding-right: 6%;
     font-family: var(--body-font), Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
     background-color: #fffff8;
     color: #111;
@@ -160,6 +161,12 @@ p {
     padding-right: 0;
     vertical-align: baseline;
     text-align: justify;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+
+    -webkit-hyphens: manual;
+    -moz-hyphens: manual;
+    hyphens: manual;
 }
 
 
@@ -777,7 +784,7 @@ label.margin-toggle:not(.sidenote-number):not(.marginnote-symbol) {
     /*}*/
     p,
     footer {
-        width: 90%;
+        width: 100%;
     }
 
     pre>code {
@@ -871,9 +878,6 @@ label.margin-toggle:not(.sidenote-number):not(.marginnote-symbol) {
     /*    !*padding-left: 5% !important;*!*/
     /*;*/
     /*}*/
-    footer {
-        width: 93%;
-    }
 
     figure {
         width: 95% !important;
@@ -930,107 +934,40 @@ label.margin-toggle:not(.sidenote-number):not(.marginnote-symbol) {
     }
 }
 
-table:before {
-    content: "";
-    width: 61%;
-    /* CE: 31/12-19   display: inline-block; */
-    ;
-}
-
-div.table {
-    width: 61%;
-}
-
-table,
-table.booktabs {
+table {
     /* making booktabs style tables the unstyled default in case someone uses Markdown styling  */
-    border-spacing: 0px;
-    border-top: 2px solid #333;
-    border-bottom: 2px solid #333;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.booktabs th,
-th {
-    border-bottom: 1px solid #333;
-    padding: 0.65ex 0.5em 0.4ex 0.5em;
-    font-weight: normal;
-    text-align: center;
-}
-
-th,
-td {
+    border-spacing: 2px;
+    border-collapse: separate;
+    width: 61%;
     font-size: 1.1rem;
-    line-height: 1.71428571;
-    padding-right: 0.5em;
 }
 
-.booktabs th.cmid,
-th {
-    border-bottom: 1px solid #3f3f3f;
+@media (max-width: 760px) {
+    table {
+        width: 100%;
+    }
 }
 
-.booktabs th.nocmid {
-    border-bottom: none;
+table td {
+    padding-left: 10px;
 }
 
-.booktabs tbody tr:first-child td,
-tr:first-child td {
-    padding-top: 0.65ex;
+table th {
+    font-family: "Gill Sans","Gill Sans MT",Calibri,sans-serif;
+    letter-spacing: .03em;
+    font-weight: normal;
+    font-size: small;
+    padding-bottom: 0.5rem;
+    white-space: nowrap;
 }
 
-
-/*add space between thead row and tbody*/
-
-.booktabs td,
-td {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    text-align: left;
-}
-
-.booktabs caption,
-caption {
-    font-size: 90%;
-    text-align: left;
-    width: auto;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1ex;
-    caption-side: top;
-}
-
-.booktabs tbody tr td.l {
-    text-align: left !important;
-}
-
-.booktabs tbody tr td.c {
-    text-align: center !important;
-}
-
-.booktabs tbody tr td.r {
-    text-align: right !important;
-}
-
-.table-caption {
-    float: right;
-    clear: right;
-    margin-right: -60%;
-    width: 50%;
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: 1.0rem;
-    line-height: 1.96;
+table tbody tr:nth-child(odd) {
+    background-color: #FBF7F0;
 }
 
 
 /* -------------------------------------- */
-
-
 /* NAV                                    */
-
-
 /* -------------------------------------- */
 
 .nav-links {
@@ -1082,6 +1019,7 @@ ul.social-links {
     list-style: none;
     text-align: center;
     margin: 0 auto;
+    padding: 0;
 }
 
 ul.social-links li {
@@ -1815,8 +1753,8 @@ footer .social,
 .badges,
 .copyright p {
     width: 100%;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    /*padding-left: 1rem;*/
+    /*padding-right: 1rem;*/
     text-align: center;
 }
 
@@ -1849,6 +1787,7 @@ footer .social,
     /* border-bottom: 1px solid #e6e6e6; */
     width: 100%;
     font-size: 1.3em;
+    text-align: left;
 }
 
 @media screen and (max-width: 480px) {

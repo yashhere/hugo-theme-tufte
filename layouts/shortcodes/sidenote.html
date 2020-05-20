@@ -1,8 +1,2 @@
-{{ $sidenoteIndex := add .Ordinal 1 }}<label for="sidenote-{{.Page.File.UniqueID}}-{{ $sidenoteIndex }}" class="margin-toggle sidenote-number">{{ $sidenoteIndex }}</label>
-<input type="checkbox" id="sidenote-{{.Page.File.UniqueID}}-{{ $sidenoteIndex }}" class="margin-toggle"/>
-
-{{ if .Get "src" }}
-    <span class="sidenote">{{ $sidenoteIndex }}: <a href="{{.Get "src" }}">{{ .Inner }}</a></span>
-{{ else }}
-    <span class="sidenote">{{ $sidenoteIndex }}: {{ .Inner }}</span>
-{{ end }}
+{{ .Page.Scratch.Add "sidenote-counter" 1 }}{{ $sidenoteIndex := .Page.Scratch.Get "sidenote-counter" }}<label for="sidenote-{{.Page.File.UniqueID}}-{{ $sidenoteIndex }}" class="margin-toggle sidenote-number">{{ $sidenoteIndex }}</label>
+<input type="checkbox" id="sidenote-{{.Page.File.UniqueID}}-{{ $sidenoteIndex }}" class="margin-toggle"/>{{ if .Get "src" }}<span class="sidenote">{{ $sidenoteIndex }}: <a href="{{.Get "src" }}">{{ .Inner }}</a></span>{{ else }}<span class="sidenote">{{ $sidenoteIndex }}: {{ .Inner }}</span>{{ end }}
