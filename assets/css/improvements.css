@@ -188,7 +188,7 @@ code.has-jax {
 .btw {
     border: 1px solid #ccc;
     display: block;
-    /*padding: 10px 10px 10px 10px;*/
+    padding: 10px 10px 10px 10px;
     width: 61%;
 }
 
@@ -218,7 +218,7 @@ code.has-jax {
 
 .btw ul {
     width: 95%;
-    padding-left: 10px;
+    padding-left: 20px;
 }
 
 .btw li {
@@ -227,4 +227,8 @@ code.has-jax {
     padding-left: 1.15rem;
     margin-bottom: 0.7em;
     font-size: 95%;
+}
+
+.btw p {
+    padding-left: 20px;
 }
