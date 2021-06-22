@@ -21,6 +21,7 @@
 <!-- End Cloudflare Web Analytics -->
 
 {{ partial "footer/scripts/mathjax" . }}
+{{ partial "footer/scripts/mermaid" . }}
 
 {{ $redirection := resources.Get "js/redirection.js" | minify | fingerprint}}
 <script integrity="{{ $redirection.Data.Integrity }}">{{ $redirection.Content | safeJS }}</script>
