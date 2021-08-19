@@ -5,27 +5,27 @@
     {{ if site.Params.css_lazy_load }} <!-- If CSS lazy loading is enabled -->
         {{ if site.Params.cache_busting }}
             {{ if site.IsServer }}
-                <link href="{{ $resource.RelPermalink }}?{{ now.Unix }}" rel="preload" as="style" onload="this.rel='stylesheet'">
-                <noscript><link rel="stylesheet" href="{{ $asset | relURL }}"></noscript>
+                <link href="{{ $resource.RelPermalink }}?{{ now.Unix }}" rel="preload" as="style" onload="this.rel='stylesheet'" crossorigin="anonymous">
+                <noscript><link rel="stylesheet" href="{{ $asset | relURL }}" crossorigin="anonymous"></noscript>
             {{ else }}
                 {{ $css := $resource | minify | fingerprint }}
-                <link href="{{ $css.RelPermalink }}" rel="preload" as="style" onload="this.rel='stylesheet'">
-                <noscript><link rel="stylesheet" href="{{ $resource.RelPermalink }}"></noscript>
+                <link href="{{ $css.RelPermalink }}" rel="preload" as="style" onload="this.rel='stylesheet'" crossorigin="anonymous">
+                <noscript><link rel="stylesheet" href="{{ $resource.RelPermalink }}" crossorigin="anonymous"></noscript>
             {{ end }}
         {{ else }}
-            <link href="{{ $resource.RelPermalink }}" rel="preload" as="style" onload="this.rel='stylesheet'">
-            <noscript><link rel="stylesheet" href="{{ $resource.RelPermalink }}"></noscript>
+            <link href="{{ $resource.RelPermalink }}" rel="preload" as="style" onload="this.rel='stylesheet'" crossorigin="anonymous">
+            <noscript><link rel="stylesheet" href="{{ $resource.RelPermalink }}" crossorigin="anonymous"></noscript>
         {{ end }}
     {{ else }}                  <!-- If CSS lazy loading is disabled (default) -->
         {{ if site.Params.cache_busting }}
             {{ if site.IsServer }}
-                <link rel="stylesheet" href="{{ $resource.RelPermalink }}?{{ now.Unix }}">
+                <link rel="stylesheet" href="{{ $resource.RelPermalink }}?{{ now.Unix }}" crossorigin="anonymous">
             {{ else }}
                 {{ $css := $resource.RelPermalink | minify | fingerprint }}
-                <link rel="stylesheet" href="{{ $resource.RelPermalink }}">
+                <link rel="stylesheet" href="{{ $resource.RelPermalink }}" crossorigin="anonymous">
             {{ end }}
         {{ else }}
-            <link rel="stylesheet" href="{{ $resource.RelPermalink }}">
+            <link rel="stylesheet" href="{{ $resource.RelPermalink }}" crossorigin="anonymous">
         {{ end }}
     {{ end }}
 {{ end }}
