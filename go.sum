@@ -1,0 +1,8 @@
+github.com/yashhere/hugo-atom-feed v0.0.0-20200225144521-5da913dc46d2 h1:2saxUbLNarc2kkhq+PrPlmtd+lOlOVsydJnH68IsQ1E=
+github.com/yashhere/hugo-atom-feed v0.0.0-20200225144521-5da913dc46d2/go.mod h1:+ZDLRp7fnQI612A06ZDHFy0qEVbHLnGGHJJI9qUOmQo=
+github.com/yashhere/hugo-debugprint v0.0.0-20191209203742-5eb3e0698e5e h1:Luk9qpb65Pi3cmO9Si+AgaC3Dq8yNCRKqMXZEQuEM0I=
+github.com/yashhere/hugo-debugprint v0.0.0-20191209203742-5eb3e0698e5e/go.mod h1:z0/OSNVEI/jAWMziZ8R+roZeWUhHhSdrivotJ4axsJk=
+github.com/yashhere/hugo-jf2 v0.0.0-20200225144146-9ae92ab7ff12 h1:TlXvmCEAupUt6aNgK8iaikot9fDdy6bEw8ccGTDZlM0=
+github.com/yashhere/hugo-jf2 v0.0.0-20200225144146-9ae92ab7ff12/go.mod h1:A4uGr0QKOriJQkp8alU36h5fAsfasluaTFSksYohoXg=
+github.com/yashhere/hugo-search-fuse-js v0.0.0-20200423103100-d04ef229b2f0 h1:h3dQ6Qhp0Li9U/AxN8NkPFeDntrl/QvlqXqzumPXhfM=
+github.com/yashhere/hugo-search-fuse-js v0.0.0-20200423103100-d04ef229b2f0/go.mod h1:NBpcLWbsIYSGgTx5rNA0o9bWqGiCL1pn24oa6jlfTq8=

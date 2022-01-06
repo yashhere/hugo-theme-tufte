@@ -1,9 +1,28 @@
-theme:
-  - hugo-debugprint
-  - hugo-atom-feed
-  - hugo-jf2
-  - hugo-search-fuse-js
-  - tufte
+# theme:
+#   - hugo-debugprint
+#   - hugo-atom-feed
+#   - hugo-jf2
+#   - hugo-search-fuse-js
+#   - tufte
+
+module:
+  imports:
+  - path: github.com/yashhere/hugo-atom-feed
+    disable: false
+    ignoreConfig: false
+    ignoreImports: false
+  - path: github.com/yashhere/hugo-debugprint
+    disable: false
+    ignoreConfig: false
+    ignoreImports: false
+  - path: github.com/yashhere/hugo-jf2
+    disable: false
+    ignoreConfig: false
+    ignoreImports: false
+  - path: github.com/yashhere/hugo-search-fuse-js
+    disable: false
+    ignoreConfig: false
+    ignoreImports: false
 
 # Default values of custom site.Params
 Params:
