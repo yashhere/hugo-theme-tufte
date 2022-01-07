@@ -6,3 +6,5 @@ github.com/yashhere/hugo-jf2 v0.0.0-20200225144146-9ae92ab7ff12 h1:TlXvmCEAupUt6
 github.com/yashhere/hugo-jf2 v0.0.0-20200225144146-9ae92ab7ff12/go.mod h1:A4uGr0QKOriJQkp8alU36h5fAsfasluaTFSksYohoXg=
 github.com/yashhere/hugo-search-fuse-js v0.0.0-20200423103100-d04ef229b2f0 h1:h3dQ6Qhp0Li9U/AxN8NkPFeDntrl/QvlqXqzumPXhfM=
 github.com/yashhere/hugo-search-fuse-js v0.0.0-20200423103100-d04ef229b2f0/go.mod h1:NBpcLWbsIYSGgTx5rNA0o9bWqGiCL1pn24oa6jlfTq8=
+github.com/yashhere/hugo-search-fuse-js v0.0.0-20220107032203-ce7c9348e9de h1:sYPDqCX7TjnsZ8yT7axMJ6pE96Urgspxjc3x0YzHj0A=
+github.com/yashhere/hugo-search-fuse-js v0.0.0-20220107032203-ce7c9348e9de/go.mod h1:NBpcLWbsIYSGgTx5rNA0o9bWqGiCL1pn24oa6jlfTq8=

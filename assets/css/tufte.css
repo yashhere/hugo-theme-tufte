@@ -218,6 +218,7 @@ blockquote footer {
     margin-right: 40px;
     font-size: 1.1rem;
     text-align: right;
+    margin-top: 0;
 }
 
 section>p,
