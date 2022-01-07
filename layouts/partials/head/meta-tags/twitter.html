@@ -49,7 +49,9 @@
 {{ end -}}
 <meta name="twitter:description" content="{{ $description_content }}"/>
 
-{{ with (index (.Site.Params.social.twitter) 0) -}}
-    <meta name="twitter:site" content="@{{ .address }}"/>
-    <meta name="twitter:creator" content="@{{ .address }}"/>
+{{ if .Site.Params.social.twitter }}
+  {{ with (index (.Site.Params.social.twitter) 0) -}}
+      <meta name="twitter:site" content="@{{ .address }}"/>
+      <meta name="twitter:creator" content="@{{ .address }}"/>
+  {{ end -}}
 {{ end -}}

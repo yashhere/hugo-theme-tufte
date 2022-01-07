@@ -232,3 +232,11 @@ code.has-jax {
 .btw p {
     padding-left: 20px;
 }
+
+.blur-up {
+  filter: blur(5px);
+}
+
+.blur-up.lazyloaded {
+  filter: unset;
+}

@@ -1,30 +1,9 @@
-{{/*{{ $jqeury := resources.Get "js/libs/jquery/3.4.1/jquery.js" }}*/}}
-
-{{/*{{ if site.IsServer }}*/}}
-{{/*    {{ $defaultJS := slice $jqeury | resources.Concat "js/global.js" }}*/}}
-{{/*    {{ $globalJS := $defaultJS }}*/}}
-
-{{/*    <!-- Enable HTTP/2 Push -->*/}}
-{{/*    <link rel="preload" href="{{ $globalJS.RelPermalink }}?{{ now.Unix }}" as="script">*/}}
-{{/*    <script defer src="{{ $globalJS.RelPermalink }}?{{ now.Unix }}"></script>*/}}
-{{/*{{ else }}*/}}
-{{/*    {{ $defaultJS := slice $jqeury | resources.Concat "js/global.js" }}*/}}
-{{/*    {{ $globalJS := $defaultJS | resources.Minify | resources.Fingerprint }}*/}}
-
-{{/*    <!-- Enable HTTP/2 Push -->*/}}
-{{/*    <link rel="preload" href="{{ $globalJS.RelPermalink }}" as="script" integrity="{{ $globalJS.Data.Integrity }}">*/}}
-{{/*    <script defer src="{{ $globalJS.RelPermalink }}" integrity="{{ $globalJS.Data.Integrity }}"></script>*/}}
-{{/*{{ end }}*/}}
-
-<!-- Cloudflare Web Analytics -->
-<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e14f712dcb3f4bb7aab3a2f606159e03"}'></script>
-<!-- End Cloudflare Web Analytics -->
-
+{{ partial "footer/scripts/cloudflare" . }}
 {{ partial "footer/scripts/mathjax" . }}
 {{ partial "footer/scripts/mermaid" . }}
-
-{{ $redirection := resources.Get "js/redirection.js" | minify | fingerprint}}
-<script integrity="{{ $redirection.Data.Integrity }}">{{ $redirection.Content | safeJS }}</script>
+{{ partial "footer/scripts/quicklink" . }}
+{{ partial "footer/scripts/lazysizes" . }}
+{{ partial "footer/scripts/https_redirection" . }}
 
 {{ with site.Params.custom_js }}
     {{ range site.Params.custom_js }}

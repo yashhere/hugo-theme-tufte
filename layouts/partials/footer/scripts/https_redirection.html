@@ -1,0 +1,2 @@
+{{ $redirection := resources.Get "js/redirection.js" | minify | fingerprint}}
+<script integrity="{{ $redirection.Data.Integrity }}">{{ $redirection.Content | safeJS }}</script>

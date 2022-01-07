@@ -1,0 +1,39 @@
+{{ $image := "" -}}
+{{ if (urls.Parse .Destination).IsAbs }}
+  {{ $image = resources.GetRemote .Destination -}}
+{{ else -}}
+  {{ $image = resources.Get .Destination -}}
+{{ end -}}
+{{ $lqip := $image.Resize site.Params.Image.lqipWidth -}}
+
+{{ $imgSrc := "" -}}
+{{ $imgSrcSet := slice -}}
+
+{{ $widths := site.Params.Image.landscapePhotoWidths -}}
+{{ if gt $image.Height $image.Width -}}
+  {{ $widths = site.Params.Image.portraitPhotoWidths -}}
+{{ end -}}
+
+{{ range $widths -}}
+  {{ $srcUrl := (printf "%dx" . | $image.Resize).Permalink -}}
+  {{ if eq $imgSrc "" -}}{{ $imgSrc = $srcUrl -}}{{ end -}}
+  {{ $imgSrcSet = $imgSrcSet | append (printf "%s %dw" $srcUrl .) -}}
+{{ end -}}
+{{ $imgSrcSet = (delimit $imgSrcSet ",") -}}
+
+{{ if gt $image.Width site.Params.Image.smallLimit -}}
+  <figure class="normal">
+    <p class="caption">
+      {{ with $.Title }}{{ . | safeHTML }}{{ end -}}
+    </p>
+    <img class="lazyload blur-up" data-sizes="auto" src="{{ $lqip.Permalink }}" data-srcset="{{ $imgSrcSet }}" alt="{{ $.Text }}">
+    <noscript><img sizes="100vw" srcset="{{ $imgSrcSet }}" src="{{ $image.Permalink }}" alt="{{ $.Text }}"></noscript>
+  </figure>
+{{ else -}}
+  <figure class="normal">
+    <p class="caption">
+      {{ with $.Title }}{{ . | safeHTML }}{{ end -}}
+    </p>
+    <img class="lazyload blur-up" src="{{ $lqip.Permalink }}" data-src="{{ $image.Permalink }}" alt="{{ $.Text }}">
+  </figure>
+{{ end -}}
